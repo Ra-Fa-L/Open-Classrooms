@@ -1,24 +1,222 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sgI-U4-2I2">
+    <device id="retina3_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Shamaz-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PlayersViewController" customModule="Shamaz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="x9f-HR-Ahy">
+                                <rect key="frame" x="20" y="293" width="280" height="37"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RZ-E6-MXu">
+                                        <rect key="frame" x="0.0" y="0.0" width="134" height="37"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qar-ZM-366">
+                                        <rect key="frame" x="142" y="0.0" width="50" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="Vfu-y2-ajx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <state key="normal" title="add"/>
+                                        <connections>
+                                            <action selector="addPlayerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QtZ-WB-ctv"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-Nk-m0s">
+                                        <rect key="frame" x="200" y="0.0" width="80" height="37"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="cKf-0U-vuU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startGameTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xDM-QE-k2h"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aaS-cN-EuZ">
+                                <rect key="frame" x="20" y="74" width="280" height="209"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="182" id="sFz-6F-GBc"/>
+                                </constraints>
+                                <string key="text">Before you start the game, you have to assign at least 2 names to the pool of players. The game chooses a random player on game start. After every experience share, a new player from the remaining player's pool gets chosen. After Game's end, you can choose to relaunch with the same but rearranged players.</string>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
+                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N3P-TS-M91">
+                                <rect key="frame" x="0.0" y="345" width="320" height="135"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="AV5-3h-97j" style="IBUITableViewCellStyleDefault" id="rkW-SA-h8u">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="5" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rkW-SA-h8u" id="CbF-zM-Nmg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AV5-3h-97j">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" red="1" green="0.59771414980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N3P-TS-M91" secondAttribute="trailing" id="0Jg-52-h6F"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="x9f-HR-Ahy" secondAttribute="trailing" constant="20" id="9DW-MW-9n2"/>
+                            <constraint firstItem="aaS-cN-EuZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="KpO-Qs-N34"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N3P-TS-M91" secondAttribute="bottom" id="PeL-ax-oq8"/>
+                            <constraint firstItem="x9f-HR-Ahy" firstAttribute="top" secondItem="aaS-cN-EuZ" secondAttribute="bottom" constant="10" id="QD1-N4-vTm"/>
+                            <constraint firstItem="N3P-TS-M91" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ynt-Ri-flC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aaS-cN-EuZ" secondAttribute="trailing" constant="20" id="Ytx-XO-CFz"/>
+                            <constraint firstItem="N3P-TS-M91" firstAttribute="top" secondItem="x9f-HR-Ahy" secondAttribute="bottom" constant="15" id="csR-HB-OkK"/>
+                            <constraint firstItem="x9f-HR-Ahy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ipb-DE-qt8"/>
+                            <constraint firstItem="aaS-cN-EuZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="wV3-Dd-ttE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Shamaz" id="kZC-Kv-Koa">
+                        <barButtonItem key="backBarButtonItem" title="Abort" id="s1n-OP-f0e"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addPlayerButton" destination="qar-ZM-366" id="dRY-fV-JsA"/>
+                        <outlet property="playerTextField" destination="9RZ-E6-MXu" id="b6L-Xs-Kxr"/>
+                        <outlet property="playersTableView" destination="N3P-TS-M91" id="C82-NP-X3K"/>
+                        <outlet property="startGameButton" destination="b8v-Nk-m0s" id="BQy-M9-zNG"/>
+                        <segue destination="Jhb-Bx-tzN" kind="show" identifier="startGameSegue" id="gj0-KC-TrL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1070.625" y="132.5"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="szn-de-Hvd">
+            <objects>
+                <viewController id="Jhb-Bx-tzN" customClass="GameViewController" customModule="Shamaz" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="css-o5-hH3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="descriptionLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-gg-Sxj">
+                                <rect key="frame" x="30" y="159" width="260" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="CWL-Qj-8TB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="akT-kP-Sck">
+                                <rect key="frame" x="35" y="64" width="250" height="45"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Aq-iT-MPa">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="45"/>
+                                        <color key="backgroundColor" red="1" green="0.59771414980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="JSz-Oj-VDP"/>
+                                            <constraint firstAttribute="width" constant="100" id="iu9-pF-Zmk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="24"/>
+                                        <state key="normal" title="PAST"/>
+                                        <connections>
+                                            <action selector="storyButtonTapped:" destination="Jhb-Bx-tzN" eventType="touchUpInside" id="Ctm-Cq-0xm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8H8-BP-W8Q">
+                                        <rect key="frame" x="150" y="0.0" width="100" height="45"/>
+                                        <color key="backgroundColor" red="1" green="0.59771414980000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="b1h-yT-SQg"/>
+                                            <constraint firstAttribute="width" constant="100" id="eja-Vl-DHY"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="24"/>
+                                        <state key="normal" title="FUTURE"/>
+                                        <connections>
+                                            <action selector="storyButtonTapped:" destination="Jhb-Bx-tzN" eventType="touchUpInside" id="Fhv-tc-Npf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W0-Xe-61b">
+                                <rect key="frame" x="40" y="309" width="240" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="dBk-qo-MwQ"/>
+                                    <constraint firstAttribute="width" constant="240" id="xay-gc-ggr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="24"/>
+                                <state key="normal" title="nextButton"/>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="Jhb-Bx-tzN" eventType="touchUpInside" id="NS8-AN-H80"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cOC-gg-Sxj" firstAttribute="leading" secondItem="nri-th-jgt" secondAttribute="leading" constant="30" id="63K-e6-4zg"/>
+                            <constraint firstItem="7W0-Xe-61b" firstAttribute="centerX" secondItem="css-o5-hH3" secondAttribute="centerX" id="721-mM-K0O"/>
+                            <constraint firstItem="cOC-gg-Sxj" firstAttribute="top" secondItem="akT-kP-Sck" secondAttribute="bottom" constant="50" id="Fhn-1N-SAb"/>
+                            <constraint firstItem="akT-kP-Sck" firstAttribute="top" secondItem="nri-th-jgt" secondAttribute="top" id="La8-3H-dmh"/>
+                            <constraint firstItem="akT-kP-Sck" firstAttribute="centerX" secondItem="css-o5-hH3" secondAttribute="centerX" id="adj-F7-mrm"/>
+                            <constraint firstItem="7W0-Xe-61b" firstAttribute="top" secondItem="cOC-gg-Sxj" secondAttribute="bottom" constant="50" id="dmf-Mp-fOO"/>
+                            <constraint firstItem="cOC-gg-Sxj" firstAttribute="centerX" secondItem="css-o5-hH3" secondAttribute="centerX" id="hAw-xP-Tph"/>
+                            <constraint firstItem="nri-th-jgt" firstAttribute="trailing" secondItem="cOC-gg-Sxj" secondAttribute="trailing" constant="30" id="u2C-9z-1T5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nri-th-jgt"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="cOC-gg-Sxj" id="MWq-qE-tFP"/>
+                        <outlet property="futureButton" destination="8H8-BP-W8Q" id="co8-z5-VSM"/>
+                        <outlet property="nextButton" destination="7W0-Xe-61b" id="RbV-DP-EcG"/>
+                        <outlet property="pastButton" destination="2Aq-iT-MPa" id="MdA-SN-pr8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aSi-vZ-cZS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2087" y="132"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="u00-Pi-1HW">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="sgI-U4-2I2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MNs-V0-HBh">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="EiK-2o-K9Q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T4a-Y3-7q8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="154" y="132"/>
         </scene>
     </scenes>
 </document>
