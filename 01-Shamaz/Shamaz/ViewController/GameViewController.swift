@@ -8,51 +8,33 @@
 
 import UIKit
 
-// Instead of using true or false for gameStatus, using enum makes it more understandable
-enum gameMode
-{
-    case none
-    case playerChoice
-    case sharingChoice
-}
-
 class GameViewController: UIViewController
 {
     @IBOutlet var pastButton: UIButton!
     @IBOutlet var futureButton: UIButton!
     @IBOutlet var nextButton: UIButton!
-    
     @IBOutlet var descriptionLabel: UILabel!
-    
-    // All players
-    var playerNames: [String] = []
-    
-    // Id of the last remaining Player
-    var lastPlayerId: Int = 0
-    
-    // Boolean indication wheter the player is first or last
-    var firstPlayer: Bool = false
-    var lastPlayer: Bool = false
-    
-    // Only true for the first launch
-    var newGame = true
-    
-    // Will be either .playerChoice or .sharingChoice
-    var gameStatus: gameMode = .none
     
     // Object with all Questions
     var game: Game!
     
+    // Will be either .playerChoice or .sharingChoice
+    var gameStatus: gameMode = .none
+    
     // Variable to hold descriptionLabel text -> Label.text will be reassigned with each change of this variable
-    var descriptionText: String = "" {
-        didSet {
+    var descriptionText: String = ""
+    {
+        didSet
+        {
             descriptionLabel.text = descriptionText
         }
     }
     
     // Change of the Text of the nextButton will be assigned to this variable -> title will be changed with it
-    var continueText: String = "" {
-        didSet {
+    var continueText: String = ""
+    {
+        didSet
+        {
             nextButton.setTitle(continueText, for: .normal)
         }
     }
@@ -63,69 +45,36 @@ class GameViewController: UIViewController
         
         applyUIColors()
         
-        restartGame()
-    }
-    
-    func chooseNewPlayer()
-    {
-        // If last player -> look for the player in playerNames-array and assign its i to variable
-        if game.getPlayersCount() == 1 {
-            lastPlayerId = game.findLastPlayerId()
-            lastPlayer = true
-        }
-        
-        var randomId = getRandomPlayersId()
-        
-        // If the games has been relaunched we generate a new id so long until the id will be different from lastPlayerId
-        if firstPlayer {
-            while (game.checkPlayers(newPlayerId: randomId, lastPlayerId: lastPlayerId)) {
-                randomId = getRandomPlayersId()
-            }
-            
-            firstPlayer = false
-        }
-        
-        // Now change Buttons availabilty
-        changeGameStatus(to: .sharingChoice)
-        
-        // Remove chosen player from remainingPlayers array
-        let activePlayerName = game.removeChosenPlayer(with: randomId)
-        
-        descriptionText = "The Next Player is \(activePlayerName.uppercased()). Choose a story either in the past or in the furture. Choose wisely!"
-    }
-    
-    // Generate and return a random id from 0 to COUNT (not included)
-    func getRandomPlayersId() -> Int
-    {
-        return game.getRandomPlayersId()
+        restartGame(veryFirstTime: true)
     }
     
     // Make all players to available to choose again, change basic labels and buttons texts to default
     // Change game status to choosing a player
-    func restartGame()
+    func restartGame(veryFirstTime: Bool = false)
     {
+        (descriptionText, continueText) = game.restartGame(veryFirstTime: veryFirstTime)
+        
         changeGameStatus(to: .playerChoice)
+    }
+    
+    func chooseNewPlayer()
+    {
+        (descriptionText) = game.chooseNewPlayer()
         
-        enableButton(past: false, future: false, next: true)
-        
-        descriptionText = "Tap START to begin the Game. A random player will be chosen randomly."
-        continueText = "START"
-        
-        // Not reapeting the last player from previous game can not be possible in very first game
-        firstPlayer = newGame ? false : true
-        newGame = false
-        // There can be no last player on restart because we start with at least 2 players
-        lastPlayer = false
-        
-        game = Game(with: playerNames)
+        changeGameStatus(to: .sharingChoice)
+    }
+    
+    func lastPlayerPlaying() -> Bool
+    {
+        return game.lastPlayer
     }
     
     // Make each individual button either enabled or not
     func enableButton(past: Bool, future: Bool, next: Bool)
     {
-        pastButton.isEnabled = past
-        futureButton.isEnabled = future
-        nextButton.isEnabled = next
+        pastButton.display(enabled: past)
+        futureButton.display(enabled: future)
+        nextButton.display(enabled: next)
     }
     
     // Changes enabled Buttons acoording to gameStatus
@@ -133,30 +82,25 @@ class GameViewController: UIViewController
     func changeGameStatus(to status: gameMode)
     {
         gameStatus = status
-        if status == .sharingChoice {
+        if status == .sharingChoice
+        {
             enableButton(past: true, future: true, next: false)
-            continueText = "Choose a story"
-            
-            pastButton.alpha = 1
-            futureButton.alpha = 1
-            
-            nextButton.alpha = 0.3
-        } else {
-            enableButton(past: false, future: false, next: true)
-            continueText = "Next Player"
-            
-            nextButton.alpha = 1.0
         }
+        else
+        {
+            enableButton(past: false, future: false, next: true)
+        }
+        continueText = game.changeStatusText(for: status)
     }
     
     func applyUIColors()
     {
         view.backgroundColor = ColorTheme.backgroundColor
         
-        pastButton.setOrangeButtons()
-        futureButton.setOrangeButtons()
+        pastButton.setOrange()
+        futureButton.setOrange()
         
-        nextButton.setGreenButtons()
+        nextButton.setGreen()
     }
     
     // Create message depending on chosen button and change alpha of the not chosen button
@@ -165,17 +109,18 @@ class GameViewController: UIViewController
     {
         var past = false
         
-        if sender.tag == 1 {
-            pastButton.alpha = 0.3
-        } else {
-            futureButton.alpha = 0.3
+        if sender.tag == 0
+        {
             past = true
         }
         
         descriptionText = game.returnQuestion(fromThePast: past)
         changeGameStatus(to: .playerChoice)
         
-        if lastPlayer {
+        sender.highlight()
+        
+        if lastPlayerPlaying()
+        {
             continueText = "RESTART GAME"
         }
     }
@@ -184,11 +129,18 @@ class GameViewController: UIViewController
     {
         // Not needed because the button cannot be tapped when in different game state
         // It is here for the sake of logical overview
-        if gameStatus == .playerChoice {
+        print(sender.tag)
+        if gameStatus == .playerChoice
+        {
+            print("1")
             // If lastPlayer make the next nextButton tap restart the game
-            if lastPlayer {
+            if lastPlayerPlaying()
+            {
+                print("LAST")
                 restartGame()
-            } else {
+            }
+            else
+            {
                 // Otherwise choose a random new player
                 chooseNewPlayer()
             }

@@ -33,10 +33,11 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         // Send player Names to the next ViewController and assign it to a variable
-        if segue.identifier == "startGameSegue" {
+        if segue.identifier == "startGameSegue"
+        {
             let nextVC = segue.destination as? GameViewController
             
-            nextVC?.playerNames = playerNames
+            nextVC?.game = Game(with: playerNames)
         }
     }
     
@@ -61,7 +62,8 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     // After that check if starting a game is possible
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
-        if editingStyle == .delete {
+        if editingStyle == .delete
+        {
             playerNames.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
             
@@ -70,7 +72,8 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     // Hide Keyboard on Return
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
         textField.resignFirstResponder()
         return true
     }
@@ -89,7 +92,8 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     func checkStartButton()
     {
         var gameAllowed = false
-        if playerNames.count > 1 {
+        if playerNames.count > 1
+        {
             gameAllowed = true
         }
         startingGame(allowed: gameAllowed)
@@ -117,8 +121,8 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : ColorTheme.secondaryTextColor]
         
         // Custom method added per Extensions
-        startGameButton.setGreenButtons()
-        addPlayerButton.setGreenButtons()
+        startGameButton.setGreen()
+        addPlayerButton.setGreen()
         
         view.backgroundColor = ColorTheme.backgroundColor
     }
@@ -128,7 +132,8 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         let name = playerTextField.text!
         
         // Check if name has more than 1 letter and if is not repeated
-        if name.count > 1, !checkForRepeating(name: name) {
+        if name.count > 1, !checkForRepeating(name: name)
+        {
             playerNames.append(name)
             clearInputField()
             reloadTable()

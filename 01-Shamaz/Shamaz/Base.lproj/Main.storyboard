@@ -79,20 +79,37 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N3P-TS-M91">
-                                <rect key="frame" x="0.0" y="317.66666666666674" width="414" height="418.33333333333326"/>
+                                <rect key="frame" x="0.0" y="330.66666666666674" width="414" height="405.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JlP-uS-hYy">
+                                <rect key="frame" x="20" y="304.66666666666669" width="81.333333333333329" height="22"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="swipe to delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TFp-9J-0gx">
+                                <rect key="frame" x="298" y="306" width="96" height="19.333333333333314"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N3P-TS-M91" secondAttribute="trailing" id="0Jg-52-h6F"/>
+                            <constraint firstItem="TFp-9J-0gx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JlP-uS-hYy" secondAttribute="trailing" constant="97" id="3vs-uY-jUw"/>
+                            <constraint firstItem="TFp-9J-0gx" firstAttribute="centerY" secondItem="JlP-uS-hYy" secondAttribute="centerY" id="5dy-ru-MlL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TFp-9J-0gx" secondAttribute="trailing" constant="20" id="9ct-U2-qUx"/>
                             <constraint firstItem="aaS-cN-EuZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="KpO-Qs-N34"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N3P-TS-M91" secondAttribute="bottom" id="PeL-ax-oq8"/>
                             <constraint firstItem="x9f-HR-Ahy" firstAttribute="top" secondItem="aaS-cN-EuZ" secondAttribute="bottom" constant="10" id="QD1-N4-vTm"/>
                             <constraint firstItem="x9f-HR-Ahy" firstAttribute="width" secondItem="aaS-cN-EuZ" secondAttribute="width" id="Uvy-Lq-pTu"/>
                             <constraint firstItem="N3P-TS-M91" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ynt-Ri-flC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="aaS-cN-EuZ" secondAttribute="trailing" constant="20" id="Ytx-XO-CFz"/>
-                            <constraint firstItem="N3P-TS-M91" firstAttribute="top" secondItem="x9f-HR-Ahy" secondAttribute="bottom" constant="15" id="csR-HB-OkK"/>
+                            <constraint firstItem="JlP-uS-hYy" firstAttribute="top" secondItem="x9f-HR-Ahy" secondAttribute="bottom" constant="2" id="ZuX-nv-HKC"/>
+                            <constraint firstItem="JlP-uS-hYy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="b6M-5o-jea"/>
+                            <constraint firstItem="N3P-TS-M91" firstAttribute="top" secondItem="JlP-uS-hYy" secondAttribute="bottom" constant="4" id="iBc-GE-bO5"/>
                             <constraint firstItem="x9f-HR-Ahy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pwU-fJ-DWf"/>
                             <constraint firstItem="aaS-cN-EuZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="wV3-Dd-ttE"/>
                         </constraints>

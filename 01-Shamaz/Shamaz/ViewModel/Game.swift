@@ -8,12 +8,27 @@
 
 import UIKit
 
+// Instead of using true or false for gameStatus, using enum makes it more understandable
+enum gameMode
+{
+    case none
+    case playerChoice
+    case sharingChoice
+}
+
 class Game
 {
     var questions: Questions!
     var allPlayers: [String]!
     // Player names that will be reduced by every chosen player
     var remainingPlayers: [String]!
+    
+    // Id of the last remaining Player
+    var lastPlayerId: Int = 0
+    
+    // Boolean indication wheter the player is first or last
+    var firstPlayer: Bool = false
+    var lastPlayer: Bool = false
     
     init(with players: [String])
     {
@@ -22,29 +37,52 @@ class Game
         self.remainingPlayers = players
     }
     
-    func getPlayersCount() -> Int
-    {
-        return remainingPlayers.count
+    func chooseNewPlayer() -> (String)
+    {        
+        // If only one player name left -> look for the player in playerNames-array and assign its id to a variable
+        if getPlayersCount() == 1
+        {
+            lastPlayerId = findLastPlayerId()
+            lastPlayer = true
+        }
+        
+        var randomId = getRandomPlayersId()
+        
+        // If the games has been relaunched we generate a new id so long until the id will be different from lastPlayerId
+        if firstPlayer
+        {
+            while (checkPlayers(newPlayerId: randomId, lastPlayerId: lastPlayerId))
+            {
+                randomId = getRandomPlayersId()
+            }
+            
+            firstPlayer = false
+        }
+        
+        // Remove chosen player from remainingPlayers array
+        let activePlayerName = removeChosenPlayer(with: randomId)
+        
+        let descriptionText = "The Next Player is \(activePlayerName.uppercased()). Choose a story either in the past or in the furture. Choose wisely!"
+        
+        return (descriptionText)
     }
     
-    func findLastPlayerId() -> Int
+    // Make all players to available to choose again, change basic labels and buttons texts to default
+    // Change game status to choosing a player
+    func restartGame(veryFirstTime: Bool) -> (String, String)
     {
-        return allPlayers.index(where: { $0 == self.remainingPlayers[0] } )!
-    }
-    
-    func getRandomPlayersId() -> Int
-    {
-        return Int.random(in: 0 ..< self.remainingPlayers.count)
-    }
-    
-    func checkPlayers(newPlayerId: Int, lastPlayerId: Int) -> Bool
-    {
-        return self.allPlayers[lastPlayerId] == self.remainingPlayers[newPlayerId]
-    }
-    
-    func removeChosenPlayer(with playerId: Int) -> String
-    {
-        return self.remainingPlayers.remove(at: playerId)
+        let descriptionText = "Tap START to begin the Game. A random player will be chosen randomly."
+        let continueText = "START"
+        
+        // Not reapeting the last player from previous game can not be possible in very first game
+        firstPlayer = veryFirstTime ? false : true
+        
+        // There can be no last player on restart because we start with at least 2 players
+        lastPlayer = false
+        
+        remainingPlayers = allPlayers
+        
+        return (descriptionText, continueText)
     }
     
     /*
@@ -67,27 +105,67 @@ class Game
         let number = Int.random(in: 1 ... 13)
         
         var message = ""
-        if fromThePast {
-            if number == 1 {
-                
+        if fromThePast
+        {
+            if number == 1
+            {
                 let secondNumber = Int.random(in: 0 ..< 6)
                 message = self.questions.pastSingular[secondNumber]
-            } else {
-                if number > 7 {
+            }
+            else
+            {
+                if number > 7
+                {
                     message = self.questions.pastPlural2[number - 8] + "\(number) days ago?"
-                } else {
+                }
+                else
+                {
                     message = self.questions.pastPlural[number - 2] + "\(number) days?"
                 }
             }
-        } else {
-            if number == 1 {
-                
+        }
+        else
+        {
+            if number == 1
+            {
                 let secondNumber = Int.random(in: 0 ..< 6)
                 message = self.questions.futureSingular[secondNumber]
-            } else {
+            }
+            else
+            {
                 message = self.questions.futurePlural[number - 2] + "\(number) days?"
             }
         }
         return message
+    }
+    
+    func changeStatusText(for status: gameMode) -> String
+    {
+        return status == .sharingChoice ? "Choose a story" : "Next Player"
+    }
+    
+    private func getPlayersCount() -> Int
+    {
+        return remainingPlayers.count
+    }
+    
+    private func findLastPlayerId() -> Int
+    {
+        return allPlayers.index(where: { $0 == self.remainingPlayers[0] } )!
+    }
+    
+    private func getRandomPlayersId() -> Int
+    {
+        return Int.random(in: 0 ..< self.remainingPlayers.count)
+    }
+    
+    private func checkPlayers(newPlayerId: Int, lastPlayerId: Int) -> Bool
+    {
+        return self.allPlayers[lastPlayerId] == self.remainingPlayers[newPlayerId]
+    }
+    
+    private func removeChosenPlayer(with playerId: Int) -> String
+    {
+        return self.remainingPlayers.remove(at: playerId)
     }
 }
