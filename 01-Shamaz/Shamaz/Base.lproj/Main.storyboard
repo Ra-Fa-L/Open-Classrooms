@@ -48,7 +48,7 @@
                                             <action selector="addPlayerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QtZ-WB-ctv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-Nk-m0s">
+                                    <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-Nk-m0s">
                                         <rect key="frame" x="294" y="0.0" width="80" height="36.666666666666664"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="qpx-Z7-aBf"/>

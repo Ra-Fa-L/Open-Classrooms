@@ -26,8 +26,6 @@ class GameViewController: UIViewController
     
     // All players
     var playerNames: [String] = []
-    // Player names that will be reduced by every chosen player
-    var remainingPlayers: [String] = []
     
     // Id of the last remaining Player
     var lastPlayerId: Int = 0
@@ -43,7 +41,7 @@ class GameViewController: UIViewController
     var gameStatus: gameMode = .none
     
     // Object with all Questions
-    let questionsPool = Questions()
+    var game: Game!
     
     // Variable to hold descriptionLabel text -> Label.text will be reassigned with each change of this variable
     var descriptionText: String = "" {
@@ -70,20 +68,18 @@ class GameViewController: UIViewController
     
     func chooseNewPlayer()
     {
-        let playersCount = remainingPlayers.count
-        
         // If last player -> look for the player in playerNames-array and assign its i to variable
-        if playersCount == 1 {
-            lastPlayerId = playerNames.index(where: { $0 == remainingPlayers[0] } )!
+        if game.getPlayersCount() == 1 {
+            lastPlayerId = game.findLastPlayerId()
             lastPlayer = true
         }
         
-        var randomId = getRandomPlayersId(count: playersCount)
+        var randomId = getRandomPlayersId()
         
         // If the games has been relaunched we generate a new id so long until the id will be different from lastPlayerId
         if firstPlayer {
-            while (playerNames[lastPlayerId] == remainingPlayers[randomId]) {
-                randomId = getRandomPlayersId(count: playersCount)
+            while (game.checkPlayers(newPlayerId: randomId, lastPlayerId: lastPlayerId)) {
+                randomId = getRandomPlayersId()
             }
             
             firstPlayer = false
@@ -93,16 +89,15 @@ class GameViewController: UIViewController
         changeGameStatus(to: .sharingChoice)
         
         // Remove chosen player from remainingPlayers array
-        let activePlayerName = remainingPlayers.remove(at: randomId)
+        let activePlayerName = game.removeChosenPlayer(with: randomId)
         
         descriptionText = "The Next Player is \(activePlayerName.uppercased()). Choose a story either in the past or in the furture. Choose wisely!"
     }
     
     // Generate and return a random id from 0 to COUNT (not included)
-    func getRandomPlayersId(count: Int) -> Int
+    func getRandomPlayersId() -> Int
     {
-        let id = Int.random(in: 0 ..< count)
-        return id
+        return game.getRandomPlayersId()
     }
     
     // Make all players to available to choose again, change basic labels and buttons texts to default
@@ -112,6 +107,7 @@ class GameViewController: UIViewController
         changeGameStatus(to: .playerChoice)
         
         enableButton(past: false, future: false, next: true)
+        
         descriptionText = "Tap START to begin the Game. A random player will be chosen randomly."
         continueText = "START"
         
@@ -121,10 +117,10 @@ class GameViewController: UIViewController
         // There can be no last player on restart because we start with at least 2 players
         lastPlayer = false
         
-        remainingPlayers = playerNames
+        game = Game(with: playerNames)
     }
     
-    // Makes all buttons eihter enabled or not
+    // Make each individual button either enabled or not
     func enableButton(past: Bool, future: Bool, next: Bool)
     {
         pastButton.isEnabled = past
@@ -153,50 +149,6 @@ class GameViewController: UIViewController
         }
     }
     
-    /*
-     Return a message with either past or future question
-     
-     If inThePast == true -> fetch from past-Array | if false -> fetch from future
-     
-     If random number is 1 -> Singular question
-     
-     If random number is 2-13 (case Future):
-     Fetch a message from Plural but subtract 2 for the id
-     num = 2-13 -> id = 0-11 | id = num - 2
-     
-     2 different endings (case Past):
-     num 2-7 -> id = 0-5 from pastPlural | id = num - 2
-     num 8-13 -> id = 0-5 from pastPlural2 | id = num - 8
-     */
-    func createMessage(inThePast: Bool) -> String
-    {
-        let number = Int.random(in: 1 ... 13)
-        
-        var message = ""
-        if inThePast {
-            if number == 1 {
-                
-                let secondNumber = Int.random(in: 0 ..< 6)
-                message = questionsPool.pastSingular[secondNumber]
-            } else {
-                if number > 7 {
-                    message = questionsPool.pastPlural2[number - 8] + "\(number) days ago?"
-                } else {
-                    message = questionsPool.pastPlural[number - 2] + "\(number) days?"
-                }
-            }
-        } else {
-            if number == 1 {
-                
-                let secondNumber = Int.random(in: 0 ..< 6)
-                message = questionsPool.futureSingular[secondNumber]
-            } else {
-                message = questionsPool.futurePlural[number - 2] + "\(number) days?"
-            }
-        }
-        return message
-    }
-    
     func applyUIColors()
     {
         view.backgroundColor = ColorTheme.backgroundColor
@@ -220,7 +172,7 @@ class GameViewController: UIViewController
             past = true
         }
         
-        descriptionText = createMessage(inThePast: past)
+        descriptionText = game.returnQuestion(fromThePast: past)
         changeGameStatus(to: .playerChoice)
         
         if lastPlayer {

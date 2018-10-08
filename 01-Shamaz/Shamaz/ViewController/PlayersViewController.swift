@@ -99,6 +99,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     func startingGame(allowed: Bool)
     {
         startGameButton.isEnabled = allowed
+        startGameButton.alpha = allowed ? 1.0 : 0.4
     }
     
     // Don't allow user to input 2 same names
@@ -124,8 +125,10 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBAction func addPlayerTapped(_ sender: UIButton)
     {
+        let name = playerTextField.text!
+        
         // Check if name has more than 1 letter and if is not repeated
-        if let name = playerTextField.text, name.count > 1, !checkForRepeating(name: name) {
+        if name.count > 1, !checkForRepeating(name: name) {
             playerNames.append(name)
             clearInputField()
             reloadTable()

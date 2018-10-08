@@ -16,6 +16,7 @@
 		01560287216AAD3D00CF6999 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01560286216AAD3D00CF6999 /* ColorTheme.swift */; };
 		01B5571D216B448100606667 /* ButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5571C216B448100606667 /* ButtonExtensions.swift */; };
 		01B5571F216B456500606667 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5571E216B456500606667 /* Questions.swift */; };
+		01B5572B216B7A3600606667 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5572A216B7A3600606667 /* Game.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		01560286216AAD3D00CF6999 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		01B5571C216B448100606667 /* ButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensions.swift; sourceTree = "<group>"; };
 		01B5571E216B456500606667 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
+		01B5572A216B7A3600606667 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			children = (
 				01B55720216B489000606667 /* ViewController */,
 				01B55722216B48C400606667 /* Model */,
+				01B5572C216B7A6A00606667 /* ViewModel */,
 				01B55721216B48AA00606667 /* Extension */,
 				01560276216A730E00CF6999 /* Main.storyboard */,
 				01560272216A730E00CF6999 /* AppDelegate.swift */,
@@ -94,10 +97,18 @@
 		01B55722216B48C400606667 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				01560286216AAD3D00CF6999 /* ColorTheme.swift */,
 				01B5571E216B456500606667 /* Questions.swift */,
+				01560286216AAD3D00CF6999 /* ColorTheme.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		01B5572C216B7A6A00606667 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				01B5572A216B7A3600606667 /* Game.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +184,7 @@
 			files = (
 				01B5571D216B448100606667 /* ButtonExtensions.swift in Sources */,
 				01560275216A730E00CF6999 /* PlayersViewController.swift in Sources */,
+				01B5572B216B7A3600606667 /* Game.swift in Sources */,
 				01560287216AAD3D00CF6999 /* ColorTheme.swift in Sources */,
 				01B5571F216B456500606667 /* Questions.swift in Sources */,
 				01560285216A820E00CF6999 /* GameViewController.swift in Sources */,

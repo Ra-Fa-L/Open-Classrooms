@@ -57,7 +57,7 @@ class Questions
         "Do you have some special plans for the next ",
         "Will you drive you car in  ",
         "Will you attend any concert or something simmilar within the next ",
-        "Does anyone from you family or friends have a birthday in the next ",
+        "Does anyone from your family or friends have a birthday in the next ",
         "Will you have a vacation in the next ",
         "What will you buy in ",
     ]
