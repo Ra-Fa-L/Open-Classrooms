@@ -8,33 +8,20 @@
 
 import UIKit
 
+// Custom Methods extending UIButton to quickly change background and corderRadius
 extension UIButton
 {
     func setGreenButtons() {
-        self.setCustomCorners()
-        self.setCustomColors()
-    }
-    
-    func setOrangeButtons() {
-        self.setCustomCorners2()
-        self.setCustomColors2()
-    }
-    
-    func setCustomColors() {
         self.backgroundColor = ColorTheme.navigationColor
         self.tintColor = ColorTheme.secondaryTextColor
-    }
-    
-    func setCustomCorners() {
+        
         self.layer.cornerRadius = self.frame.height / 3
     }
     
-    func setCustomColors2() {
+    func setOrangeButtons() {
         self.backgroundColor = ColorTheme.buttonColor
         self.tintColor = ColorTheme.mainTextColor
-    }
-    
-    func setCustomCorners2() {
+        
         self.roundCorners(corners: [.bottomLeft, .bottomRight], radius: self.frame.height / 3)
     }
     
