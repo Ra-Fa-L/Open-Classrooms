@@ -8,44 +8,6 @@
 
 import UIKit
 
-extension UIButton
-{    
-    func setGreenButtons() {
-        self.setCustomCorners()
-        self.setCustomColors()
-    }
-    
-    func setOrangeButtons() {
-        self.setCustomCorners2()
-        self.setCustomColors2()
-    }
-    
-    func setCustomColors() {
-        self.backgroundColor = ColorTheme.navigationColor
-        self.tintColor = ColorTheme.secondaryTextColor
-    }
-    
-    func setCustomCorners() {
-        self.layer.cornerRadius = self.frame.height / 3
-    }
-    
-    func setCustomColors2() {
-        self.backgroundColor = ColorTheme.buttonColor
-        self.tintColor = ColorTheme.mainTextColor
-    }
-    
-    func setCustomCorners2() {
-        self.roundCorners(corners: [.bottomLeft, .bottomRight], radius: self.frame.height / 3)
-    }
-    
-    func roundCorners(corners: UIRectCorner, radius: CGFloat){
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-}
-
 class PlayersViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate
 {
     @IBOutlet var playerTextField: UITextField!
@@ -53,6 +15,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var playersTableView: UITableView!
     @IBOutlet var addPlayerButton: UIButton!
     
+    // Array to hold input Names
     var playerNames: [String] = []
     
     override func viewDidLoad()
@@ -64,18 +27,12 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         playersTableView.dataSource = self
         playerTextField.delegate = self
         
-        navigationController?.navigationBar.barTintColor = ColorTheme.navigationColor
-        navigationController?.navigationBar.tintColor = ColorTheme.mainTextColor
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : ColorTheme.secondaryTextColor]
-        
-        startGameButton.setGreenButtons()
-        addPlayerButton.setGreenButtons()
-        
-        view.backgroundColor = ColorTheme.backgroundColor
+        applyUIColors()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        // Send player Names to the next ViewController and assign it to a variable
         if segue.identifier == "startGameSegue" {
             let nextVC = segue.destination as? GameViewController
             
@@ -93,12 +50,15 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = UITableViewCell()
         cell.textLabel?.text = playerNames[indexPath.row]
         
+        // Every cell's colors needs to changed individually
         cell.backgroundColor = ColorTheme.backgroundColor
         cell.textLabel?.textColor = ColorTheme.mainTextColor
         
         return cell
     }
     
+    // Delete cell and remove the name from playersName-Array
+    // After that check if starting a game is possible
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete {
@@ -109,6 +69,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
+    // Hide Keyboard on Return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -124,6 +85,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         playerTextField.text = ""
     }
     
+    // Check if there are at least 2 players
     func checkStartButton()
     {
         var gameAllowed = false
@@ -133,28 +95,47 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         startingGame(allowed: gameAllowed)
     }
     
+    // Enable or disenable startButton
     func startingGame(allowed: Bool)
     {
         startGameButton.isEnabled = allowed
     }
     
+    // Don't allow user to input 2 same names
     func checkForRepeating(name: String) -> Bool
     {
         let nameRepeated = playerNames.contains(name)
         return nameRepeated
     }
     
+    // Apply chosen Colors for UIItems
+    func applyUIColors()
+    {
+        navigationController?.navigationBar.barTintColor = ColorTheme.navigationColor
+        navigationController?.navigationBar.tintColor = ColorTheme.mainTextColor
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : ColorTheme.secondaryTextColor]
+        
+        // Custom method added per Extensions
+        startGameButton.setGreenButtons()
+        addPlayerButton.setGreenButtons()
+        
+        view.backgroundColor = ColorTheme.backgroundColor
+    }
+    
     @IBAction func addPlayerTapped(_ sender: UIButton)
     {
+        // Check if name has more than 1 letter and if is not repeated
         if let name = playerTextField.text, name.count > 1, !checkForRepeating(name: name) {
             playerNames.append(name)
             clearInputField()
             reloadTable()
         }
         
+        // Check if the game can be started
         checkStartButton()
     }
     
+    // Navigate to the next VC -> start Game
     @IBAction func startGameTapped(_ sender: UIButton)
     {
         performSegue(withIdentifier: "startGameSegue", sender: nil)
