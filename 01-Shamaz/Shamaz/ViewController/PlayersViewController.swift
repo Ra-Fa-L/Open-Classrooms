@@ -15,7 +15,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet var playersTableView: UITableView!
     @IBOutlet var addPlayerButton: UIButton!
     
-    // Array to hold input Names
+    // Array to hold inputNames
     var playerNames: [String] = []
     
     override func viewDidLoad()
@@ -30,9 +30,9 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         applyUIColors()
     }
     
+    // Instatiate a Game-Object with playerNames and assign it to a variable in the next ViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        // Send player Names to the next ViewController and assign it to a variable
         if segue.identifier == "startGameSegue"
         {
             let nextVC = segue.destination as? GameViewController
@@ -51,7 +51,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         let cell = UITableViewCell()
         cell.textLabel?.text = playerNames[indexPath.row]
         
-        // Every cell's colors needs to changed individually
+        // Every cell's colors needs to be changed individually, because it's on top of table background
         cell.backgroundColor = ColorTheme.backgroundColor
         cell.textLabel?.textColor = ColorTheme.mainTextColor
         
@@ -59,13 +59,13 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     // Delete cell and remove the name from playersName-Array
-    // After that check if starting a game is possible
+    // After that check startButton status
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
     {
         if editingStyle == .delete
         {
             playerNames.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.left)
             
             checkStartButton()
         }
@@ -88,14 +88,11 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         playerTextField.text = ""
     }
     
-    // Check if there are at least 2 players
+    // Check if there are at least 2 players -> change startButtons status
     func checkStartButton()
     {
-        var gameAllowed = false
-        if playerNames.count > 1
-        {
-            gameAllowed = true
-        }
+        let gameAllowed = playerNames.count > 1 ? true : false
+        
         startingGame(allowed: gameAllowed)
     }
     
@@ -106,14 +103,14 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         startGameButton.alpha = allowed ? 1.0 : 0.4
     }
     
-    // Don't allow user to input 2 same names
+    // Don't allow user to input 2 names that are the same || john & joHn should not be allowed
     func checkForRepeating(name: String) -> Bool
     {
-        let nameRepeated = playerNames.contains(name)
+        let nameRepeated = playerNames.contains(name.lowercased())
         return nameRepeated
     }
     
-    // Apply chosen Colors for UIItems
+    // Apply predefined colors for UI-Items
     func applyUIColors()
     {
         navigationController?.navigationBar.barTintColor = ColorTheme.navigationColor
@@ -127,6 +124,8 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         view.backgroundColor = ColorTheme.backgroundColor
     }
     
+    // Create a red border and red text color to indicate a duplicated name
+    // After 0.8 second revert changes
     func highlightTextFieldWithRed()
     {
         playerTextField.highlight(error: true)
@@ -141,12 +140,13 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     {
         let name = playerTextField.text!
         
-        // Check if name has more than 1 letter and if is not repeated
+        // Check if name has more than 1 letter
         if name.count > 1
         {
+            // and if the input name is not repeated
             if  !checkForRepeating(name: name)
             {
-                playerNames.append(name)
+                playerNames.append(name.lowercased())
                 clearInputField()
                 reloadTable()
             }

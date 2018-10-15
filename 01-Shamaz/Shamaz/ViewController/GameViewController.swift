@@ -10,19 +10,19 @@ import UIKit
 
 class GameViewController: UIViewController
 {
-    @IBOutlet var pastButton: UIButton!
-    @IBOutlet var futureButton: UIButton!
-    @IBOutlet var nextButton: UIButton!
-    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet private var pastButton: UIButton!
+    @IBOutlet private var futureButton: UIButton!
+    @IBOutlet private var nextButton: UIButton!
+    @IBOutlet private var descriptionLabel: UILabel!
     
-    // Object with all Questions
+    // Game object with data and logic
     var game: Game!
     
     // Will be either .playerChoice or .sharingChoice
-    var gameStatus: gameMode = .none
+    private var gameStatus: gameMode = .none
     
     // Variable to hold descriptionLabel text -> Label.text will be reassigned with each change of this variable
-    var descriptionText: String = ""
+    private var descriptionText: String = ""
     {
         didSet
         {
@@ -31,7 +31,7 @@ class GameViewController: UIViewController
     }
     
     // Change of the Text of the nextButton will be assigned to this variable -> title will be changed with it
-    var continueText: String = ""
+    private var continueText: String = ""
     {
         didSet
         {
@@ -48,29 +48,29 @@ class GameViewController: UIViewController
         restartGame(veryFirstTime: true)
     }
     
-    // Make all players to available to choose again, change basic labels and buttons texts to default
+    // Make all players available to choose again, change basic labels and buttons texts to default
     // Change game status to choosing a player
-    func restartGame(veryFirstTime: Bool = false)
+    private func restartGame(veryFirstTime: Bool = false)
     {
         (descriptionText, continueText) = game.restartGame(veryFirstTime: veryFirstTime)
         
         changeGameStatus(to: .playerChoice)
     }
     
-    func chooseNewPlayer()
+    private func chooseNewPlayer()
     {
         (descriptionText) = game.chooseNewPlayer()
         
         changeGameStatus(to: .sharingChoice)
     }
     
-    func lastPlayerPlaying() -> Bool
+    private func lastPlayerPlaying() -> Bool
     {
         return game.lastPlayer
     }
     
     // Make each individual button either enabled or not
-    func enableButton(past: Bool, future: Bool, next: Bool)
+    private func enableButton(past: Bool, future: Bool, next: Bool)
     {
         pastButton.display(enabled: past)
         futureButton.display(enabled: future)
@@ -79,9 +79,10 @@ class GameViewController: UIViewController
     
     // Changes enabled Buttons acoording to gameStatus
     // Changes alpha of the Buttons and continueText as well
-    func changeGameStatus(to status: gameMode)
+    private func changeGameStatus(to status: gameMode)
     {
         gameStatus = status
+        
         if status == .sharingChoice
         {
             enableButton(past: true, future: true, next: false)
@@ -93,7 +94,7 @@ class GameViewController: UIViewController
         continueText = game.changeStatusText(for: status)
     }
     
-    func applyUIColors()
+    private func applyUIColors()
     {
         view.backgroundColor = ColorTheme.backgroundColor
         
@@ -103,18 +104,14 @@ class GameViewController: UIViewController
         nextButton.setGreen()
     }
     
-    // Create message depending on chosen button and change alpha of the not chosen button
-    // If lastPlayer change the nextButton's text to Restart Game
-    @IBAction func storyButtonTapped(_ sender: UIButton)
+    // Create message depending on chosen button and highlight chosen button
+    // If lastPlayer, change the nextButton's text to Restart Game
+    @IBAction private func storyButtonTapped(_ sender: UIButton)
     {
-        var past = false
-        
-        if sender.tag == 0
-        {
-            past = true
-        }
+        let past = sender.tag == 0 ? true : false
         
         descriptionText = game.returnQuestion(fromThePast: past)
+        
         changeGameStatus(to: .playerChoice)
         
         sender.highlight()
@@ -125,23 +122,20 @@ class GameViewController: UIViewController
         }
     }
     
-    @IBAction func nextButtonTapped(_ sender: UIButton)
+    @IBAction private func nextButtonTapped(_ sender: UIButton)
     {
         // Not needed because the button cannot be tapped when in different game state
-        // It is here for the sake of logical overview
-        print(sender.tag)
+        // It is here for the logical overview
         if gameStatus == .playerChoice
         {
-            print("1")
             // If lastPlayer make the next nextButton tap restart the game
             if lastPlayerPlaying()
             {
-                print("LAST")
                 restartGame()
             }
+            // Otherwise choose a random new player
             else
             {
-                // Otherwise choose a random new player
                 chooseNewPlayer()
             }
         }
