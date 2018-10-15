@@ -34,13 +34,12 @@ class PlayersViewModel
         if name.count > 1 && !checkForRepeating(name: name)
         {
             playerNames.append(name.lowercased())
-            
             return true
         }
         return false
     }
     
-    // If playerName is longer at least 3 letters long you can add it to the ViewModel
+    // If playerName is at least 3 letters long you can add it to the ViewModel
     func isAllowedAdding(player: String) -> Bool
     {
         return player.count > 2 ? true : false
