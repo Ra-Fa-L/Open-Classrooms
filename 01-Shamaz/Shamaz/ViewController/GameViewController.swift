@@ -16,7 +16,7 @@ class GameViewController: UIViewController
     @IBOutlet private var descriptionLabel: UILabel!
     
     // Game object with data and logic
-    var game: Game!
+    var game: GameViewModel!
     
     // Will be either .playerChoice or .sharingChoice
     private var gameStatus: gameMode = .none
@@ -44,7 +44,6 @@ class GameViewController: UIViewController
         super.viewDidLoad()
         
         applyUIColors()
-        
         restartGame(veryFirstTime: true)
     }
     
@@ -52,15 +51,17 @@ class GameViewController: UIViewController
     // Change game status to choosing a player
     private func restartGame(veryFirstTime: Bool = false)
     {
-        (descriptionText, continueText) = game.restartGame(veryFirstTime: veryFirstTime)
+        descriptionText = "Tap START to begin the Game. A random player will be chosen randomly."
+        continueText = "START"
+        
+        game.restartGame(veryFirstTime: veryFirstTime)
         
         changeGameStatus(to: .playerChoice)
     }
     
     private func chooseNewPlayer()
     {
-        (descriptionText) = game.chooseNewPlayer()
-        
+        descriptionText = game.chooseNewPlayer()
         changeGameStatus(to: .sharingChoice)
     }
     
@@ -100,7 +101,6 @@ class GameViewController: UIViewController
         
         pastButton.setOrange()
         futureButton.setOrange()
-        
         nextButton.setGreen()
     }
     
@@ -111,9 +111,7 @@ class GameViewController: UIViewController
         let past = sender.tag == 0 ? true : false
         
         descriptionText = game.returnQuestion(fromThePast: past)
-        
         changeGameStatus(to: .playerChoice)
-        
         sender.highlight()
         
         if lastPlayerPlaying()

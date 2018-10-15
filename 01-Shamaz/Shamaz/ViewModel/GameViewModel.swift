@@ -1,5 +1,5 @@
 //
-//  Game.swift
+//  GameViewModel.swift
 //  Shamaz
 //
 //  Created by Rafal Padberg on 08.10.18.
@@ -16,7 +16,7 @@ enum gameMode
     case sharingChoice
 }
 
-class Game
+class GameViewModel
 {
     private var questions: Questions!
     private var allPlayers: [String]!
@@ -69,20 +69,14 @@ class Game
     }
     
     // Make all players available to choose again, change basic labels and buttons texts to default
-    func restartGame(veryFirstTime: Bool) -> (String, String)
+    func restartGame(veryFirstTime: Bool)
     {
-        let descriptionText = "Tap START to begin the Game. A random player will be chosen randomly."
-        let continueText = "START"
-        
-        // Reapeting the last player from previous game can not be possible in the very first game
+        // Repeating the last player from previous game can not be possible in the very first game
         firstPlayer = veryFirstTime ? false : true
         
         // There can be no last player on restart because we start with at least 2 players
         lastPlayer = false
-        
         remainingPlayers = allPlayers
-        
-        return (descriptionText, continueText)
     }
     
     // Return a message with either past or future question

@@ -15,9 +15,10 @@
 		01560285216A820E00CF6999 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01560284216A820E00CF6999 /* GameViewController.swift */; };
 		01560287216AAD3D00CF6999 /* ColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01560286216AAD3D00CF6999 /* ColorTheme.swift */; };
 		0180FECA21749B8800D6EDF7 /* TextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180FEC921749B8800D6EDF7 /* TextFieldExtension.swift */; };
+		0180FECC2174F08600D6EDF7 /* PlayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0180FECB2174F08600D6EDF7 /* PlayersViewModel.swift */; };
 		01B5571D216B448100606667 /* ButtonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5571C216B448100606667 /* ButtonExtensions.swift */; };
 		01B5571F216B456500606667 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5571E216B456500606667 /* Questions.swift */; };
-		01B5572B216B7A3600606667 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5572A216B7A3600606667 /* Game.swift */; };
+		01B5572B216B7A3600606667 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B5572A216B7A3600606667 /* GameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +32,10 @@
 		01560284216A820E00CF6999 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		01560286216AAD3D00CF6999 /* ColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTheme.swift; sourceTree = "<group>"; };
 		0180FEC921749B8800D6EDF7 /* TextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldExtension.swift; sourceTree = "<group>"; };
+		0180FECB2174F08600D6EDF7 /* PlayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewModel.swift; sourceTree = "<group>"; };
 		01B5571C216B448100606667 /* ButtonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonExtensions.swift; sourceTree = "<group>"; };
 		01B5571E216B456500606667 /* Questions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Questions.swift; sourceTree = "<group>"; };
-		01B5572A216B7A3600606667 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		01B5572A216B7A3600606667 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +111,8 @@
 		01B5572C216B7A6A00606667 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				01B5572A216B7A3600606667 /* Game.swift */,
+				01B5572A216B7A3600606667 /* GameViewModel.swift */,
+				0180FECB2174F08600D6EDF7 /* PlayersViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -187,7 +190,8 @@
 			files = (
 				01B5571D216B448100606667 /* ButtonExtensions.swift in Sources */,
 				01560275216A730E00CF6999 /* PlayersViewController.swift in Sources */,
-				01B5572B216B7A3600606667 /* Game.swift in Sources */,
+				01B5572B216B7A3600606667 /* GameViewModel.swift in Sources */,
+				0180FECC2174F08600D6EDF7 /* PlayersViewModel.swift in Sources */,
 				0180FECA21749B8800D6EDF7 /* TextFieldExtension.swift in Sources */,
 				01560287216AAD3D00CF6999 /* ColorTheme.swift in Sources */,
 				01B5571F216B456500606667 /* Questions.swift in Sources */,
@@ -341,6 +345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7KK37S6N26;
 				INFOPLIST_FILE = Shamaz/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -359,6 +364,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7KK37S6N26;
 				INFOPLIST_FILE = Shamaz/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
