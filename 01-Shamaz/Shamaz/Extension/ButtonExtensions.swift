@@ -19,7 +19,7 @@ extension UIButton
     
     func highlight()
     {
-        self.alpha = 0.95
+        self.alpha = 0.90
     }
     
     func setGreen()

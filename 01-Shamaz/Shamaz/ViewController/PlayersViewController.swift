@@ -127,16 +127,33 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
         view.backgroundColor = ColorTheme.backgroundColor
     }
     
+    func highlightTextFieldWithRed()
+    {
+        playerTextField.highlight(error: true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8)
+        {
+            self.playerTextField.highlight(error: false)
+        }
+    }
+    
     @IBAction func addPlayerTapped(_ sender: UIButton)
     {
         let name = playerTextField.text!
         
         // Check if name has more than 1 letter and if is not repeated
-        if name.count > 1, !checkForRepeating(name: name)
+        if name.count > 1
         {
-            playerNames.append(name)
-            clearInputField()
-            reloadTable()
+            if  !checkForRepeating(name: name)
+            {
+                playerNames.append(name)
+                clearInputField()
+                reloadTable()
+            }
+            else
+            {
+                highlightTextFieldWithRed()
+            }
         }
         
         // Check if the game can be started
