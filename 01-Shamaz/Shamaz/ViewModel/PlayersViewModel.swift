@@ -40,6 +40,12 @@ class PlayersViewModel
         return false
     }
     
+    // If playerName is longer at least 3 letters long you can add it to the ViewModel
+    func isAllowedAdding(player: String) -> Bool
+    {
+        return player.count > 2 ? true : false
+    }
+    
     // Don't allow user to input 2 names that are the same || john & joHn should not be allowed
     private func checkForRepeating(name: String) -> Bool
     {

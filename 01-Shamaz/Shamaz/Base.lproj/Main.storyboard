@@ -75,8 +75,11 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textFieldChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="6QQ-dD-btj"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qar-ZM-366">
+                                    <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qar-ZM-366">
                                         <rect key="frame" x="385" y="0.0" width="65" height="36.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="65" id="aAy-dK-g0Q"/>
@@ -94,7 +97,7 @@
                                             <action selector="addPlayerTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QtZ-WB-ctv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" alpha="0.40000000000000002" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-Nk-m0s">
+                                    <button opaque="NO" alpha="0.55000000000000004" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b8v-Nk-m0s">
                                         <rect key="frame" x="458" y="0.0" width="80" height="36.5"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="qpx-Z7-aBf"/>

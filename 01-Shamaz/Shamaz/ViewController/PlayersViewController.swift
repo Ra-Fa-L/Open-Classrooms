@@ -86,6 +86,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     private func clearInputField()
     {
         playerTextField.text = ""
+        addingPlayer(allowed: false)
     }
     
     private func checkStartButton()
@@ -97,6 +98,12 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     private func startingGame(allowed: Bool)
     {
         startGameButton.display(enabled: allowed)
+    }
+    
+    // Enable or disenable addingButton
+    private func addingPlayer(allowed: Bool)
+    {
+        addPlayerButton.display(enabled: allowed)
     }
     
     // Apply predefined colors for UI-Items
@@ -148,6 +155,12 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction private func startGameTapped(_ sender: UIButton)
     {
         performSegue(withIdentifier: "startGameSegue", sender: nil)
+    }
+    
+    // Fires on every pressed letter -> Event: Editing Changed
+    @IBAction func textFieldChanged(_ sender: UITextField)
+    {
+        addingPlayer(allowed: playersVM.isAllowedAdding(player: sender.text!))
     }
 }
 
