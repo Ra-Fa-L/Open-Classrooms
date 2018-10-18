@@ -14,9 +14,6 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet private var startGameButton: UIButton!
     @IBOutlet private var playersTableView: UITableView!
     @IBOutlet private var addPlayerButton: UIButton!
-    @IBOutlet private var playerAdditionStackView: UIStackView!
-    
-    private var moveTextFieldBy: CGFloat = 0.0
     
     // Players View Model
     private let playersVM: PlayersViewModel = PlayersViewModel()
@@ -34,6 +31,7 @@ class PlayersViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     // Instatiate a Game-Object with playerNames and assign it to a variable in the next ViewController
+    // TODO: ads
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "startGameSegue"
