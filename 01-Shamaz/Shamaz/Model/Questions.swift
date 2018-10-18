@@ -45,7 +45,7 @@ class Questions
     [
         "What will you eat tomorrow for a dinner?",
         "Will you go somewhere tomorrow?",
-        "Have something planned for tommorow?",
+        "Have you something planned for tommorow?",
         "Tommorow is a great day to exercise don't you think?",
         "Do you intend to do something crazy tomorrow?",
         "When will you wake up tommorow?",
@@ -53,9 +53,9 @@ class Questions
     
     private let futurePlural =
     [
-        "What restaurant are going to visit in the next ",
+        "What restaurant are you going to visit in the next ",
         "Will you leave your town in the next ",
-        "What movies are are looking forward to see in the next ",
+        "What movies are you looking forward to see in the next ",
         "Will you work out in the next ",
         "What is the craziest thing you will be doing in your next ",
         "Will you see any of your family members in the next ",
