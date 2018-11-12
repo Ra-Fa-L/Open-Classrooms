@@ -93,39 +93,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		013374472194A5CD009F6147 /* SetUp */ = {
+		013374472194A5CD009F6147 /* SetUpVC */ = {
 			isa = PBXGroup;
 			children = (
 				0133744D2194A642009F6147 /* SetUpViewController.swift */,
 			);
-			path = SetUp;
+			path = SetUpVC;
 			sourceTree = "<group>";
 		};
-		013374482194A5DE009F6147 /* Introduction */ = {
+		013374482194A5DE009F6147 /* IntroductionVC */ = {
 			isa = PBXGroup;
 			children = (
 				01581F3E2195D9C300A32A8A /* Controller */,
 				01581F382195A8AC00A32A8A /* View */,
 			);
-			path = Introduction;
+			path = IntroductionVC;
 			sourceTree = "<group>";
 		};
-		013374492194A603009F6147 /* InterestsSharing */ = {
+		013374492194A603009F6147 /* InterestsSharingVC */ = {
 			isa = PBXGroup;
 			children = (
 				01581F3F2195D9CF00A32A8A /* Controller */,
 				01581F3D2195D9B400A32A8A /* View */,
 			);
-			path = InterestsSharing;
+			path = InterestsSharingVC;
 			sourceTree = "<group>";
 		};
-		0133744A2194A611009F6147 /* Results */ = {
+		0133744A2194A611009F6147 /* ResultsVC */ = {
 			isa = PBXGroup;
 			children = (
 				01A4E5D92199086400AD85F8 /* Controller */,
 				01A4E5D82199085F00AD85F8 /* View */,
 			);
-			path = Results;
+			path = ResultsVC;
 			sourceTree = "<group>";
 		};
 		0133744B2194A61A009F6147 /* ViewModel */ = {
@@ -225,10 +225,10 @@
 				0133745F2194A739009F6147 /* Protocol */,
 				0133744C2194A622009F6147 /* Model */,
 				0133744B2194A61A009F6147 /* ViewModel */,
-				0133744A2194A611009F6147 /* Results */,
-				013374492194A603009F6147 /* InterestsSharing */,
-				013374482194A5DE009F6147 /* Introduction */,
-				013374472194A5CD009F6147 /* SetUp */,
+				013374472194A5CD009F6147 /* SetUpVC */,
+				013374482194A5DE009F6147 /* IntroductionVC */,
+				013374492194A603009F6147 /* InterestsSharingVC */,
+				0133744A2194A611009F6147 /* ResultsVC */,
 				017436C621821E3200D6EADA /* AppDelegate.swift */,
 				017436CA21821E3200D6EADA /* Main.storyboard */,
 				017436CF21821E3300D6EADA /* LaunchScreen.storyboard */,

@@ -53,7 +53,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         let matches = resultModel.hitsToPerson.sorted { (first, second) -> Bool in
             return first.key > second.key
         }
-        return "\(matches[section].key) Interests Matching"
+        return "\(matches[section].key) Interests Matching between:"
     }
     
     func giveNumberOfRows(for section: Int) -> Int {
