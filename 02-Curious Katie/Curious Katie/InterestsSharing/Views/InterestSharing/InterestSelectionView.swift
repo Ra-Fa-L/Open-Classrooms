@@ -20,7 +20,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
     @IBOutlet var noMoreButton: UIButton!
     @IBOutlet var interestsPickerView: CustomPickerView!
     
-    var viewModel: CuriousKatieViewModel!
+    var viewModel: CuriousKatieVM!
     var delegate: InterestsSharingDelegate!
     
     let placeholderText = "Add extra info or generate it"

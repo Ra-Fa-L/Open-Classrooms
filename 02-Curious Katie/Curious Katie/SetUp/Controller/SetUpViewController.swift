@@ -66,7 +66,7 @@ class SetUpViewController: UIViewController {
         let customPlayerCount = demoChosen ? playerCount : nil
         
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "IntroductionVC") as! IntroductionViewController
-        nextVC.viewModel = CuriousKatieViewModel(with: customPlayerCount)
+        nextVC.viewModel = CuriousKatieVM(with: customPlayerCount)
         nextVC.modalTransitionStyle = .crossDissolve
         
         present(nextVC, animated: true, completion: nil)

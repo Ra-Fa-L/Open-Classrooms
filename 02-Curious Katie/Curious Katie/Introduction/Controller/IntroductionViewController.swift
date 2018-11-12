@@ -20,7 +20,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var generateAllButton: UIButton!
     @IBOutlet var nextPlayerButton: UIButton!
     
-    var viewModel: CuriousKatieViewModel!
+    var viewModel: CuriousKatieVM!
     
     var activePlayerNumber: Int = 1
     var playersCount: Int = 12

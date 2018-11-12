@@ -16,7 +16,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     var selectedCell: [Int]  = []
     var segment = 0
     
-    var resultModel: ResultsViewModel!
+    var resultModel: ResultsVM!
     
     override func viewDidLoad() {
         super.viewDidLoad()

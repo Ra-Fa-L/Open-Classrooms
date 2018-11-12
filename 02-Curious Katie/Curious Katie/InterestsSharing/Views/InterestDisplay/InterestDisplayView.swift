@@ -15,7 +15,7 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
     
     @IBOutlet var customCollectionView: UICollectionView!
     
-    var viewModel: CuriousKatieViewModel!
+    var viewModel: CuriousKatieVM!
     var width: CGFloat = 0
     var height: CGFloat = 0
     

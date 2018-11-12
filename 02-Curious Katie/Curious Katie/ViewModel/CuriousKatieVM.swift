@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CuriousKatieViewModel {
+class CuriousKatieVM {
     
     let generator: Generator = Generator()
     let interests: Interests = Interests()
@@ -213,8 +213,8 @@ class CuriousKatieViewModel {
         return players[player].interests
     }
     
-    func createResultsVM() -> ResultsViewModel
+    func createResultsVM() -> ResultsVM
     {
-        return ResultsViewModel(players: players, interests: interests.interests)
+        return ResultsVM(players: players, interests: interests.interests)
     }
 }

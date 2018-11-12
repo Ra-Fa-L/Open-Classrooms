@@ -16,7 +16,7 @@
 		013374562194A698009F6147 /* CuriousKatieVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374552194A698009F6147 /* CuriousKatieVM.swift */; };
 		013374582194A6A7009F6147 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374572194A6A7009F6147 /* Player.swift */; };
 		0133745A2194A711009F6147 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374592194A711009F6147 /* Interest.swift */; };
-		0133745C2194A728009F6147 /* ResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745B2194A728009F6147 /* ResultsViewModel.swift */; };
+		0133745C2194A728009F6147 /* ResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745B2194A728009F6147 /* ResultsVM.swift */; };
 		0133745E2194A736009F6147 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745D2194A736009F6147 /* Generator.swift */; };
 		013374622194B0A2009F6147 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013374612194AC49009F6147 /* Assets.xcassets */; };
 		013374642194D051009F6147 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374632194D051009F6147 /* CustomColors.swift */; };
@@ -53,7 +53,7 @@
 		013374552194A698009F6147 /* CuriousKatieVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriousKatieVM.swift; sourceTree = "<group>"; };
 		013374572194A6A7009F6147 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		013374592194A711009F6147 /* Interest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
-		0133745B2194A728009F6147 /* ResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewModel.swift; sourceTree = "<group>"; };
+		0133745B2194A728009F6147 /* ResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVM.swift; sourceTree = "<group>"; };
 		0133745D2194A736009F6147 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		013374612194AC49009F6147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/rafi/Dane/Ra-Fa-L/Projects/Open-Classrooms/02-Curious Katie/Curious Katie/Assets.xcassets"; sourceTree = "<absolute>"; };
 		013374632194D051009F6147 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomColors.swift; path = "/Users/rafi/Dane/Ra-Fa-L/Projects/Open-Classrooms/02-Curious Katie/Curious Katie/Model/CustomColors.swift"; sourceTree = "<absolute>"; };
@@ -93,45 +93,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		013374472194A5CD009F6147 /* SetUpVC */ = {
+		011BB4F72199CDD0002D3F17 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				0133744D2194A642009F6147 /* SetUpViewController.swift */,
 			);
-			path = SetUpVC;
+			path = Controller;
 			sourceTree = "<group>";
 		};
-		013374482194A5DE009F6147 /* IntroductionVC */ = {
+		013374472194A5CD009F6147 /* SetUp */ = {
+			isa = PBXGroup;
+			children = (
+				011BB4F72199CDD0002D3F17 /* Controller */,
+			);
+			path = SetUp;
+			sourceTree = "<group>";
+		};
+		013374482194A5DE009F6147 /* Introduction */ = {
 			isa = PBXGroup;
 			children = (
 				01581F3E2195D9C300A32A8A /* Controller */,
 				01581F382195A8AC00A32A8A /* View */,
 			);
-			path = IntroductionVC;
+			path = Introduction;
 			sourceTree = "<group>";
 		};
-		013374492194A603009F6147 /* InterestsSharingVC */ = {
+		013374492194A603009F6147 /* InterestsSharing */ = {
 			isa = PBXGroup;
 			children = (
 				01581F3F2195D9CF00A32A8A /* Controller */,
-				01581F3D2195D9B400A32A8A /* View */,
+				01581F3D2195D9B400A32A8A /* Views */,
 			);
-			path = InterestsSharingVC;
+			path = InterestsSharing;
 			sourceTree = "<group>";
 		};
-		0133744A2194A611009F6147 /* ResultsVC */ = {
+		0133744A2194A611009F6147 /* Results */ = {
 			isa = PBXGroup;
 			children = (
 				01A4E5D92199086400AD85F8 /* Controller */,
 				01A4E5D82199085F00AD85F8 /* View */,
 			);
-			path = ResultsVC;
+			path = Results;
 			sourceTree = "<group>";
 		};
 		0133744B2194A61A009F6147 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0133745B2194A728009F6147 /* ResultsViewModel.swift */,
+				0133745B2194A728009F6147 /* ResultsVM.swift */,
 				013374552194A698009F6147 /* CuriousKatieVM.swift */,
 			);
 			path = ViewModel;
@@ -176,14 +184,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		01581F3D2195D9B400A32A8A /* View */ = {
+		01581F3D2195D9B400A32A8A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				01E541AC2196293F00CB9C70 /* InterestSharing */,
 				01E541AD2196294D00CB9C70 /* InterestDisplay */,
 				01581F402195DA3F00A32A8A /* PlayerNameButton.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		01581F3E2195D9C300A32A8A /* Controller */ = {
@@ -225,10 +233,10 @@
 				0133745F2194A739009F6147 /* Protocol */,
 				0133744C2194A622009F6147 /* Model */,
 				0133744B2194A61A009F6147 /* ViewModel */,
-				013374472194A5CD009F6147 /* SetUpVC */,
-				013374482194A5DE009F6147 /* IntroductionVC */,
-				013374492194A603009F6147 /* InterestsSharingVC */,
-				0133744A2194A611009F6147 /* ResultsVC */,
+				013374472194A5CD009F6147 /* SetUp */,
+				013374482194A5DE009F6147 /* Introduction */,
+				013374492194A603009F6147 /* InterestsSharing */,
+				0133744A2194A611009F6147 /* Results */,
 				017436C621821E3200D6EADA /* AppDelegate.swift */,
 				017436CA21821E3200D6EADA /* Main.storyboard */,
 				017436CF21821E3300D6EADA /* LaunchScreen.storyboard */,
@@ -374,7 +382,7 @@
 				01E541AF219633C100CB9C70 /* InterestsSharingDelegate.swift in Sources */,
 				01581F412195DA3F00A32A8A /* PlayerNameButton.swift in Sources */,
 				01801CAF21998AFF00C2C082 /* Label-Colors.swift in Sources */,
-				0133745C2194A728009F6147 /* ResultsViewModel.swift in Sources */,
+				0133745C2194A728009F6147 /* ResultsVM.swift in Sources */,
 				017436C721821E3200D6EADA /* AppDelegate.swift in Sources */,
 				01E541A72196282200CB9C70 /* CustomPickerView.swift in Sources */,
 				013374522194A668009F6147 /* InterestsSharingViewController.swift in Sources */,

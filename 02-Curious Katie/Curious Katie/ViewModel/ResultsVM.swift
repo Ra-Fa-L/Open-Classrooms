@@ -1,5 +1,5 @@
 //
-//  ResultsViewModel.swift
+//  ResultsVM.swift
 //  Curious Katie
 //
 //  Created by Rafal Padberg on 08.11.18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ResultsViewModel
+class ResultsVM
 {
     let players: [Player]!
     let interests: [String]!

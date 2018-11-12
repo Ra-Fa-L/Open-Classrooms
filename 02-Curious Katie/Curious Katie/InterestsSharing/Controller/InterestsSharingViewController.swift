@@ -31,7 +31,7 @@ class InterestsSharingViewController: UIViewController {
     
     @IBOutlet var playerNameButtonCollection: [PlayerNameButton]!
     
-    var viewModel: CuriousKatieViewModel!
+    var viewModel: CuriousKatieVM!
     
     var buttonCoordinates: [CGFloat] = []
     var firstCircuitDone: Bool = false
