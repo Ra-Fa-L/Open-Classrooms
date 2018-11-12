@@ -18,4 +18,8 @@ extension UIButton {
         let height = self.bounds.height
         self.roundCorners(corners: [.bottomLeft, .topLeft], radius: height / 4)
     }
+    
+    func noCorners() {
+        self.roundCorners(corners: .allCorners, radius: 0.0)
+    }
 }

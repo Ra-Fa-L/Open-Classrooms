@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		011F96DC2197100600228971 /* InterestDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F96DB2197100600228971 /* InterestDisplayView.swift */; };
-		011F96DE2197104800228971 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011F96DD2197104800228971 /* CustomCollectionViewCell.swift */; };
 		011F96E0219710BD00228971 /* InterestDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 011F96DF219710BD00228971 /* InterestDisplayView.xib */; };
 		0133744E2194A642009F6147 /* SetUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133744D2194A642009F6147 /* SetUpViewController.swift */; };
 		013374502194A653009F6147 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133744F2194A653009F6147 /* IntroductionViewController.swift */; };
@@ -17,7 +16,7 @@
 		013374562194A698009F6147 /* CuriousKatieVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374552194A698009F6147 /* CuriousKatieVM.swift */; };
 		013374582194A6A7009F6147 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374572194A6A7009F6147 /* Player.swift */; };
 		0133745A2194A711009F6147 /* Interest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374592194A711009F6147 /* Interest.swift */; };
-		0133745C2194A728009F6147 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745B2194A728009F6147 /* Result.swift */; };
+		0133745C2194A728009F6147 /* ResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745B2194A728009F6147 /* ResultsViewModel.swift */; };
 		0133745E2194A736009F6147 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745D2194A736009F6147 /* Generator.swift */; };
 		013374622194B0A2009F6147 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013374612194AC49009F6147 /* Assets.xcassets */; };
 		013374642194D051009F6147 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374632194D051009F6147 /* CustomColors.swift */; };
@@ -32,6 +31,11 @@
 		017436C721821E3200D6EADA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017436C621821E3200D6EADA /* AppDelegate.swift */; };
 		017436CC21821E3200D6EADA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 017436CA21821E3200D6EADA /* Main.storyboard */; };
 		017436D121821E3300D6EADA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 017436CF21821E3300D6EADA /* LaunchScreen.storyboard */; };
+		01A4E5D12198F8BF00AD85F8 /* kuti.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A4E5D02198F8BF00AD85F8 /* kuti.xib */; };
+		01A4E5D62198FB7C00AD85F8 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4E5D42198FB7C00AD85F8 /* CustomCollectionViewCell.swift */; };
+		01A4E5D72198FB7C00AD85F8 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A4E5D52198FB7C00AD85F8 /* CustomCollectionViewCell.xib */; };
+		01A4E5DB2199088600AD85F8 /* NamesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4E5DA2199088600AD85F8 /* NamesTableViewCell.swift */; };
+		01A4E5DD2199089A00AD85F8 /* SuitableHitsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4E5DC2199089A00AD85F8 /* SuitableHitsTableViewCell.swift */; };
 		01E541A72196282200CB9C70 /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E541A62196282200CB9C70 /* CustomPickerView.swift */; };
 		01E541A9219628B900CB9C70 /* SingleInterestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E541A8219628B900CB9C70 /* SingleInterestView.swift */; };
 		01E541AB219628CC00CB9C70 /* SingleInterestView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01E541AA219628CC00CB9C70 /* SingleInterestView.xib */; };
@@ -40,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		011F96DB2197100600228971 /* InterestDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestDisplayView.swift; sourceTree = "<group>"; };
-		011F96DD2197104800228971 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
 		011F96DF219710BD00228971 /* InterestDisplayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InterestDisplayView.xib; sourceTree = "<group>"; };
 		0133744D2194A642009F6147 /* SetUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetUpViewController.swift; sourceTree = "<group>"; };
 		0133744F2194A653009F6147 /* IntroductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
@@ -49,7 +52,7 @@
 		013374552194A698009F6147 /* CuriousKatieVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuriousKatieVM.swift; sourceTree = "<group>"; };
 		013374572194A6A7009F6147 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		013374592194A711009F6147 /* Interest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
-		0133745B2194A728009F6147 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		0133745B2194A728009F6147 /* ResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewModel.swift; sourceTree = "<group>"; };
 		0133745D2194A736009F6147 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		013374612194AC49009F6147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/rafi/Dane/Ra-Fa-L/Projects/Open-Classrooms/02-Curious Katie/Curious Katie/Assets.xcassets"; sourceTree = "<absolute>"; };
 		013374632194D051009F6147 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomColors.swift; path = "/Users/rafi/Dane/Ra-Fa-L/Projects/Open-Classrooms/02-Curious Katie/Curious Katie/Model/CustomColors.swift"; sourceTree = "<absolute>"; };
@@ -66,6 +69,11 @@
 		017436CB21821E3200D6EADA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		017436D021821E3300D6EADA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		017436D221821E3300D6EADA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01A4E5D02198F8BF00AD85F8 /* kuti.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = kuti.xib; sourceTree = "<group>"; };
+		01A4E5D42198FB7C00AD85F8 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		01A4E5D52198FB7C00AD85F8 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
+		01A4E5DA2199088600AD85F8 /* NamesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamesTableViewCell.swift; sourceTree = "<group>"; };
+		01A4E5DC2199089A00AD85F8 /* SuitableHitsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuitableHitsTableViewCell.swift; sourceTree = "<group>"; };
 		01E541A62196282200CB9C70 /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		01E541A8219628B900CB9C70 /* SingleInterestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleInterestView.swift; sourceTree = "<group>"; };
 		01E541AA219628CC00CB9C70 /* SingleInterestView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleInterestView.xib; sourceTree = "<group>"; };
@@ -112,7 +120,8 @@
 		0133744A2194A611009F6147 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				013374532194A679009F6147 /* ResultsViewController.swift */,
+				01A4E5D92199086400AD85F8 /* Controller */,
+				01A4E5D82199085F00AD85F8 /* View */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -120,6 +129,7 @@
 		0133744B2194A61A009F6147 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0133745B2194A728009F6147 /* ResultsViewModel.swift */,
 				013374552194A698009F6147 /* CuriousKatieVM.swift */,
 			);
 			path = ViewModel;
@@ -131,7 +141,6 @@
 				013374632194D051009F6147 /* CustomColors.swift */,
 				013374572194A6A7009F6147 /* Player.swift */,
 				013374592194A711009F6147 /* Interest.swift */,
-				0133745B2194A728009F6147 /* Result.swift */,
 				0133745D2194A736009F6147 /* Generator.swift */,
 			);
 			path = Model;
@@ -222,8 +231,26 @@
 				017436CF21821E3300D6EADA /* LaunchScreen.storyboard */,
 				013374612194AC49009F6147 /* Assets.xcassets */,
 				017436D221821E3300D6EADA /* Info.plist */,
+				01A4E5D02198F8BF00AD85F8 /* kuti.xib */,
 			);
 			path = "Curious Katie";
+			sourceTree = "<group>";
+		};
+		01A4E5D82199085F00AD85F8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				01A4E5DA2199088600AD85F8 /* NamesTableViewCell.swift */,
+				01A4E5DC2199089A00AD85F8 /* SuitableHitsTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		01A4E5D92199086400AD85F8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				013374532194A679009F6147 /* ResultsViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		01E541AC2196293F00CB9C70 /* InterestSharing */ = {
@@ -243,7 +270,8 @@
 			children = (
 				011F96DB2197100600228971 /* InterestDisplayView.swift */,
 				011F96DF219710BD00228971 /* InterestDisplayView.xib */,
-				011F96DD2197104800228971 /* CustomCollectionViewCell.swift */,
+				01A4E5D42198FB7C00AD85F8 /* CustomCollectionViewCell.swift */,
+				01A4E5D52198FB7C00AD85F8 /* CustomCollectionViewCell.xib */,
 			);
 			path = InterestDisplay;
 			sourceTree = "<group>";
@@ -310,8 +338,10 @@
 				01581F472195F7B600A32A8A /* InterestSelectionView.xib in Resources */,
 				01E541AB219628CC00CB9C70 /* SingleInterestView.xib in Resources */,
 				01581F3C2195A91F00A32A8A /* AddedPlayerView.xib in Resources */,
+				01A4E5D72198FB7C00AD85F8 /* CustomCollectionViewCell.xib in Resources */,
 				013374622194B0A2009F6147 /* Assets.xcassets in Resources */,
 				017436CC21821E3200D6EADA /* Main.storyboard in Resources */,
+				01A4E5D12198F8BF00AD85F8 /* kuti.xib in Resources */,
 				011F96E0219710BD00228971 /* InterestDisplayView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,7 +355,6 @@
 			files = (
 				013374682194DBCF009F6147 /* View-Colors.swift in Sources */,
 				01581F3A2195A8C000A32A8A /* AddedPlayerView.swift in Sources */,
-				011F96DE2197104800228971 /* CustomCollectionViewCell.swift in Sources */,
 				013374562194A698009F6147 /* CuriousKatieVM.swift in Sources */,
 				013374642194D051009F6147 /* CustomColors.swift in Sources */,
 				01E541A9219628B900CB9C70 /* SingleInterestView.swift in Sources */,
@@ -337,14 +366,17 @@
 				01581F37219591C600A32A8A /* TextField-Error.swift in Sources */,
 				011F96DC2197100600228971 /* InterestDisplayView.swift in Sources */,
 				01581F452195F19800A32A8A /* InterestSelectionView.swift in Sources */,
+				01A4E5DB2199088600AD85F8 /* NamesTableViewCell.swift in Sources */,
 				0133745E2194A736009F6147 /* Generator.swift in Sources */,
 				01E541AF219633C100CB9C70 /* InterestsSharingDelegate.swift in Sources */,
 				01581F412195DA3F00A32A8A /* PlayerNameButton.swift in Sources */,
-				0133745C2194A728009F6147 /* Result.swift in Sources */,
+				0133745C2194A728009F6147 /* ResultsViewModel.swift in Sources */,
 				017436C721821E3200D6EADA /* AppDelegate.swift in Sources */,
 				01E541A72196282200CB9C70 /* CustomPickerView.swift in Sources */,
 				013374522194A668009F6147 /* InterestsSharingViewController.swift in Sources */,
 				013374542194A679009F6147 /* ResultsViewController.swift in Sources */,
+				01A4E5DD2199089A00AD85F8 /* SuitableHitsTableViewCell.swift in Sources */,
+				01A4E5D62198FB7C00AD85F8 /* CustomCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

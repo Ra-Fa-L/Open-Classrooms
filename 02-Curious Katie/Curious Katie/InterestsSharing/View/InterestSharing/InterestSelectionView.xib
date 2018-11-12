@@ -79,7 +79,7 @@
                         <action selector="generateAllTapped:" destination="-1" eventType="touchUpInside" id="jDY-Wr-hBn"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgT-eL-haO">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qgT-eL-haO">
                     <rect key="frame" x="10" y="194" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="FOF-9w-DqU"/>

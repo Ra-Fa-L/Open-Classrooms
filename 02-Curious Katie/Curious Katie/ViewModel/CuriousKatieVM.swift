@@ -27,6 +27,8 @@ class CuriousKatieViewModel {
     var chosenPlayerId: Int = 0
     var chosenAllInterest: Bool = false
     
+    var resultModel: ResultsViewModel? = nil
+    
     init(with customPlayersCount: Int?) {
         self.playersCount = customPlayersCount ?? Int.random(in: 2 ... 12)
     }
@@ -227,13 +229,25 @@ class CuriousKatieViewModel {
         
         return notYestChosen.randomElement()!
     }
+    
+    
+    func getPlayerInterest(with player: Int) -> [Bool]
+    {
+        return players[player].interests
+    }
+    
+    func returnResults() -> ResultsViewModel
+    {
+        resultModel = ResultsViewModel(participants: players, interests: interests.interests)
+        
+        return resultModel!
+    }
 }
     
     // ----------------------------
     
     /*
-    
-    var resultModel: Result? = nil
+ 
     
  
     
@@ -296,18 +310,8 @@ class CuriousKatieViewModel {
  
  
  
-    
-    func getPlayerInterest(with player: Int) -> [Bool]
-    {
-        return participants[player].interests
-    }
-    
-    func returnResults() -> Result
-    {
-        resultModel = Result(participants: participants, interests: interests.interests)
-        
-        return resultModel!
-    }
+ 
+ 
 }
  
  */
