@@ -12,6 +12,7 @@ extension UIButton {
     func makeButton() {
         let height = self.bounds.height
         self.roundCorners(corners: .allCorners, radius: height / 3)
+        self.backgroundColor = CustomColors4.fifthColor
     }
     
     func makePlayerButtonRight() {

@@ -30,25 +30,19 @@ class SetUpViewController: UIViewController {
         super.viewDidLoad()
         
         setPlayerCount()
-        
         setUI()
     }
     
-    // TODO: Refactor UIElements
     func setUI() {
         view.setUIColors()
-        
-        katieLabel.textColor = CustomColors4.secondColor
-        demoSwitch.onTintColor = CustomColors4.thirdColor
-        
-        playButton.backgroundColor = CustomColors4.fifthColor
-        simulateButton.backgroundColor = CustomColors4.fifthColor
+        demoPlayerCountLabel.setUIColors()
+        demoLabel.setUIColors()
         
         playButton.makeButton()
         simulateButton.makeButton()
         
-        demoPlayerCountLabel.textColor = CustomColors4.sixthColor
-        demoLabel.textColor = CustomColors4.sixthColor
+        demoSwitch.onTintColor = CustomColors4.thirdColor
+        katieLabel.textColor = CustomColors4.secondColor
     }
     
     func setPlayerCount() {

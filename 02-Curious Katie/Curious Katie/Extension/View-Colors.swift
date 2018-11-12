@@ -12,6 +12,10 @@ extension UIView {
     func setUIColors() {
         self.backgroundColor = CustomColors4.firstColor
         self.tintColor = CustomColors4.thirdColor
+        
+        if self.isKind(of: UILabel.self) {
+            (self as? UILabel)?.textColor = CustomColors4.sixthColor
+        }
     }
     
     func setAddedPlayerColors() {
