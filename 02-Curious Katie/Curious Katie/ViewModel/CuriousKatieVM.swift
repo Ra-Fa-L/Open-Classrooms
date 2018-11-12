@@ -27,8 +27,6 @@ class CuriousKatieViewModel {
     var chosenPlayerId: Int = 0
     var chosenAllInterest: Bool = false
     
-    var resultModel: ResultsViewModel? = nil
-    
     init(with customPlayersCount: Int?) {
         self.playersCount = customPlayersCount ?? Int.random(in: 2 ... 12)
     }
@@ -41,7 +39,6 @@ class CuriousKatieViewModel {
         while (!checkIfPossible(name: newName)) {
             newName = generator.getName(male: male)
         }
-        
         return newName
     }
     
@@ -73,8 +70,7 @@ class CuriousKatieViewModel {
         return !nameExists
     }
     
-    func addPerson(name: String, age: Int, city: String, nationality: String)
-    {
+    func addPerson(name: String, age: Int, city: String, nationality: String) {
         players.append(Player(name: name, age: age, city: city, nationality: nationality))
     }
     
@@ -94,24 +90,24 @@ class CuriousKatieViewModel {
         for player in players {
             playerNames.append(player.name)
         }
-        
         return playerNames
     }
     
     func shuffleParticipants() {
         playersShuffled.removeAll()
+        
         playerToButton = Array(repeating: 0, count: self.playersCount)
         
         for (index, player) in players.shuffled().enumerated() {
             playersShuffled.append(player.id)
             playerToButton[player.id] = index
         }
-        
+        // FIXME: CONSOLE PRINTING - REMOVE ME
         print("playerToButton: \(playerToButton)")
+        print("************")
     }
     
-    func getPlayerWithId(id: Int) -> Int
-    {
+    func getPlayerWithId(id: Int) -> Int {
         return playersShuffled[id]
     }
     
@@ -120,115 +116,96 @@ class CuriousKatieViewModel {
         return getPlayerWithId(id: chosenPlayerId)
     }
     
-    func canPlayerChoose() -> Bool
-    {
-        return players[getPlayerWithId(id: chosenPlayerId)].stillChoosing
-    }
-    
-    func chooseNextInterestPlayer() -> Int?
-    {
+    func chooseNextInterestPlayer() -> Int? {
         chosenPlayerId += 1
         
         var dontHaveAnyMoreInterest = true
         
-        repeat
-        {
-            if chosenPlayerId == playersCount
-            {
+        repeat {
+            if chosenPlayerId == playersCount {
                 chosenPlayerId = 0
             }
-            
-            if chosenPlayerId == 0
-            {
-                if chosenAllInterest
-                {
+            if chosenPlayerId == 0 {
+                if chosenAllInterest {
                     return nil
                 }
             }
-            
-            if canPlayerChoose()
-            {
+            if canPlayerChoose() {
                 dontHaveAnyMoreInterest = false
-            }
-            else
-            {
+            } else {
                 chosenPlayerId += 1
             }
         } while (dontHaveAnyMoreInterest)
-        
-        return getPlayerWithId(id: chosenPlayerId)
+        return getActivePlayer()
+    }
+    
+    func canPlayerChoose() -> Bool {
+        return players[getActivePlayer()].stillChoosing
     }
     
     // InterstSelectionView:
     
-    func getNeededData() -> [Bool]
+    func getNeededPickerData() -> [Bool]
     {
-        let player = players[getPlayerWithId(id: chosenPlayerId)]
+        let player = players[getActivePlayer()]
         
         return player.interests
     }
     
-    func allInterests() -> [String]
+    func getAllInterests() -> [String]
     {
         return interests.interests
     }
     
-    func addInterest(rowId: Int, extraText: String, level: Int) -> Int
-    {
-        players[getPlayerWithId(id: chosenPlayerId)].interests[rowId] = true
-        players[getPlayerWithId(id: chosenPlayerId)].interestsExtras[rowId] = extraText
-        players[getPlayerWithId(id: chosenPlayerId)].interestsLevels[rowId] = level
-        
-        players[getPlayerWithId(id: chosenPlayerId)].interestsInOrder.append(rowId)
-        
-        return players[getPlayerWithId(id: chosenPlayerId)].interestsInOrder.count
+    func generateInterestExtras(id: Int) -> String {
+        return interests.generateRandom(id: id)
     }
     
-    func noMoreInterest()
-    {
-        players[getPlayerWithId(id: chosenPlayerId)].stillChoosing = false
+    func generateLevel() -> Int {
+        return Int.random(in: 0 ..< 5)
+    }
+    
+    func generateInterest() -> Int {
+        let newInterests = players[getActivePlayer()].interests
+        var notYestChosen: [Int] = []
+        
+        for i in 0 ..< newInterests.count {
+            if !newInterests[i] {
+                notYestChosen.append(i)
+            }
+        }
+        return notYestChosen.randomElement()!
+    }
+    
+    func addInterest(rowId: Int, extraText: String, level: Int) -> Int {
+        players[getActivePlayer()].interests[rowId] = true
+        players[getActivePlayer()].interestsExtras[rowId] = extraText
+        players[getActivePlayer()].interestsLevels[rowId] = level
+        players[getActivePlayer()].interestsInOrder.append(rowId)
+        
+        return players[getActivePlayer()].interestsInOrder.count
+    }
+    
+    func noMoreInterest() {
+        players[getActivePlayer()].stillChoosing = false
         
         checkIfAllDone()
     }
     
-    func checkIfAllDone()
-    {
+    func checkIfAllDone() {
         chosenAllInterest = true
         
-        for person in players
-        {
-            if person.stillChoosing
-            {
+        players.forEach { (player) in
+            if player.stillChoosing {
                 chosenAllInterest = false
+                return
             }
         }
     }
     
-    func generateInterestExtras(id: Int) -> String
-    {
-        return interests.generateRandom(id: id)
-    }
     
-    func generateLevel() -> Int
-    {
-        return Int.random(in: 0 ..< 5)
-    }
     
-    func generateInterest() -> Int
-    {
-        let newInterests = players[getActivePlayer()].interests
-        var notYestChosen: [Int] = []
-        
-        for i in 0 ..< newInterests.count
-        {
-            if !newInterests[i]
-            {
-                notYestChosen.append(i)
-            }
-        }
-        
-        return notYestChosen.randomElement()!
-    }
+    
     
     
     func getPlayerInterest(with player: Int) -> [Bool]
@@ -236,82 +213,8 @@ class CuriousKatieViewModel {
         return players[player].interests
     }
     
-    func returnResults() -> ResultsViewModel
+    func createResultsVM() -> ResultsViewModel
     {
-        resultModel = ResultsViewModel(participants: players, interests: interests.interests)
-        
-        return resultModel!
+        return ResultsViewModel(players: players, interests: interests.interests)
     }
 }
-    
-    // ----------------------------
-    
-    /*
- 
-    
- 
-    
-    var firstCircuitDone: Bool = false
- 
-    
-    func checkPersonNumber() -> Int
-    {
-        if participants.count < playersCount
-        {
-            return participants.count + 1
-        }
-        return 0
-    }
-    
- 
-    
-    func getActivePlayer() -> Int
-    {
-        return getPlayerWithId(id: chosenPlayerId)
-    }
-    
-    func chooseNextInterestPlayer() -> Int?
-    {
-        chosenPlayerId += 1
-        
-        var dontHaveAnyMoreInterest = true
-        
-        repeat
-        {
-            if chosenPlayerId == playersCount
-            {
-                chosenPlayerId = 0
-            }
-            
-            if chosenPlayerId == 0
-            {
-                if chosenAllInterest
-                {
-                    return nil
-                }
-            }
-            
-            if canPlayerChoose()
-            {
-                dontHaveAnyMoreInterest = false
-            }
-            else
-            {
-                chosenPlayerId += 1
-            }
-        } while (dontHaveAnyMoreInterest)
-        
-        return getPlayerWithId(id: chosenPlayerId)
-    }
- 
- 
- 
- 
- 
- 
- 
- 
- 
-}
- 
- */

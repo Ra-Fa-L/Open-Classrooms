@@ -35,8 +35,9 @@ class SetUpViewController: UIViewController {
     
     func setUI() {
         view.setUIColors()
-        demoPlayerCountLabel.setUIColors()
-        demoLabel.setUIColors()
+        
+        demoPlayerCountLabel.setColors()
+        demoLabel.setColors()
         
         playButton.makeButton()
         simulateButton.makeButton()
@@ -74,5 +75,4 @@ class SetUpViewController: UIViewController {
     @IBAction func simulateButtonTapped(_ sender: UIButton) {
         print("SORRY: Not yet implemented")
     }
-    
 }

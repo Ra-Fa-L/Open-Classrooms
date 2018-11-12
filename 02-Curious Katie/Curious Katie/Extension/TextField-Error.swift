@@ -24,7 +24,6 @@ extension UITextField {
             self.textColor = UIColor.black
             
             self.layer.borderColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.4).cgColor
-            
         }
     }
     

@@ -16,24 +16,23 @@ class SingleInterestView: UIView {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var checkButton: UIButton!
     
-    override init(frame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 10))
-    {
+    override init(frame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 10)) {
         super.init(frame: frame)
         
         commonInit()
     }
     
-    required init?(coder aDecoder: NSCoder)
-    {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
     
-    private func commonInit()
-    {
+    private func commonInit() {
         Bundle.main.loadNibNamed("SingleInterestView", owner: self, options: nil)
         addSubview(customView)
         
         customView.frame = self.bounds
+        
+        self.customView.backgroundColor = CustomColors4.firstColor
     }
 }

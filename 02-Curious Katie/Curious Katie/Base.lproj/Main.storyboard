@@ -574,13 +574,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Paring Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPs-nA-kpA">
-                                <rect key="frame" x="105.5" y="35" width="109" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="90.5" y="30" width="139" height="33"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Bold" family="Avenir Next Condensed" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vJQ-PZ-4dx">
-                                <rect key="frame" x="0.0" y="130" width="320" height="438"/>
+                                <rect key="frame" x="0.0" y="138.5" width="320" height="429.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -766,23 +766,23 @@
                                 </prototypes>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="twS-O1-FYM">
-                                <rect key="frame" x="93.5" y="87" width="133" height="29"/>
+                                <rect key="frame" x="109.5" y="95.5" width="101" height="29"/>
                                 <segments>
                                     <segment title="Name"/>
-                                    <segment title="Matches"/>
+                                    <segment title="Hits"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentedControlChanged:" destination="uO8-XT-lyT" eventType="valueChanged" id="cgb-eZ-XtN"/>
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Displayed by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D64-bQ-g5n">
-                                <rect key="frame" x="123.5" y="66" width="73" height="15"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <rect key="frame" x="125.5" y="73" width="69" height="16.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.56862745098039214" green="0.66666666666666663" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="twS-O1-FYM" firstAttribute="top" secondItem="D64-bQ-g5n" secondAttribute="bottom" constant="6" id="JN9-q4-Jmo"/>
                             <constraint firstItem="cPs-nA-kpA" firstAttribute="centerX" secondItem="VuP-so-U11" secondAttribute="centerX" id="Stq-Bx-mfe"/>
@@ -794,7 +794,7 @@
                             <constraint firstItem="vJQ-PZ-4dx" firstAttribute="leading" secondItem="1wv-JX-zi9" secondAttribute="leading" id="g6D-xB-wGG"/>
                             <constraint firstItem="twS-O1-FYM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="1wv-JX-zi9" secondAttribute="leading" constant="20" id="kAA-s7-Fex"/>
                             <constraint firstItem="vJQ-PZ-4dx" firstAttribute="top" secondItem="twS-O1-FYM" secondAttribute="bottom" constant="15" id="oDb-dQ-Ynw"/>
-                            <constraint firstItem="cPs-nA-kpA" firstAttribute="top" secondItem="1wv-JX-zi9" secondAttribute="top" constant="15" id="xQL-cu-1oY"/>
+                            <constraint firstItem="cPs-nA-kpA" firstAttribute="top" secondItem="1wv-JX-zi9" secondAttribute="top" constant="10" id="xQL-cu-1oY"/>
                             <constraint firstItem="vJQ-PZ-4dx" firstAttribute="bottom" secondItem="1wv-JX-zi9" secondAttribute="bottom" id="xqV-U3-puG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1wv-JX-zi9"/>

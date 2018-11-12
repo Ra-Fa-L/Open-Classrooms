@@ -15,47 +15,38 @@ class CustomPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
     var interests: [String] = []
     var neededData: [Bool] = []
     
-    func numberOfComponents(in pickerView: UIPickerView) -> Int
-    {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int
-    {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return interests.count
     }
     
-    func reset()
-    {
+    func reloadPickerView() {
         self.reloadAllComponents()
         
         let index = getIndexOfFirstNotYetChoosen()
-        
         self.selectRow(index, inComponent: 0, animated: true)
     }
     
-    func getIndexOfFirstNotYetChoosen() -> Int
-    {
+    func getIndexOfFirstNotYetChoosen() -> Int {
         return neededData.firstIndex(of: false)!
     }
     
-    override func selectRow(_ row: Int, inComponent component: Int, animated: Bool)
-    {
+    override func selectRow(_ row: Int, inComponent component: Int, animated: Bool) {
         super.selectRow(row, inComponent: component, animated: animated)
-        
         selectedRow = row
     }
     
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView
-    {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let newView = SingleInterestView()
         let interestName = interests[row]
         
         newView.nameLabel.text = interestName
         newView.imageView.image = UIImage(named: interestName.lowercased())
         
-        if neededData[row]
-        {
+        if neededData[row] {
             newView.customView.backgroundColor = UIColor.clear
             newView.customView.alpha = 0.28
             newView.checkButton.alpha = 1
@@ -63,10 +54,8 @@ class CustomPickerView: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSour
         return newView
     }
     
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
-    {
-        if neededData[row]
-        {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if neededData[row] {
             selectRow(getIndexOfFirstNotYetChoosen(), inComponent: 0, animated: true)
         } else {
             selectedRow = row

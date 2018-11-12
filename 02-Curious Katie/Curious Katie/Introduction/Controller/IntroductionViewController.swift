@@ -38,37 +38,33 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
             textField.delegate = self
         }
         
-        setInitialUI()
-        
         playersCount = viewModel.playersCount
+        
+        setUI()
         changeActivePlayerLabel()
     }
     
-    // TODO: Refactor UI Colors
-    func setInitialUI() {
+    func setUI() {
         view.setUIColors()
         
-        titleLabel.textColor = CustomColors4.secondColor
-        activePlayerLabel.textColor = CustomColors4.sixthColor
-        generateLabel.textColor = CustomColors4.sixthColor
-        nextPlayerButton.backgroundColor = CustomColors4.fifthColor
-        generateAllButton.backgroundColor = CustomColors4.fifthColor
+        titleLabel.setColors()
+        activePlayerLabel.setColors()
+        generateLabel.setColors()
+        
         nextPlayerButton.makeButton()
         generateAllButton.makeButton()
     }
     
     func changeActivePlayerLabel() {
-        
         let boldAttribute = [NSAttributedString.Key.font: UIFont(name: "Avenir-Heavy", size: 18.0)!]
         
         let fullString = NSMutableAttributedString(string: String(activePlayerNumber), attributes: boldAttribute)
-        let playersNumber = NSMutableAttributedString(string: String(playersCount), attributes: boldAttribute)
-        
         let secondString = NSAttributedString(string: " of ")
+        let thirdString = NSMutableAttributedString(string: String(playersCount), attributes: boldAttribute)
         let fourthString = NSAttributedString(string: " Players")
         
         fullString.append(secondString)
-        fullString.append(playersNumber)
+        fullString.append(thirdString)
         fullString.append(fourthString)
         
         activePlayerLabel.attributedText = fullString
@@ -79,8 +75,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         cleanTextFields()
     }
     
-    func cleanTextFields()
-    {
+    func cleanTextFields() {
         for field in textFieldCollection {
             field.text = ""
         }
@@ -98,8 +93,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func isEverythingCorrecttlyFilledOut() -> Bool
-    {
+    func isEverythingCorrecttlyFilledOut() -> Bool {
         let minNumOfLetters = viewModel.minNumberOfLetters
         let ageBoundary = viewModel.ageBoundary
         
@@ -150,15 +144,17 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
     func addPersonToViewModel()
     {
         var playerData = [String]()
+        
         textFieldCollection.forEach { textField in
             playerData.append(textField.text!)
         }
+        
         viewModel.addPerson(name: playerData[0], age: Int(playerData[1])!, city: playerData[2], nationality: playerData[3])
         
-        animateAddition(with: playerData)
+        animateNewPlayer(with: playerData)
     }
     
-    func animateAddition(with data: [String])
+    func animateNewPlayer(with data: [String])
     {
         let currentActivePlayer = activePlayerNumber
         addingPlayerAllowed = false
@@ -171,26 +167,23 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(addedPlayerView)
         
         UIView.animate(withDuration: 0.6, animations: {
-            addedPlayerView.firstAnimation()
+            addedPlayerView.moveToTheRight()
         }) { [weak self] _ in
             
             UIView.animate(withDuration: 0.9, animations: {
-                addedPlayerView.secondAnimation()
+                addedPlayerView.pushDown()
                 
-                self!.addingPlayerAllowed = self!.viewModel.checkNextPersonNumber() == nil ? false : true
+                self?.addingPlayerAllowed = self!.viewModel.checkNextPersonNumber() == nil ? false : true
                 
-                if currentActivePlayer != 1
-                {
+                if currentActivePlayer != 1 {
                     let subviews = self!.view.subviews
                     let lastAdded = subviews[subviews.count - 2]
                     
-                    UIView.animate(withDuration: 0.9, animations:
-                        {
+                    UIView.animate(withDuration: 0.9, animations: {
                             lastAdded.frame.origin.y += lastAdded.frame.size.height + 30
                             lastAdded.alpha = 0.2
                             
-                    }, completion:
-                        { _ in
+                    }, completion: { _ in
                             lastAdded.removeFromSuperview()
                     })
                 }
@@ -204,8 +197,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "InterestsSharingVC") as? InterestsSharingViewController
         nextVC?.viewModel = viewModel
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.8)
-        {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
             self.present(nextVC!, animated: true, completion: {
                 nextVC?.shuffleButtons(initially: true)
             })

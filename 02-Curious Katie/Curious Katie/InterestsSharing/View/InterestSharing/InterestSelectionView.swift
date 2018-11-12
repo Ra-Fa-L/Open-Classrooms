@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InterestSelectionView: UIView {
+class InterestSelectionView: UIView, UITextViewDelegate {
     
     @IBOutlet var customView: UIView!
     
@@ -23,45 +23,45 @@ class InterestSelectionView: UIView {
     var viewModel: CuriousKatieViewModel!
     var delegate: InterestsSharingDelegate!
     
-    var activePlayer: Player!
+    let placeholderText = "Add extra info or generate it"
     
-    func initalAnim() {
+    func initialSetUp() {
         Bundle.main.loadNibNamed("InterestSelectionView", owner: self, options: nil)
         addSubview(customView)
         customView.frame = self.bounds
         
         customView.backgroundColor = CustomColors2.secondColor
+        extraTextView.layer.cornerRadius = 8.0
         
+        initialAnimation()
+        
+        setUpCustomPickerView()
+        createPlaceholderText()
+        
+        extraTextView.delegate = self
+        
+        generateAllButton.make2ndButton()
+    }
+    
+    func initialAnimation() {
         self.frame.origin.x = -frame.width
         self.frame.origin.y += UIScreen.main.bounds.height
-        
         self.roundCorners(corners: [.topRight, .bottomRight], radius: 10.0)
         
         UIView.animate(withDuration: 0.6) {
             self.frame.origin.x = 0
             self.frame.origin.y -= UIScreen.main.bounds.height
         }
-        
-        extraTextView.layer.cornerRadius = 8.0
-        
-        setUpCustomPickerView()
-        createPlaceholderText()
     }
     
-    func changePlayerAnimation(with player: Player)
-    {
-        activePlayer = player
-        
-        UIView.animate(withDuration: 0.4, animations:
-            {
-                self.alpha = 0.6
-        }, completion:
-            { (error) in
+    func changePlayerAnimation() {
+        UIView.animate(withDuration: 0.2, animations: {
+                self.alpha = 0.5
+        }, completion: { (error) in
                 self.createPlaceholderText()
                 self.levelSegmentedControl.selectedSegmentIndex = 2
                 
-                UIView.animate(withDuration: 0.4, animations:
-                    {
+                UIView.animate(withDuration: 0.2, animations: {
                         self.alpha = 1.0
                 })
         })
@@ -70,26 +70,43 @@ class InterestSelectionView: UIView {
     
     func createPlaceholderText() {
         let attribute = [NSAttributedString.Key.font: UIFont(name: "Avenir-Light", size: 12.0)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray]
-        
-        let fullString = NSMutableAttributedString(string: "Add extra info or generate it", attributes: attribute)
+        let fullString = NSMutableAttributedString(string: placeholderText, attributes: attribute)
         
         extraTextView.attributedText = fullString
     }
     
-    func injectDataIntoPicker()
-    {
-        interestsPickerView.neededData = viewModel.getNeededData()
-        interestsPickerView.reset()
-    }
-    
-    func setUpCustomPickerView()
-    {
+    func setUpCustomPickerView() {
         injectDataIntoPicker()
-        
-        interestsPickerView.interests = viewModel.allInterests()
+        interestsPickerView.interests = viewModel.getAllInterests()
         
         interestsPickerView.delegate = interestsPickerView
         interestsPickerView.dataSource = interestsPickerView
+    }
+    
+    func injectDataIntoPicker()
+    {
+        interestsPickerView.neededData = viewModel.getNeededPickerData()
+        interestsPickerView.reloadPickerView()
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.text == placeholderText {
+            textView.text = ""
+        }
+        return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.last == "\n" {
+            textView.text = String(textView.text.dropLast())
+            textView.resignFirstResponder()
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = placeholderText
+        }
     }
 
     @IBAction func generateExtraInfoTapped(_ sender: UIButton?) {
@@ -113,12 +130,12 @@ class InterestSelectionView: UIView {
     }
     
     @IBAction func confirmTapped(_ sender: UIButton) {
-        
         let extraText = extraTextView.text!
         let level = levelSegmentedControl.selectedSegmentIndex
-        let number = viewModel.addInterest(rowId: interestsPickerView.selectedRow, extraText: extraText, level: level)
         
-        if number == 9
+        let playerInterestCount = viewModel.addInterest(rowId: interestsPickerView.selectedRow, extraText: extraText, level: level)
+        
+        if playerInterestCount == 10
         {
             viewModel.noMoreInterest()
             delegate.fadeButton()
@@ -127,7 +144,6 @@ class InterestSelectionView: UIView {
     }
     
     @IBAction func noMoreTapped(_ sender: UIButton) {
-        
         viewModel.noMoreInterest()
         
         delegate.fadeButton()

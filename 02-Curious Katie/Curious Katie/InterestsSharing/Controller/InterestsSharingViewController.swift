@@ -38,7 +38,7 @@ class InterestsSharingViewController: UIViewController {
     
     var sharingDone: Bool = false
     
-    var unsharedView: InterestDisplayView?
+    var displayView: InterestDisplayView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,14 +49,7 @@ class InterestsSharingViewController: UIViewController {
         interestSelectionView.viewModel = viewModel
         interestSelectionView.delegate = self
         
-        interestSelectionView.frame.size.width = UIScreen.main.bounds.width - buttonsView.frame.width
-        
-        // TODO: UI Colors
         view.setUIColors()
-        
-        startButton.backgroundColor = CustomColors4.fifthColor
-        shuffleButton.backgroundColor = CustomColors4.fifthColor
-        
         startButton.makeButton()
         shuffleButton.makeButton()
     }
@@ -67,8 +60,6 @@ class InterestsSharingViewController: UIViewController {
             { (first, second) -> Bool in
                 return first.tag < second.tag
         }
-        
-        print(playerNameButtonCollection[11].tag)
     }
 
     func setUpNameButtons()
@@ -93,11 +84,11 @@ class InterestsSharingViewController: UIViewController {
             button.setTitle(newName, for: .normal)
         }
 
-        // FIXME: Remove
+        // FIXME: CONSOLE PRINTING - REMOVE ME
         print("************")
         for button in playerNameButtonCollection
         {
-            print("\(button.title(for: .normal)!) - \(button.tag)")
+            print("\(button.tag) -\(button.title(for: .normal)!)")
         }
         print("************")
     }
@@ -107,160 +98,143 @@ class InterestsSharingViewController: UIViewController {
             startButton.isEnabled = true
             shuffleButton.isEnabled = true
         }
-        
         viewModel.shuffleParticipants()
         
-        shuffleButtonsTwo()
-//        for i in 0 ..< viewModel.playersCount
-//        {
-//            UIView.animate(withDuration: 0.6)
-//            {
-//                self.playerNameButtonCollection[i].frame.origin.y = self.buttonCoordinates[self.viewModel.playerToButton[i]]
-//            }
-//        }
-    }
-    
-    func shuffleButtonsTwo() {
-        var array: [UIView?] = Array(repeating: nil, count: viewModel.playersCount)
+        let playerCount = viewModel.playersCount
         
-        for i in 0 ..< viewModel.playersCount {
+        var array: [UIView?] = Array(repeating: nil, count: playerCount)
+        
+        for i in 0 ..< playerCount {
             let x = buttonsStackView.subviews[viewModel.playersShuffled[i]]
             array[i] = x
         }
         
-        for i in 0 ..< viewModel.playersCount {
-            let newNum = (viewModel.playersCount - i) - 1
+        for i in 0 ..< playerCount {
+            let newNum = (playerCount - i) - 1
             buttonsStackView.insertArrangedSubview(array[newNum]!, at: 0)
         }
+        
         UIView.animate(withDuration: 0.6) {
             self.buttonsView.layoutIfNeeded()
         }
     }
     
     func startSharing() {
-        interestSelectionView.initalAnim()
+        interestSelectionView.initialSetUp()
     }
     
-    func moveTheHand(id: Int)
-    {
+    func moveTheHand(id: Int) {
         let position = self.buttonCoordinates[self.viewModel.playerToButton[id]]
         
-        UIView.animate(withDuration: 0.6)
-        {
+        UIView.animate(withDuration: 0.4) {
             self.activeHandImageView.frame.origin.y = position + 10
         }
     }
     
     func moveTheUIToTheLeft() {
+        let lengthToMove = buttonsView.frame.origin.x
+        let moveTo = buttonsView.frame.width
         
-        view.addSubview(unsharedView!)
-        
-        let newPosition = buttonsView.frame.origin.x
-        
-        UIView.animate(withDuration: 1.0, animations:
-            {
-                self.unsharedView?.animate(moveBy: 100.0)
+        UIView.animate(withDuration: 0.9, animations: {
+                self.displayView?.animate(moveTo: moveTo)
                 self.activeHandImageView.alpha = 0
-                self.interestSelectionView.frame.origin.x -= newPosition
-                self.buttonsView.frame.origin.x -= newPosition
-        })
-        { [weak self] _ in
+                self.interestSelectionView.frame.origin.x -= lengthToMove
+                self.buttonsView.frame.origin.x -= lengthToMove
+        }) { [weak self] _ in
+            
             self?.activeHandImageView.removeFromSuperview()
             self?.interestSelectionView.removeFromSuperview()
-            self?.unsharedView?.removeFromSuperview()
+            self?.displayView?.removeFromSuperview()
             
-            self?.containerStackView.addArrangedSubview((self?.unsharedView)!)
-            
-            self?.secondAnimation()
+            self?.containerStackView.addArrangedSubview((self?.displayView)!)
             
             self?.titleLabel.text = "Review Chosen Interests"
+            self?.sharingDone = true
             
+            self?.changeToNewUI()
         }
     }
     
-    func secondAnimation() {
-//        shuffleButtonsTwo()
-        
-        sharingDone = true
+    func changeToNewUI() {
         startButton.setTitle("CONTINUE", for: .normal)
         startButton.isEnabled = true
         
-        self.stackViewLeadingConstraint.constant = 0
-        self.stackViewTrailingConstraint.constant = 0
+        stackViewLeadingConstraint.constant = 0
+        stackViewTrailingConstraint.constant = 0
         
-        self.buttonsStackView.spacing = 1.0
+        buttonsStackView.spacing = 1.0
         
         UIView.animate(withDuration: 0.8) {
             self.buttonsView.layoutIfNeeded()
-            
-            self.view.backgroundColor = CustomColors4.secondColor
-            self.buttonsView.backgroundColor = CustomColors4.secondColor
+        
+            self.view.setSecondaryUIColors()
+            self.buttonsView.setSecondaryUIColors()
             
             self.enableAllButtons()
             
-            self.unsharedView?.showView()
+            self.displayView?.showContainerView()
         }
     }
     
-    func enableAllButtons()
-    {
-        for i in 0 ..< viewModel.playersCount
-        {
-            playerNameButtonCollection[i].isEnabled = true
-            playerNameButtonCollection[i].alpha = 1.0
-            playerNameButtonCollection[i].noCorners()
+    func enableAllButtons() {
+        for i in 0 ..< viewModel.playersCount {
+            playerNameButtonCollection[i].activate()
         }
     }
     
     func createDisplayView() {
-        unsharedView = InterestDisplayView(frame: CGRect(x: UIScreen.main.bounds.width, y: containerStackView.frame.origin.y, width: interestSelectionView.frame.width, height: interestSelectionView.frame.height))
-        print("!!! PROBA !!!")
-        unsharedView?.viewModel = viewModel
+        let x = UIScreen.main.bounds.width
+        let y = containerStackView.frame.origin.y
+        let width = interestSelectionView.frame.width
+        let heigth = interestSelectionView.frame.height
+        displayView = InterestDisplayView(frame: CGRect(x: x, y: y, width: width, height: heigth))
+        
+        displayView?.viewModel = viewModel
+        
+        view.addSubview(displayView!)
     }
     
-    func showNextPlayer()
-    {
+    func showNextPlayer() {
         let nextPlayersId = viewModel.chooseNextInterestPlayer()
         
         if !firstCircuitDone && viewModel.chosenPlayerId == 0 {
             interestSelectionView.noMoreButton.isHidden = false
             firstCircuitDone = true
         }
-        
         if nextPlayersId != nil {
             moveTheHand(id: nextPlayersId!)
-            interestSelectionView.changePlayerAnimation(with: viewModel.players[nextPlayersId!])
-        }
-        else {
+            interestSelectionView.changePlayerAnimation()
+        } else {
             createDisplayView()
-            
             moveTheUIToTheLeft()
         }
     }
     
     @IBAction func nameButtonTapped(_ sender: UIButton) {
-        if sharingDone
-        {
-            print("JOU")
-            unsharedView!.playerInterests = viewModel.getPlayerInterest(with: sender.tag)
-            unsharedView!.newPlayer()
+        if sharingDone {
+            for i in 0 ..< viewModel.playersCount {
+                (playerNameButtonCollection[i] as UIButton).activateButton(goBack: true)
+            }
+            
+            displayView!.playerInterests = viewModel.getPlayerInterest(with: sender.tag)
+            displayView!.showPlayersInterests()
+            sender.activateButton(goBack: false)
         }
     }
 
     @IBAction func startButtonTapped(_ sender: UIButton) {
         if sharingDone {
-            
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "ResultsVC") as? ResultsViewController
             
-            nextVC?.resultModel = viewModel.returnResults()
+            nextVC?.resultModel = viewModel.createResultsVM()
             
             self.present(nextVC!, animated: true, completion: nil)
         } else {
             startButton.isEnabled = false
+            
             descriptionLabel.disappear()
             shuffleButton.disappear()
-            
             activeHandImageView.reappear()
             
             startSharing()

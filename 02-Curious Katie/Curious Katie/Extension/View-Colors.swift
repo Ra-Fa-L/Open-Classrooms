@@ -12,14 +12,16 @@ extension UIView {
     func setUIColors() {
         self.backgroundColor = CustomColors4.firstColor
         self.tintColor = CustomColors4.thirdColor
-        
-        if self.isKind(of: UILabel.self) {
-            (self as? UILabel)?.textColor = CustomColors4.sixthColor
-        }
     }
     
-    func setAddedPlayerColors() {
+    func setSecondaryUIColors() {
+        self.backgroundColor = CustomColors2.thirdColor
+        self.tintColor = CustomColors.secondColor
+    }
+    
+    func setAddedPlayerView() {
         self.backgroundColor = CustomColors.firstColor
+        self.layer.cornerRadius = 25.0
     }
     
     func disappear() {
@@ -31,14 +33,12 @@ extension UIView {
     }
     
     func reappear() {
-        
         UIView.animate(withDuration: 0.6) {
             self.alpha = 1
         }
     }
     
-    func roundCorners(corners: UIRectCorner, radius: CGFloat)
-    {
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         

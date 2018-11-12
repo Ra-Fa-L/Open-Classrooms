@@ -10,49 +10,40 @@ import Foundation
 
 class ResultsViewModel
 {
-    let participants: [Player]!
+    let players: [Player]!
     let interests: [String]!
     
     var interestToPerson = [Int : [Int]]()
     var personToPerson = [Int : [Int : [Int]]]()
     var hitsToPerson = [Int : [Int : Int]]()
     
-    init(participants: [Player], interests: [String])
-    {
-        self.participants = participants
+    init(players: [Player], interests: [String]) {
+        self.players = players
         self.interests = interests
         
         self.createAllResults()
-        self.createNextResults()
     }
     
-    func createAllResults()
-    {
-        for person in participants
-        {
-            for (index, interest) in person.interests.enumerated()
-            {
-                if !interest
-                {
-                    if interestToPerson[index] == nil
-                    {
+    func createIntrestToPersonResults() {
+        for person in players {
+            for (index, interest) in person.interests.enumerated() {
+                if !interest {
+                    if interestToPerson[index] == nil {
                         interestToPerson[index] = []
                     }
-                    
                     interestToPerson[index]?.append(person.id)
                 }
             }
         }
     }
     
-    func createNextResults() {
-        for person in participants {
-            for secondPerson in participants {
+    func createAllResults() {
+        for person in players {
+            for secondPerson in players {
                 if person.id != secondPerson.id {
                     if personToPerson[person.id] == nil {
                         personToPerson[person.id] = [Int : [Int]]()
                     }
-                    
                     var numberOfDiffereces = 0
                     var differencesArray = [Int]()
                     
@@ -69,7 +60,6 @@ class ResultsViewModel
                         if hitsToPerson[numberOfDiffereces] == nil {
                             hitsToPerson[numberOfDiffereces] = [:]
                         }
-                        
                         personToPerson[person.id]![secondPerson.id] = differencesArray
                         
                         if hitsToPerson[numberOfDiffereces]![secondPerson.id] != person.id {
@@ -79,9 +69,11 @@ class ResultsViewModel
                 }
             }
         }
-        print("MatchesToPerson: \(hitsToPerson)")
-        print("**********")
+        // FIXME: CONSOLE PRINTING - REMOVE ME
+        print("HitsToPerson: \(hitsToPerson)")
+        print("************")
         print("PersonToPerson: \(personToPerson)")
+        print("************")
     }
     
     func getPersonBased(on section: Int, and row: Int) -> (String, Int) {
@@ -92,7 +84,7 @@ class ResultsViewModel
         
         let personIndex = personMatches![row].key
         
-        let person = participants[personIndex].name
+        let person = players[personIndex].name
         let count = personMatches![row].value.count
         
         return (person, count)
@@ -118,31 +110,22 @@ class ResultsViewModel
             let (key, _) = arg0
             return key == secondPersonId
         })
-//
-//        let personMatches = personToPerson[match.key]?.sorted(by: { (first, second) -> Bool in
-//            return first.value.count > second.value.count
-//        })
-//
-//        let interests = personMatches![match.value].value
+        
         return (unsharedHits?.first!.value)!
     }
     
     func getPersonsBased(on section: Int, and row: Int) -> (String, String) {
         
-        let matches = hitsToPerson.sorted
-        { (first, second) -> Bool in
+        let sorted = hitsToPerson.sorted { (first, second) -> Bool in
             return first.key > second.key
         }
-        
-        let matchesArray = matches[section].value.sorted
-        { (first, second) -> Bool in
+        let hitsArray = sorted[section].value.sorted { (first, second) -> Bool in
             return first.key > second.key
         }
+        let hit = hitsArray[row]
         
-        let match = matchesArray[row]
-        
-        let first = participants![match.key].name
-        let second = participants![match.value].name
+        let first = players![hit.key].name
+        let second = players![hit.value].name
         
         return (first, second)
     }

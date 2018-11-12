@@ -40,10 +40,10 @@ struct Interests
             "I have been to America last year", "Those pyramids are amazing", "I like forests", "India", "Mexico City is so huge", "What’s the capital of Greece?", "Eiffel Tower", "Been there, done that", "Look at the sky!", "Brazil is nice"
         ],
         8 : [
-            "I like to cook", "My favourite vegetable is a Potato", "I need to drink wine when I eat", "It look tasty!", "I like Asian foods", "Mexican foods is hot and tasty", "I watch Hell’s Kitchen every week", "Pepper or Salt?", "Sushi!", "There are two groups of humans. First group eats to live, second one lives to eat. Guess which group I belong to?"
+            "I like to cook", "My favourite vegetable is a Potato", "I need to drink wine when I eat", "It look tasty!", "I like Asian foods", "Mexican foods is hot and tasty", "I watch Hell’s Kitchen every week", "Pepper or Salt?", "Sushi!", "There are two groups of humans. First group eats to live, second one lives to eat."
         ],
         9 : [
-            "Are you a dog or cat person", "I am strong as a bear", "I used to have a hamster", "Lassi come home", "Is it a bird?", "What is the biggest animal on the planet?", "I am an animal of type Homo sapiens sapiens", "I take my dog fore a walk, I will be back in 30 minutes", "Which Australian animals cannot kill you?", "There are two groups of humans. First group eats to live, second one lives to eat."
+            "Are you a dog or cat person", "I am strong as a bear", "I used to have a hamster", "Lassi come home", "Is it a bird?", "What is the biggest animal on the planet?", "I am an animal of type Homo sapiens sapiens", "I take my dog fore a walk, I will be back in 30 minutes", "Which Australian animals cannot kill you?", "My zodiac animal is a lion."
         ]
     ]
     

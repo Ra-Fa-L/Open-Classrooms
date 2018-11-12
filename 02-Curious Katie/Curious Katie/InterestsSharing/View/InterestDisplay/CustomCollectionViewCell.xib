@@ -19,15 +19,15 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2P9-k0-RY5">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <rect key="frame" x="4" y="4" width="42" height="42"/>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="2P9-k0-RY5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="EKF-Dt-zSB"/>
-                <constraint firstAttribute="bottom" secondItem="2P9-k0-RY5" secondAttribute="bottom" id="LWO-Lb-z3N"/>
-                <constraint firstItem="2P9-k0-RY5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ej9-at-lSY"/>
-                <constraint firstAttribute="trailing" secondItem="2P9-k0-RY5" secondAttribute="trailing" id="foM-sc-oEP"/>
+                <constraint firstItem="2P9-k0-RY5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="EKF-Dt-zSB"/>
+                <constraint firstAttribute="bottom" secondItem="2P9-k0-RY5" secondAttribute="bottom" constant="4" id="LWO-Lb-z3N"/>
+                <constraint firstItem="2P9-k0-RY5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="ej9-at-lSY"/>
+                <constraint firstAttribute="trailing" secondItem="2P9-k0-RY5" secondAttribute="trailing" constant="4" id="foM-sc-oEP"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>

@@ -26,11 +26,16 @@ class SuitableHitsTableViewCell: UITableViewCell {
     
     func makeVisible(_ interests: [String], _ unshared: [Int]) {
         for (index, image) in imageStackView.subviews.enumerated() {
-            (image as? UIImageView)?.alpha = 0.2
-            (image as? UIImageView)?.image = UIImage(named: interests[index].lowercased())
+            let imageView = (image as! UIImageView)
+            
+            imageView.alpha = 0.2
+            imageView.backgroundColor = UIColor.clear
+            imageView.image = UIImage(named: interests[index].lowercased())
             
             if unshared.contains(index) {
-                (image as? UIImageView)?.alpha = 1.0
+                imageView.backgroundColor = CustomColors2.secondColor.withAlphaComponent(0.6)
+                imageView.layer.cornerRadius = 6.0
+                imageView.alpha = 1.0
             }
         }
     }

@@ -25,17 +25,12 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
     
     var playerInterests: [Bool] = Array(repeating: false, count: 10)
     
-    override func awakeFromNib() {
-        print("DAWAJ!!!!!!!!!!!!!!!!!!!")
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         width = self.frame.size.width
         height = self.frame.size.height
         
-        print("***INITIALIZED***")
         initalize()
     }
     
@@ -48,52 +43,46 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
     func initalize() {
         Bundle.main.loadNibNamed("InterestDisplayView", owner: self, options: nil)
         addSubview(customView)
+        customView.frame = self.bounds
         
         containerView.alpha = 0.0
-        customView.frame = self.bounds
         customView.backgroundColor = CustomColors4.thirdColor
+        containerView.backgroundColor = CustomColors4.secondColor
     }
     
-    func animate(moveBy: CGFloat) {
+    func animate(moveTo: CGFloat) {
         self.roundCorners(corners: [.topLeft, .bottomLeft], radius: 10.0)
-        self.frame.origin.x = 0 + moveBy
+        self.frame.origin.x = moveTo
     }
     
-    func showView() {
+    func showContainerView() {
         containerView.alpha = 1.0
     }
-
     
-    
-    
-    func newPlayer()
-    {
+    func showPlayersInterests() {
         customCollectionView.reloadData()
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
-    {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.interests.interests.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-    {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let nibFile = UINib(nibName: "CustomCollectionViewCell", bundle: nil)
         collectionView.register(nibFile, forCellWithReuseIdentifier: "CustomCollectionCell")
         
         let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionCell", for: indexPath) as? CustomCollectionViewCell
         
-        let alpha = CGFloat(playerInterests[indexPath.row] ? 0.5 : 0.1)
+        let chosenIntrests = playerInterests[indexPath.row]
+        let imageName = viewModel.interests.interests[indexPath.row].lowercased()
         
-        viewCell?.backgroundColor = UIColor(red: 0.4, green: 0.1, blue: 0.2, alpha: alpha)
-        viewCell?.layer.cornerRadius = 6.0
-        viewCell?.customImageView.image = UIImage(named: viewModel.interests.interests[indexPath.row].lowercased())
+        viewCell!.prepareImage(chosen: chosenIntrests, name: imageName)
         
         return viewCell!
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
-    {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let minWidth = (width - (2 * inset) - interItem) / 2
         let minHeight = (height - (2 * inset) - (4 * lineSpacing)) / 5
         let squareSideLength = minWidth < minHeight ? minWidth : minHeight
@@ -101,18 +90,15 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
         return CGSize(width: squareSideLength, height: squareSideLength)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-    {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
-    {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return lineSpacing
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat
-    {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return interItem
     }
 }

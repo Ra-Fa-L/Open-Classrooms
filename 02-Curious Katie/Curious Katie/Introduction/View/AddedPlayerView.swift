@@ -34,15 +34,13 @@ class AddedPlayerView: UIView {
     func setUpCustomView() {
         allElements(show: false)
         
-        customView.setAddedPlayerColors()
-        customView.layer.cornerRadius = 25.0
+        customView.setAddedPlayerView()
         
         for view in customView.subviews {
             if view.isKind(of: UILabel.self) {
-                (view as? UILabel)?.textColor = CustomColors2.secondColor
+                (view as? UILabel)?.setColors()
             }
         }
-        
         lineView.backgroundColor = CustomColors2.secondColor.withAlphaComponent(0.25)
     }
     
@@ -52,7 +50,7 @@ class AddedPlayerView: UIView {
         playerCityLabel.text = city
     }
     
-    func firstAnimation() {
+    func moveToTheRight() {
         self.alpha = 1.0
         self.frame.size.height = 70
         self.frame.size.width = 100
@@ -63,7 +61,7 @@ class AddedPlayerView: UIView {
         customView.layer.cornerRadius = 8.0
     }
     
-    func secondAnimation() {
+    func pushDown() {
         allElements(show: true)
         
         self.frame.origin.y = UIScreen.main.bounds.height - self.frame.size.height - 10

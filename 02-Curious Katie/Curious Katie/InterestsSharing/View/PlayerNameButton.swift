@@ -19,7 +19,14 @@ class PlayerNameButton: UIButton {
         self.titleLabel?.minimumScaleFactor = 0.5
         self.titleLabel?.baselineAdjustment = .alignCenters
         
-        self.makePlayerButtonRight()
+        self.roundLeftCorners()
+    }
+    
+    func activate() {
+        self.isEnabled = true
+        self.alpha = 1.0
+        self.noCorners()
+        self.changeColors()
     }
 
 }

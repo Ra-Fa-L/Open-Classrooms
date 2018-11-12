@@ -14,89 +14,73 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var displaySegmenteControl: UISegmentedControl!
     
     var selectedCell: [Int]  = []
+    var segment = 0
     
     var resultModel: ResultsViewModel!
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         customTableView.delegate = self
         customTableView.dataSource = self
         
-        changeHeight()
-        
         customTableView.tableFooterView = UIView(frame: .zero)
+        
+        refreshTables()
+        
+        setUI()
     }
     
-    func changeHeight()
-    {
-        var height = 60.0
-        
-        if displaySegmenteControl.selectedSegmentIndex == 1
-        {
-            height = 36.0
-        }
+    func setUI() {
+        view.setSecondaryUIColors()
+        customTableView.setUIColors()
+    }
+    
+    func changeHeight(for segment: Int) {
+        let height = segment == 1 ? 36.0 : 60.0
         
         customTableView.rowHeight = CGFloat(height)
     }
     
-    func giveNumberOfRows() -> Int
-    {
-        return displaySegmenteControl.selectedSegmentIndex == 0 ? resultModel.personToPerson.count : resultModel.hitsToPerson.count
+    func giveNumberOfRows() -> Int {
+        return segment == 0 ? resultModel.personToPerson.count : resultModel.hitsToPerson.count
     }
     
-    func giveHeaderText(for section: Int) -> String
-    {
-        if displaySegmenteControl.selectedSegmentIndex == 0
-        {
-            return resultModel.participants[section].name
+    func giveHeaderText(for section: Int) -> String {
+        if segment == 0 {
+            return resultModel.players[section].name
         }
-        
-        let matches = resultModel.hitsToPerson.sorted
-        { (first, second) -> Bool in
+        let matches = resultModel.hitsToPerson.sorted { (first, second) -> Bool in
             return first.key > second.key
         }
-        
         return "\(matches[section].key) Interests Matching"
     }
     
-    func giveNumberOfRows(for section: Int) -> Int
-    {
-        if displaySegmenteControl.selectedSegmentIndex == 0
-        {
+    func giveNumberOfRows(for section: Int) -> Int {
+        if segment == 0 {
             return resultModel.personToPerson[section]!.count
         }
-        
-        let matches = resultModel.hitsToPerson.sorted
-        { (first, second) -> Bool in
+        let matches = resultModel.hitsToPerson.sorted { (first, second) -> Bool in
             return first.key > second.key
         }
-        
         return matches[section].value.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int
-    {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return giveNumberOfRows()
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return giveHeaderText(for: section)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return giveNumberOfRows(for: section)
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        if displaySegmenteControl.selectedSegmentIndex == 0
-        {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if segment == 0 {
             let newCell = tableView.dequeueReusableCell(withIdentifier: "NameTableCell", for: indexPath) as? NamesTableViewCell
-            
             let (person, count) = resultModel.getPersonBased(on: indexPath.section, and: indexPath.row)
             
             newCell?.playerLabel.text = person
@@ -120,7 +104,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if displaySegmenteControl.selectedSegmentIndex == 1 {
+        if segment == 1 {
             if selectedCell.count == 2 {
                 if selectedCell[0] == indexPath.section && selectedCell[1] == indexPath.row {
                     return 80.0
@@ -131,15 +115,24 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return 60.0
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 35.0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedCell = [indexPath.section, indexPath.row]
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
     }
     
-    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl)
-    {
-        changeHeight()
+    func refreshTables() {
+        changeHeight(for: segment)
+        
+        customTableView.allowsSelection = segment == 1
         customTableView.reloadData()
     }
-
+    
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+        segment = sender.selectedSegmentIndex
+        refreshTables()
+    }
 }
