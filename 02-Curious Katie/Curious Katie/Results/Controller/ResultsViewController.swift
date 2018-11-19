@@ -27,12 +27,14 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         customTableView.tableFooterView = UIView(frame: .zero)
         
         refreshTables()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setUI()
     }
     
     func setUI() {
-        view.setSecondaryUIColors()
+        view.setDarkUIColors()
         customTableView.setUIColors()
     }
     
@@ -60,10 +62,12 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if segment == 0 {
             return resultModel.personToPerson[section]!.count
         }
-        let matches = resultModel.hitsToPerson.sorted { (first, second) -> Bool in
-            return first.key > second.key
+        
+        let sortedHitCount = resultModel.hitsCount.sorted { (arg0, arg1) -> Bool in
+            return arg0.key < arg1.key
         }
-        return matches[section].value.count
+        
+        return sortedHitCount[section].value
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,7 +95,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         let newCell = tableView.dequeueReusableCell(withIdentifier: "HitTableCell", for: indexPath) as? SuitableHitsTableViewCell
         
-        let (firstName, secondName) = resultModel.getPersonsBased(on: indexPath.section, and: indexPath.row)
+        let (firstName, secondName) = resultModel.getPersonPairBased(on: indexPath.section, and: indexPath.row)
         
         newCell?.firstNameLabel.text = firstName
         newCell?.secondNameLabel.text = secondName

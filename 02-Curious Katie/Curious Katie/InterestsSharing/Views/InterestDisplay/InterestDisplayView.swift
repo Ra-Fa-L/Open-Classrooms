@@ -46,8 +46,8 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
         customView.frame = self.bounds
         
         containerView.alpha = 0.0
-        customView.backgroundColor = CustomColors4.thirdColor
-        containerView.backgroundColor = CustomColors4.secondColor
+        customView.backgroundColor = customColorTheme.midGray
+        containerView.backgroundColor = customColorTheme.darkGray
     }
     
     func animate(moveTo: CGFloat) {
@@ -64,7 +64,7 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.interests.interests.count
+        return viewModel.interests.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -75,7 +75,7 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
         let viewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionCell", for: indexPath) as? CustomCollectionViewCell
         
         let chosenIntrests = playerInterests[indexPath.row]
-        let imageName = viewModel.interests.interests[indexPath.row].lowercased()
+        let imageName = viewModel.interests[indexPath.row].name.lowercased()
         
         viewCell!.prepareImage(chosen: chosenIntrests, name: imageName)
         

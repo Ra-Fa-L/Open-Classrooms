@@ -33,6 +33,6 @@ class SingleInterestView: UIView {
         
         customView.frame = self.bounds
         
-        self.customView.backgroundColor = CustomColors4.firstColor
+        self.customView.backgroundColor = customColorTheme.lightGray
     }
 }

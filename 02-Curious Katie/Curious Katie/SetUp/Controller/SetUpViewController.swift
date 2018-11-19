@@ -30,6 +30,11 @@ class SetUpViewController: UIViewController {
         super.viewDidLoad()
         
         setPlayerCount()
+        
+        print("WELCOME to Curious Katie, please start a game!")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         setUI()
     }
     
@@ -39,11 +44,11 @@ class SetUpViewController: UIViewController {
         demoPlayerCountLabel.setColors()
         demoLabel.setColors()
         
-        playButton.makeButton()
-        simulateButton.makeButton()
+        playButton.setUpButton()
+        simulateButton.setUpButton()
         
-        demoSwitch.onTintColor = CustomColors4.thirdColor
-        katieLabel.textColor = CustomColors4.secondColor
+        demoSwitch.onTintColor = customColorTheme.midGray
+        katieLabel.textColor = customColorTheme.darkGray
     }
     
     func setPlayerCount() {
@@ -73,6 +78,15 @@ class SetUpViewController: UIViewController {
     }
     
     @IBAction func simulateButtonTapped(_ sender: UIButton) {
-        print("SORRY: Not yet implemented")
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let customPlayerCount = demoChosen ? playerCount : nil
+        
+        let nextVC = storyBoard.instantiateViewController(withIdentifier: "ResultsVC") as! ResultsViewController
+        let viewModel = CuriousKatieVM(with: customPlayerCount)
+        viewModel.simulate()
+        nextVC.resultModel = viewModel.createResultsVM()
+        nextVC.modalTransitionStyle = .crossDissolve
+        
+        present(nextVC, animated: true, completion: nil)
     }
 }

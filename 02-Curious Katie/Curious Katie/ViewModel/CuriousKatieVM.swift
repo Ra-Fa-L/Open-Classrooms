@@ -11,9 +11,10 @@ import Foundation
 class CuriousKatieVM {
     
     let generator: Generator = Generator()
-    let interests: Interests = Interests()
     
     var playersCount: Int
+    
+    var interests: [Interest] = []
     
     var players: [Player] = []
     // Button -> PlayerId
@@ -29,6 +30,18 @@ class CuriousKatieVM {
     
     init(with customPlayersCount: Int?) {
         self.playersCount = customPlayersCount ?? Int.random(in: 2 ... 12)
+        self.initializeInterests()
+        
+        // PRINT:
+        print("------------------------")
+        print("Please introduce all \(self.playersCount) Players to the game!")
+        print("------------------------")
+    }
+    
+    func initializeInterests() {
+        generator.interests.forEach { (interest) in
+            interests.append(Interest(name: interest))
+        }
     }
     
     // IntroductionVC:
@@ -72,6 +85,9 @@ class CuriousKatieVM {
     
     func addPerson(name: String, age: Int, city: String, nationality: String) {
         players.append(Player(name: name, age: age, city: city, nationality: nationality))
+        
+        // PRINT:
+        print("--> A New Player has been added: \(age) years old \"\(name)\" from \(city) of \(nationality) origin!")
     }
     
     func checkNextPersonNumber() -> Int? {
@@ -102,9 +118,17 @@ class CuriousKatieVM {
             playersShuffled.append(player.id)
             playerToButton[player.id] = index
         }
+        // PRINT:
+        print("------------------------")
+        print("The Players have been rearranged!")
+        
+        for (index, player) in playersShuffled.enumerated() {
+            print("\(index + 1). \(players[player].name)")
+        }
+        
         // FIXME: CONSOLE PRINTING - REMOVE ME
-        print("playerToButton: \(playerToButton)")
-        print("************")
+//        print("playerToButton: \(playerToButton)")
+//        print("************")
     }
     
     func getPlayerWithId(id: Int) -> Int {
@@ -127,6 +151,12 @@ class CuriousKatieVM {
             }
             if chosenPlayerId == 0 {
                 if chosenAllInterest {
+                    
+                    // PRINT:
+                    print("------------------------")
+                    print("All Players have no more interests!")
+                    print("------------------------")
+                    
                     return nil
                 }
             }
@@ -145,20 +175,31 @@ class CuriousKatieVM {
     
     // InterstSelectionView:
     
-    func getNeededPickerData() -> [Bool]
+    func getNeededPickerData(playerId: Int? = nil) -> [Bool]
     {
-        let player = players[getActivePlayer()]
+        let player = players[playerId ?? getActivePlayer()]
         
-        return player.interests
+        var interestsBoolArray: [Bool] = []
+        
+        interests.forEach { (interest) in
+            let bool = player.interests.contains(interest)
+            interestsBoolArray.append(bool)
+        }
+        
+        return interestsBoolArray
     }
     
     func getAllInterests() -> [String]
     {
-        return interests.interests
+        var interestsArray: [String] = []
+        interests.forEach { (interest) in
+            interestsArray.append(interest.name)
+        }
+        return interestsArray
     }
     
     func generateInterestExtras(id: Int) -> String {
-        return interests.generateRandom(id: id)
+        return generator.getInterestExtra(id: id)
     }
     
     func generateLevel() -> Int {
@@ -166,28 +207,33 @@ class CuriousKatieVM {
     }
     
     func generateInterest() -> Int {
-        let newInterests = players[getActivePlayer()].interests
-        var notYestChosen: [Int] = []
+        var notYestChosen: [Interest] = []
         
-        for i in 0 ..< newInterests.count {
-            if !newInterests[i] {
-                notYestChosen.append(i)
+        for interest in interests {
+            if !players[getActivePlayer()].interests.contains(interest) {
+                notYestChosen.append(interest)
             }
         }
-        return notYestChosen.randomElement()!
+        return notYestChosen.randomElement()!.id
     }
     
     func addInterest(rowId: Int, extraText: String, level: Int) -> Int {
-        players[getActivePlayer()].interests[rowId] = true
-        players[getActivePlayer()].interestsExtras[rowId] = extraText
-        players[getActivePlayer()].interestsLevels[rowId] = level
-        players[getActivePlayer()].interestsInOrder.append(rowId)
+        players[getActivePlayer()].interests.append(interests[rowId])
+        players[getActivePlayer()].interestExtras[rowId] = extraText
+        players[getActivePlayer()].interestLevels[rowId] = level
         
-        return players[getActivePlayer()].interestsInOrder.count
+        let extraString = extraText == "" ? "\"\"" : extraText
+        
+        // PRINT:
+        print("\(players[getActivePlayer()].name) has chosen: \(interests[rowId].name) => \(extraString) => Intrest Level of \(level)")
+        
+        return players[getActivePlayer()].interests.count
     }
     
     func noMoreInterest() {
         players[getActivePlayer()].stillChoosing = false
+        
+        print("*** \(players[getActivePlayer()].name) has no more interests!")
         
         checkIfAllDone()
     }
@@ -203,18 +249,39 @@ class CuriousKatieVM {
         }
     }
     
-    
-    
-    
-    
-    
-    func getPlayerInterest(with player: Int) -> [Bool]
-    {
-        return players[player].interests
-    }
-    
     func createResultsVM() -> ResultsVM
     {
-        return ResultsVM(players: players, interests: interests.interests)
+        return ResultsVM(players: players, interests: interests)
+    }
+    
+    func simulate() {
+        //Players
+        for _ in 0 ..< playersCount {
+            let player = generateAll()
+            addPerson(name: player[0], age: Int(player[1])!, city: player[2], nationality: player[3])
+        }
+        
+        shuffleParticipants()
+        
+        //Interests
+        players.forEach { (player) in
+            chosenPlayerId = player.id
+            
+            for _ in 0 ..< Int.random(in: 1 ..< interests.count) {
+                let interestId = generateInterest()
+                addInterest(rowId: interestId, extraText: generateInterestExtras(id: interestId), level: generateLevel())
+            }
+        }
+        
+        
+        // PRINT:
+        print("------------------------")
+        print("All Players have no more interests!")
+        print("========================")
+        // PRINT:
+        print("========================")
+        print("HERE YOU CAN SEE THE PAIRING RESULTS!")
+        print("========================")
+        print("========================")
     }
 }

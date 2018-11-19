@@ -10,6 +10,6 @@ import UIKit
 
 extension UILabel {
     func setColors() {
-        self.textColor = CustomColors4.sixthColor
+        self.textColor = customColorTheme.almostBlack
     }
 }

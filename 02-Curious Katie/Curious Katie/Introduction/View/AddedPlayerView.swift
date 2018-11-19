@@ -41,7 +41,7 @@ class AddedPlayerView: UIView {
                 (view as? UILabel)?.setColors()
             }
         }
-        lineView.backgroundColor = CustomColors2.secondColor.withAlphaComponent(0.25)
+        lineView.backgroundColor = UIColor.white.withAlphaComponent(0.15)
     }
     
     func setUpLabels(number: Int, name: String, city: String) {
@@ -61,7 +61,7 @@ class AddedPlayerView: UIView {
         customView.layer.cornerRadius = 8.0
     }
     
-    func pushDown() {
+    func moveDown() {
         allElements(show: true)
         
         self.frame.origin.y = UIScreen.main.bounds.height - self.frame.size.height - 10

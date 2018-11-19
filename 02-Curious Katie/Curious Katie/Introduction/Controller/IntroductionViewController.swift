@@ -40,8 +40,11 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         
         playersCount = viewModel.playersCount
         
-        setUI()
         changeActivePlayerLabel()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setUI()
     }
     
     func setUI() {
@@ -51,8 +54,8 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         activePlayerLabel.setColors()
         generateLabel.setColors()
         
-        nextPlayerButton.makeButton()
-        generateAllButton.makeButton()
+        nextPlayerButton.setUpButton()
+        generateAllButton.setUpButton()
     }
     
     func changeActivePlayerLabel() {
@@ -171,7 +174,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         }) { [weak self] _ in
             
             UIView.animate(withDuration: 0.9, animations: {
-                addedPlayerView.pushDown()
+                addedPlayerView.moveDown()
                 
                 self?.addingPlayerAllowed = self!.viewModel.checkNextPersonNumber() == nil ? false : true
                 

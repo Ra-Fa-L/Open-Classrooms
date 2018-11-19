@@ -48,10 +48,12 @@ class InterestsSharingViewController: UIViewController {
         
         interestSelectionView.viewModel = viewModel
         interestSelectionView.delegate = self
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         view.setUIColors()
-        startButton.makeButton()
-        shuffleButton.makeButton()
+        startButton.setUpButton()
+        shuffleButton.setUpButton()
     }
     
     func sortNameButtons()
@@ -85,12 +87,12 @@ class InterestsSharingViewController: UIViewController {
         }
 
         // FIXME: CONSOLE PRINTING - REMOVE ME
-        print("************")
-        for button in playerNameButtonCollection
-        {
-            print("\(button.tag) -\(button.title(for: .normal)!)")
-        }
-        print("************")
+//        print("************")
+//        for button in playerNameButtonCollection
+//        {
+//            print("\(button.tag) -\(button.title(for: .normal)!)")
+//        }
+//        print("************")
     }
     
     func shuffleButtons(initially: Bool = false) {
@@ -165,10 +167,13 @@ class InterestsSharingViewController: UIViewController {
         buttonsStackView.spacing = 1.0
         
         UIView.animate(withDuration: 0.8) {
+            
+            self.startButton.setUpGenerateAllButton()
+            
             self.buttonsView.layoutIfNeeded()
         
-            self.view.setSecondaryUIColors()
-            self.buttonsView.setSecondaryUIColors()
+            self.view.setDarkUIColors()
+            self.buttonsView.setDarkUIColors()
             
             self.enableAllButtons()
             
@@ -205,6 +210,10 @@ class InterestsSharingViewController: UIViewController {
             moveTheHand(id: nextPlayersId!)
             interestSelectionView.changePlayerAnimation()
         } else {
+            
+            print("You can now review the selected Interests")
+            print("========================")
+            
             createDisplayView()
             moveTheUIToTheLeft()
         }
@@ -216,7 +225,7 @@ class InterestsSharingViewController: UIViewController {
                 (playerNameButtonCollection[i] as UIButton).activateButton(goBack: true)
             }
             
-            displayView!.playerInterests = viewModel.getPlayerInterest(with: sender.tag)
+            displayView!.playerInterests = viewModel.getNeededPickerData(playerId: sender.tag)
             displayView!.showPlayersInterests()
             sender.activateButton(goBack: false)
         }
@@ -224,6 +233,12 @@ class InterestsSharingViewController: UIViewController {
 
     @IBAction func startButtonTapped(_ sender: UIButton) {
         if sharingDone {
+            // PRINT:
+            print("========================")
+            print("HERE YOU CAN SEE THE PAIRING RESULTS!")
+            print("========================")
+            print("========================")
+            
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
             let nextVC = storyBoard.instantiateViewController(withIdentifier: "ResultsVC") as? ResultsViewController
             
@@ -233,11 +248,16 @@ class InterestsSharingViewController: UIViewController {
         } else {
             startButton.isEnabled = false
             
-            descriptionLabel.disappear()
-            shuffleButton.disappear()
-            activeHandImageView.reappear()
+            descriptionLabel.hide()
+            shuffleButton.hide()
+            activeHandImageView.show()
             
             startSharing()
+            
+            // PRINT:
+            print("------------------------")
+            print("Now we can start choosing interests!")
+            print("------------------------")
         }
     }
     

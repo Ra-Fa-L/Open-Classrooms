@@ -30,7 +30,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         addSubview(customView)
         customView.frame = self.bounds
         
-        customView.backgroundColor = CustomColors2.secondColor
+        customView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.75)
         extraTextView.layer.cornerRadius = 8.0
         
         initialAnimation()
@@ -40,7 +40,8 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         
         extraTextView.delegate = self
         
-        generateAllButton.make2ndButton()
+        generateAllButton.setUpGenerateAllButton()
+        self.tintColor = customColorTheme.darkGray
     }
     
     func initialAnimation() {
@@ -130,7 +131,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
     }
     
     @IBAction func confirmTapped(_ sender: UIButton) {
-        let extraText = extraTextView.text!
+        let extraText = extraTextView.text == placeholderText ? "" : extraTextView.text!
         let level = levelSegmentedControl.selectedSegmentIndex
         
         let playerInterestCount = viewModel.addInterest(rowId: interestsPickerView.selectedRow, extraText: extraText, level: level)

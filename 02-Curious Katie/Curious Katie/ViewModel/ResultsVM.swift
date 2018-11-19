@@ -11,69 +11,81 @@ import Foundation
 class ResultsVM
 {
     let players: [Player]!
-    let interests: [String]!
+    let interests: [Interest]!
     
-    var interestToPerson = [Int : [Int]]()
     var personToPerson = [Int : [Int : [Int]]]()
-    var hitsToPerson = [Int : [Int : Int]]()
+    var hitsToPerson = [Int : [Int : [Int]]]()
+    var hitsCount = [Int : Int]()
     
-    init(players: [Player], interests: [String]) {
+    init(players: [Player], interests: [Interest]) {
         self.players = players
         self.interests = interests
         
         self.createAllResults()
     }
     
-    func createIntrestToPersonResults() {
-        for person in players {
-            for (index, interest) in person.interests.enumerated() {
-                if !interest {
-                    if interestToPerson[index] == nil {
-                        interestToPerson[index] = []
-                    }
-                    interestToPerson[index]?.append(person.id)
-                }
-            }
-        }
-    }
-    
     func createAllResults() {
         for person in players {
+            
+            print("\(person.name.uppercased())'s possible partners are:")
+            print("**********************************************************")
+            
             for secondPerson in players {
                 if person.id != secondPerson.id {
                     if personToPerson[person.id] == nil {
                         personToPerson[person.id] = [Int : [Int]]()
                     }
                     var numberOfDiffereces = 0
-                    var differencesArray = [Int]()
                     
-                    for i in 0 ..< interests.count {
-                        if person.interests[i] || secondPerson.interests[i] {
-                            if person.interests[i] != secondPerson.interests[i] {
-                                differencesArray.append(i)
-                                numberOfDiffereces += 1
-                            }
+                    var differencesArray: [Int] = []
+                    
+                    for interest in interests {
+                        let firstPlayerHas = person.interests.contains(interest)
+                        let secondPlayerHas = secondPerson.interests.contains(interest)
+                        
+                        if (firstPlayerHas || secondPlayerHas) && (secondPlayerHas != firstPlayerHas) {
+                            differencesArray.append(interest.id)
+                            numberOfDiffereces += 1
                         }
                     }
                     
                     if numberOfDiffereces > 0 {
                         if hitsToPerson[numberOfDiffereces] == nil {
-                            hitsToPerson[numberOfDiffereces] = [:]
+                            hitsToPerson[numberOfDiffereces] = [Int : [Int]]()
+                            hitsCount[numberOfDiffereces] = 0
                         }
                         personToPerson[person.id]![secondPerson.id] = differencesArray
                         
-                        if hitsToPerson[numberOfDiffereces]![secondPerson.id] != person.id {
-                            hitsToPerson[numberOfDiffereces]![person.id] = secondPerson.id
+                        let hitAlreadyExists = hitsToPerson[numberOfDiffereces]![secondPerson.id]
+                        
+                        if hitAlreadyExists == nil || !hitAlreadyExists!.contains(person.id) {
+                            if hitsToPerson[numberOfDiffereces]![person.id] == nil {
+                                hitsToPerson[numberOfDiffereces]![person.id] = []
+                            }
+                            hitsToPerson[numberOfDiffereces]![person.id]?.append(secondPerson.id)
+                            hitsCount[numberOfDiffereces] = hitsCount[numberOfDiffereces]! + 1
+                        }
+                    }
+                    
+                    if numberOfDiffereces > 0 {
+                        print("... \(secondPerson.name) based on \(numberOfDiffereces) different interests")
+                        
+                        for id in differencesArray {
+                            print("...... \(interests[id].name)")
                         }
                     }
                 }
             }
+            
+            print("**********************************************************")
         }
         // FIXME: CONSOLE PRINTING - REMOVE ME
-        print("HitsToPerson: \(hitsToPerson)")
-        print("************")
-        print("PersonToPerson: \(personToPerson)")
-        print("************")
+//        print("HitsToPerson: \(hitsToPerson)")
+//        print("************")
+//        print("PersonToPerson: \(personToPerson)")
+//        print("************")
+//        print("HitsCount: \(hitsCount)")
+//        print("************")
     }
     
     func getPersonBased(on section: Int, and row: Int) -> (String, Int) {
@@ -91,20 +103,33 @@ class ResultsVM
     }
     
     func getUnsharedInterests(on section: Int, and row: Int) -> [Int] {
-        let matches = hitsToPerson.sorted
+        let hits = hitsToPerson.sorted
         { (first, second) -> Bool in
             return first.key > second.key
         }
         
-        let matchesArray = matches[section].value.sorted
+        let hitsArray = hits[section].value.sorted
         { (first, second) -> Bool in
             return first.key > second.key
         }
+        var i = 0
+        var secondPersonId = 0
+        var firstPersonId = 0
         
-        let match = matchesArray[row]
-        
-        let firstPersonId = match.key
-        let secondPersonId = match.value
+        for hits in hitsArray {
+            hits.value.forEach { (id) in
+                if i == row {
+                    firstPersonId = hits.key
+                    secondPersonId = id
+                } else {
+                    i += 1
+                }
+            }
+            
+            if i == row {
+                break
+            }
+        }
         
         let unsharedHits = personToPerson[firstPersonId]?.filter({ (arg0) -> Bool in
             let (key, _) = arg0
@@ -114,7 +139,7 @@ class ResultsVM
         return (unsharedHits?.first!.value)!
     }
     
-    func getPersonsBased(on section: Int, and row: Int) -> (String, String) {
+    func getPersonPairBased(on section: Int, and row: Int) -> (String, String) {
         
         let sorted = hitsToPerson.sorted { (first, second) -> Bool in
             return first.key > second.key
@@ -122,11 +147,28 @@ class ResultsVM
         let hitsArray = sorted[section].value.sorted { (first, second) -> Bool in
             return first.key > second.key
         }
-        let hit = hitsArray[row]
         
-        let first = players![hit.key].name
-        let second = players![hit.value].name
+        var i = 0
+        var secondPersonId = 0
+        var firstPersonId = 0
         
+        for hits in hitsArray {
+            hits.value.forEach { (id) in
+                if i == row {
+                    firstPersonId = hits.key
+                    secondPersonId = id
+                } else {
+                    i += 1
+                }
+            }
+            
+            if i == row {
+                break
+            }
+        }
+        
+        let first = players![firstPersonId].name
+        let second = players![secondPersonId].name
         return (first, second)
     }
 }

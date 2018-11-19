@@ -354,7 +354,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWH-uA-en4">
-                                <rect key="frame" x="110" y="85.5" width="100" height="30"/>
+                                <rect key="frame" x="110" y="79.5" width="100" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="uTJ-b6-sbm"/>
@@ -367,7 +367,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ph-Mn-N6p">
-                                <rect key="frame" x="235" y="85.5" width="70" height="30"/>
+                                <rect key="frame" x="235" y="79.5" width="70" height="30"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="Sh5-Dx-V0v"/>
@@ -380,20 +380,20 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="you can reshuffle players before starting game" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ms2-3b-KZV">
-                                <rect key="frame" x="37" y="63" width="246" height="16.5"/>
+                                <rect key="frame" x="37" y="59" width="246" height="16.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAN-sD-2pZ">
-                                <rect key="frame" x="0.0" y="120" width="320" height="448"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="438"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjC-Xe-Ey7" customClass="InterestSelectionView" customModule="Curious_Katie" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="220" height="448"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="220" height="438"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.28665453767123289" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrL-yR-RTV">
-                                        <rect key="frame" x="220" y="0.0" width="100" height="448"/>
+                                        <rect key="frame" x="220" y="0.0" width="100" height="438"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="XFJ-u4-Xsv">
                                                 <rect key="frame" x="10" y="10" width="80" height="426"/>
@@ -523,10 +523,10 @@
                             <constraint firstItem="uAN-sD-2pZ" firstAttribute="top" secondItem="mn8-zQ-ch1" secondAttribute="top" constant="100" id="3DH-Kl-CcX"/>
                             <constraint firstItem="uAN-sD-2pZ" firstAttribute="leading" secondItem="mn8-zQ-ch1" secondAttribute="leading" id="4Ci-y8-PJB"/>
                             <constraint firstItem="iWH-uA-en4" firstAttribute="centerX" secondItem="EAq-aV-X97" secondAttribute="centerX" id="54q-hd-3Nl"/>
-                            <constraint firstItem="iWH-uA-en4" firstAttribute="top" secondItem="Ms2-3b-KZV" secondAttribute="bottom" constant="6" id="9PC-ww-iRK"/>
+                            <constraint firstItem="iWH-uA-en4" firstAttribute="top" secondItem="Ms2-3b-KZV" secondAttribute="bottom" constant="4" id="9PC-ww-iRK"/>
                             <constraint firstItem="4Ph-Mn-N6p" firstAttribute="centerY" secondItem="iWH-uA-en4" secondAttribute="centerY" id="B6c-BK-rOK"/>
-                            <constraint firstItem="Ms2-3b-KZV" firstAttribute="top" secondItem="NF3-Cy-87K" secondAttribute="bottom" id="EMD-Sm-UYj"/>
-                            <constraint firstItem="uAN-sD-2pZ" firstAttribute="bottom" secondItem="mn8-zQ-ch1" secondAttribute="bottom" id="JrL-Y6-XiJ"/>
+                            <constraint firstItem="Ms2-3b-KZV" firstAttribute="top" secondItem="NF3-Cy-87K" secondAttribute="bottom" constant="-4" id="EMD-Sm-UYj"/>
+                            <constraint firstItem="uAN-sD-2pZ" firstAttribute="bottom" secondItem="mn8-zQ-ch1" secondAttribute="bottom" constant="-10" id="JrL-Y6-XiJ"/>
                             <constraint firstItem="NF3-Cy-87K" firstAttribute="centerX" secondItem="EAq-aV-X97" secondAttribute="centerX" id="N9C-6n-0AE"/>
                             <constraint firstItem="Ms2-3b-KZV" firstAttribute="centerX" secondItem="EAq-aV-X97" secondAttribute="centerX" id="XxJ-Wd-A3O"/>
                             <constraint firstItem="mn8-zQ-ch1" firstAttribute="trailing" secondItem="uAN-sD-2pZ" secondAttribute="trailing" id="bmb-rH-Vbh"/>

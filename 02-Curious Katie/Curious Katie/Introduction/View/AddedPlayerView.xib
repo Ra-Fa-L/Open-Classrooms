@@ -42,8 +42,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lsq-53-8Oc">
-                    <rect key="frame" x="6" y="51" width="26" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Lsq-53-8Oc">
+                    <rect key="frame" x="6" y="51" width="88" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -59,8 +59,10 @@
                 <constraint firstAttribute="trailing" secondItem="bky-EW-npV" secondAttribute="trailing" constant="5" id="1fG-oo-jqy"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="yOp-yV-s4X" secondAttribute="trailing" constant="6" id="DQt-94-VLU"/>
                 <constraint firstItem="Lsq-53-8Oc" firstAttribute="top" secondItem="yOp-yV-s4X" secondAttribute="bottom" constant="-1" id="KRz-aH-pRO"/>
+                <constraint firstItem="Lsq-53-8Oc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="6" id="Kah-jM-cgc"/>
                 <constraint firstItem="83L-4b-jd7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="6" id="VSe-Y2-BxE"/>
                 <constraint firstItem="83L-4b-jd7" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="2" id="Xk9-Bm-PLt"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Lsq-53-8Oc" secondAttribute="trailing" constant="6" id="YWy-D8-Zr5"/>
                 <constraint firstItem="3GW-bc-OrU" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="6" id="cVQ-FV-Wo8"/>
                 <constraint firstItem="yOp-yV-s4X" firstAttribute="top" secondItem="3GW-bc-OrU" secondAttribute="bottom" constant="-1" id="e0f-9e-Tms"/>
                 <constraint firstItem="Lsq-53-8Oc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="6" id="k8r-Iq-uxO"/>

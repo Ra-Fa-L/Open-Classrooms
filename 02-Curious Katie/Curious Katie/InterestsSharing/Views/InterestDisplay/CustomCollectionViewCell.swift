@@ -20,7 +20,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     func prepareImage(chosen: Bool, name: String) {
         let alpha: CGFloat = chosen ? 1.0 : 0.1
         
-        self.backgroundColor = CustomColors2.secondColor.withAlphaComponent(alpha)
+        self.backgroundColor = customColorTheme.yellow.withAlphaComponent(alpha)
         self.layer.cornerRadius = chosen ? 16.0 : 6.0
         self.customImageView.image = UIImage(named: name)
     }

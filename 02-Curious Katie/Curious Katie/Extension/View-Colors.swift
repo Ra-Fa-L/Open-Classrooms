@@ -10,21 +10,23 @@ import UIKit
 
 extension UIView {
     func setUIColors() {
-        self.backgroundColor = CustomColors4.firstColor
-        self.tintColor = CustomColors4.thirdColor
+        self.backgroundColor = customColorTheme.lightGray
+        self.tintColor = UIColor.white
     }
     
-    func setSecondaryUIColors() {
-        self.backgroundColor = CustomColors2.thirdColor
-        self.tintColor = CustomColors.secondColor
+    func setDarkUIColors() {
+        self.backgroundColor = customColorTheme.midGray
+        self.tintColor = customColorTheme.lightGray
     }
     
     func setAddedPlayerView() {
-        self.backgroundColor = CustomColors.firstColor
+        self.backgroundColor = customColorTheme.lightGray
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = customColorTheme.darkGray.withAlphaComponent(0.45).cgColor
         self.layer.cornerRadius = 25.0
     }
     
-    func disappear() {
+    func hide() {
         UIView.animate(withDuration: 0.6, animations: {
             self.alpha = 0
         }) { _ in
@@ -32,7 +34,7 @@ extension UIView {
         }
     }
     
-    func reappear() {
+    func show() {
         UIView.animate(withDuration: 0.6) {
             self.alpha = 1
         }

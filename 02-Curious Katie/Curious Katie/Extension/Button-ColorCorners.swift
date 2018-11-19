@@ -9,30 +9,22 @@
 import UIKit
 
 extension UIButton {
-    func makeButton() {
+    func setUpButton() {
         let height = self.bounds.height
         self.roundCorners(corners: .allCorners, radius: height / 3)
-        self.backgroundColor = CustomColors4.fifthColor
+        self.backgroundColor = UIColor.gray
     }
     
-    func make2ndButton() {
+    func setUpGenerateAllButton() {
         let height = self.bounds.height
         self.roundCorners(corners: .allCorners, radius: height / 4)
-        self.backgroundColor = CustomColors4.firstColor
-    }
-    
-    func roundLeftCorners() {
-        let height = self.bounds.height
-        self.roundCorners(corners: [.bottomLeft, .topLeft], radius: height / 4)
+        self.backgroundColor = customColorTheme.lightGray
+        self.setTitleColor(customColorTheme.almostBlack, for: .normal)
     }
     
     func changeColors() {
-        self.backgroundColor = CustomColors.secondColor
-        self.titleLabel?.textColor = CustomColors4.sixthColor
-    }
-    
-    func noCorners() {
-        self.roundCorners(corners: .allCorners, radius: 0.0)
+        self.backgroundColor = customColorTheme.yellow
+        self.titleLabel?.textColor = customColorTheme.almostBlack
     }
     
     func activateButton(goBack: Bool) {
@@ -40,8 +32,8 @@ extension UIButton {
             if goBack {
                 self.changeColors()
             } else {
-                self.backgroundColor = CustomColors4.secondColor
-                self.setTitleColor(CustomColors4.firstColor, for: .normal)
+                self.backgroundColor = customColorTheme.darkGray
+                self.setTitleColor(customColorTheme.lightGray, for: .normal)
             }
         }
     }
