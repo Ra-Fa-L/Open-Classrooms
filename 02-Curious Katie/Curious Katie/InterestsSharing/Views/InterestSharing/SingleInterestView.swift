@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Custom PickerView-RowUIView
 class SingleInterestView: UIView {
     
     @IBOutlet var customView: UIView!

@@ -26,6 +26,7 @@ extension UIView {
         self.layer.cornerRadius = 25.0
     }
     
+    // Functions to show and hide buttons and labels with a animation
     func hide() {
         UIView.animate(withDuration: 0.6, animations: {
             self.alpha = 0
@@ -40,6 +41,7 @@ extension UIView {
         }
     }
     
+    // Function for rounding corners that will be available to all descendant(of: UIView)
     func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// A class that holds exactly one interest
 class Interest: Equatable {
     
     static func == (lhs: Interest, rhs: Interest) -> Bool {
@@ -15,7 +16,8 @@ class Interest: Equatable {
     }
     
     static var identifier: Int = 0
-    
+
+    // The reason for the id => PickerView has (rowId == InterestId) || so extra loops can be skipped
     var id: Int
     var name: String
     

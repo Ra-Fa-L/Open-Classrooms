@@ -9,13 +9,14 @@
 import UIKit
 
 extension UIButton {
+    // Different sets of Colors for buttons
     func setUpButton() {
         let height = self.bounds.height
         self.roundCorners(corners: .allCorners, radius: height / 3)
         self.backgroundColor = UIColor.gray
     }
     
-    func setUpGenerateAllButton() {
+    func setUpLightColoredButton() {
         let height = self.bounds.height
         self.roundCorners(corners: .allCorners, radius: height / 4)
         self.backgroundColor = customColorTheme.lightGray
@@ -27,6 +28,7 @@ extension UIButton {
         self.titleLabel?.textColor = customColorTheme.almostBlack
     }
     
+    // PlayerButtons animation on tap (after sharing is done)
     func activateButton(goBack: Bool) {
         UIView.animate(withDuration: 0.3) {
             if goBack {

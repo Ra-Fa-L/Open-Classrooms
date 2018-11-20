@@ -17,6 +17,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         
     }
     
+    // Change backgorund color depending whether the interest is chosen
     func prepareImage(chosen: Bool, name: String) {
         let alpha: CGFloat = chosen ? 1.0 : 0.1
         

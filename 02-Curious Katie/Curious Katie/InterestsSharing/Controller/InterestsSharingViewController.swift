@@ -33,11 +33,14 @@ class InterestsSharingViewController: UIViewController {
     
     var viewModel: CuriousKatieVM!
     
+    // Array that holds relative pixel distances, that will be used to animate the hand
     var buttonCoordinates: [CGFloat] = []
+    // After first circuit the skip button can be shown
     var firstCircuitDone: Bool = false
     
     var sharingDone: Bool = false
     
+    // Will be instantiated when sharing is done
     var displayView: InterestDisplayView?
     
     override func viewDidLoad() {
@@ -51,11 +54,14 @@ class InterestsSharingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        view.setUIColors()
-        startButton.setUpButton()
-        shuffleButton.setUpButton()
+        DispatchQueue.main.async {
+            self.view.setUIColors()
+            self.startButton.setUpButton()
+            self.shuffleButton.setUpButton()
+        }
     }
     
+    // Just not to rely on the UIBuilder's order
     func sortNameButtons()
     {
         playerNameButtonCollection.sort
@@ -64,6 +70,9 @@ class InterestsSharingViewController: UIViewController {
         }
     }
 
+    // Hide all buttons not in use and assign names to others
+    // Button.tag == player.id
+    // Assign coordinates distances of all buttons to the buttonCoordinates
     func setUpNameButtons()
     {
         let playerNames = viewModel.getAllPlayerNames()
@@ -85,16 +94,10 @@ class InterestsSharingViewController: UIViewController {
             buttonCoordinates.append(button.frame.origin.y)
             button.setTitle(newName, for: .normal)
         }
-
-        // FIXME: CONSOLE PRINTING - REMOVE ME
-//        print("************")
-//        for button in playerNameButtonCollection
-//        {
-//            print("\(button.tag) -\(button.title(for: .normal)!)")
-//        }
-//        print("************")
     }
     
+    // Takes out all the used buttons from the StackView, reaarange them, and insert them back in new order
+    // Because not used Buttons can be at the end, the inserting is not done to the end.
     func shuffleButtons(initially: Bool = false) {
         if initially {
             startButton.isEnabled = true
@@ -121,18 +124,21 @@ class InterestsSharingViewController: UIViewController {
         }
     }
     
+    // First appearance of interestSelectionView
     func startSharing() {
         interestSelectionView.initialSetUp()
     }
     
     func moveTheHand(id: Int) {
-        let position = self.buttonCoordinates[self.viewModel.playerToButton[id]]
+        let position = buttonCoordinates[viewModel.playerToButton[id]]
         
         UIView.animate(withDuration: 0.4) {
             self.activeHandImageView.frame.origin.y = position + 10
         }
     }
     
+    // Move UI to the left and changeToNewUI on completion
+    // Remove interestSelectionView and activeHand on completion
     func moveTheUIToTheLeft() {
         let lengthToMove = buttonsView.frame.origin.x
         let moveTo = buttonsView.frame.width
@@ -157,6 +163,7 @@ class InterestsSharingViewController: UIViewController {
         }
     }
     
+    // Change Background-, Button-Colors. Make PlayerButtons enabled again
     func changeToNewUI() {
         startButton.setTitle("CONTINUE", for: .normal)
         startButton.isEnabled = true
@@ -166,9 +173,9 @@ class InterestsSharingViewController: UIViewController {
         
         buttonsStackView.spacing = 1.0
         
-        UIView.animate(withDuration: 0.8) {
+        UIView.animate(withDuration: 0.6) {
             
-            self.startButton.setUpGenerateAllButton()
+            self.startButton.setUpLightColoredButton()
             
             self.buttonsView.layoutIfNeeded()
         
@@ -187,6 +194,7 @@ class InterestsSharingViewController: UIViewController {
         }
     }
     
+    // Instantiate displayView
     func createDisplayView() {
         let x = UIScreen.main.bounds.width
         let y = containerStackView.frame.origin.y
@@ -199,6 +207,7 @@ class InterestsSharingViewController: UIViewController {
         view.addSubview(displayView!)
     }
     
+    // If none of the player can choose interests fire the Animation to show DisplayView
     func showNextPlayer() {
         let nextPlayersId = viewModel.chooseNextInterestPlayer()
         
@@ -219,6 +228,8 @@ class InterestsSharingViewController: UIViewController {
         }
     }
     
+    // playerButton will only function if sharing is done
+    // The chosen player's interest will be reviewed
     @IBAction func nameButtonTapped(_ sender: UIButton) {
         if sharingDone {
             for i in 0 ..< viewModel.playersCount {
@@ -231,6 +242,7 @@ class InterestsSharingViewController: UIViewController {
         }
     }
 
+    // Start the game and after sharing is done continues to resultsVC
     @IBAction func startButtonTapped(_ sender: UIButton) {
         if sharingDone {
             // PRINT:
@@ -267,11 +279,13 @@ class InterestsSharingViewController: UIViewController {
     
 }
 
+// It makes running methods of this VC possible to the InterestSelectionView through the delegate
 extension InterestsSharingViewController: InterestsSharingDelegate {
     func confirmChoice() {
         showNextPlayer()
     }
     
+    // If a player doesn't have any more interests or has all fade his button out
     func fadeButton() {
         playerNameButtonCollection[viewModel.getActivePlayer()].alpha = 0.2
     }

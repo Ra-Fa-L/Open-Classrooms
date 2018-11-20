@@ -10,6 +10,7 @@ import UIKit
 
 class PlayerNameButton: UIButton {
 
+    // Set up initial looks
     override func awakeFromNib() {
         self.backgroundColor = UIColor.lightGray
         self.tintColor = UIColor.white

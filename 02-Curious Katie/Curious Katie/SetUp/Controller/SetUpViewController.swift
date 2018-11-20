@@ -19,6 +19,7 @@ class SetUpViewController: UIViewController {
     @IBOutlet var playButton: UIButton!
     @IBOutlet var simulateButton: UIButton!
     
+    // If demo chosen there will only be 2-4 players depending on choice
     var demoChosen: Bool = false
     var playerCount: Int = 0 {
         willSet {
@@ -35,9 +36,12 @@ class SetUpViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setUI()
+        DispatchQueue.main.async {
+            self.setUI()
+        }
     }
     
+    // Make the UI look good (at least not bad :D)
     func setUI() {
         view.setUIColors()
         
@@ -55,6 +59,7 @@ class SetUpViewController: UIViewController {
         playerCount = Int(demoSlider.value.rounded())
     }
     
+    // If taped a user can set custom number of players from 2-4
     @IBAction func demoSwitchChanged(_ sender: UISwitch) {
         demoChosen = sender.isOn
         
@@ -66,6 +71,7 @@ class SetUpViewController: UIViewController {
         setPlayerCount()
     }
     
+    // Start a new game by creating a CuriousKatieViewModel and go to next VC
     @IBAction func playButtonTapped(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let customPlayerCount = demoChosen ? playerCount : nil
@@ -77,6 +83,7 @@ class SetUpViewController: UIViewController {
         present(nextVC, animated: true, completion: nil)
     }
     
+    // Start a simulation by creating a ViewModel and running a simulate() method on it. Then show the results
     @IBAction func simulateButtonTapped(_ sender: UIButton) {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let customPlayerCount = demoChosen ? playerCount : nil

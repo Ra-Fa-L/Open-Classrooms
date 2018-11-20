@@ -9,6 +9,7 @@
 import UIKit
 
 extension UILabel {
+    // One color for all labels in one place
     func setColors() {
         self.textColor = customColorTheme.almostBlack
     }

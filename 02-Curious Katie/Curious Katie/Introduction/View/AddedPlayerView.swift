@@ -31,6 +31,8 @@ class AddedPlayerView: UIView {
         setUpCustomView()
     }
     
+    // Set up colors of each element
+    // All UI elements but View should be hidden until they reach end of the first animation (moveToTheRight)
     func setUpCustomView() {
         allElements(show: false)
         
@@ -50,6 +52,7 @@ class AddedPlayerView: UIView {
         playerCityLabel.text = city
     }
     
+    // Grow in size and move to the right
     func moveToTheRight() {
         self.alpha = 1.0
         self.frame.size.height = 70
@@ -61,6 +64,7 @@ class AddedPlayerView: UIView {
         customView.layer.cornerRadius = 8.0
     }
     
+    // Show all elements again and move to the bottom
     func moveDown() {
         allElements(show: true)
         

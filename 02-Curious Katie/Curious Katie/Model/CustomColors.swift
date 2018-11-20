@@ -1,12 +1,14 @@
 //
 //  CustomColors.swift
-//  
+//  Curious Katie
 //
 //  Created by Rafal Padberg on 08.11.18.
+//  Copyright © 2018 Rafal Padberg. All rights reserved.
 //
 
 import UIKit
 
+// A static class that hold all my chosen UIColors
 class customColorTheme {
     static let lightGray = #colorLiteral(red: 0.9254901961, green: 0.9411764706, blue: 0.9450980392, alpha: 1)
     static let midGray = #colorLiteral(red: 0.3026254758, green: 0.468492648, blue: 0.5467313003, alpha: 1)

@@ -21,8 +21,10 @@ class InterestSelectionView: UIView, UITextViewDelegate {
     @IBOutlet var interestsPickerView: CustomPickerView!
     
     var viewModel: CuriousKatieVM!
+    // Connection to InterestsSharingViewController
     var delegate: InterestsSharingDelegate!
     
+    // Workaround to make TextView show placeholderText
     let placeholderText = "Add extra info or generate it"
     
     func initialSetUp() {
@@ -30,34 +32,35 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         addSubview(customView)
         customView.frame = self.bounds
         
-        customView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.75)
-        extraTextView.layer.cornerRadius = 8.0
-        
         initialAnimation()
-        
-        setUpCustomPickerView()
         createPlaceholderText()
         
         extraTextView.delegate = self
         
-        generateAllButton.setUpGenerateAllButton()
-        self.tintColor = customColorTheme.darkGray
+        setUpCustomPickerView()
+        
+        // UI related
+        customView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.75)
+        extraTextView.layer.cornerRadius = 8.0
+        generateAllButton.setUpLightColoredButton()
+        tintColor = customColorTheme.darkGray
     }
     
+    // Appear from the left of the screen
     func initialAnimation() {
         self.frame.origin.x = -frame.width
-        self.frame.origin.y += UIScreen.main.bounds.height
         self.roundCorners(corners: [.topRight, .bottomRight], radius: 10.0)
         
         UIView.animate(withDuration: 0.6) {
             self.frame.origin.x = 0
-            self.frame.origin.y -= UIScreen.main.bounds.height
         }
     }
     
+    // Animate reduction of alpha to indicate change of player
+    // Injects needed data for the picker to show already chosen interesets by the active player
     func changePlayerAnimation() {
         UIView.animate(withDuration: 0.2, animations: {
-                self.alpha = 0.5
+                self.alpha = 0.6
         }, completion: { (error) in
                 self.createPlaceholderText()
                 self.levelSegmentedControl.selectedSegmentIndex = 2
@@ -69,6 +72,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         injectDataIntoPicker()
     }
     
+    // Placeholder text reduced in color
     func createPlaceholderText() {
         let attribute = [NSAttributedString.Key.font: UIFont(name: "Avenir-Light", size: 12.0)!, NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         let fullString = NSMutableAttributedString(string: placeholderText, attributes: attribute)
@@ -76,6 +80,8 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         extraTextView.attributedText = fullString
     }
     
+    // Will be fired once on the appearance of the interestSelectionView
+    // Sets picker delegates and injects neeeded data
     func setUpCustomPickerView() {
         injectDataIntoPicker()
         interestsPickerView.interests = viewModel.getAllInterests()
@@ -90,6 +96,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         interestsPickerView.reloadPickerView()
     }
     
+    // If the text == placeholderText => delete it
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text == placeholderText {
             textView.text = ""
@@ -97,6 +104,8 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         return true
     }
     
+    // Hide Keyboard on Return
+    // It makes the user not able to make "\n" in the textView
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.last == "\n" {
             textView.text = String(textView.text.dropLast())
@@ -104,6 +113,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         }
     }
     
+    // If no text was typed change to placeholder text
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
             textView.text = placeholderText
@@ -130,6 +140,8 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         generateInterestLevelTapped(nil)
     }
     
+    // Add new Interest to the player and chose next player through delegate.confirmChoice()
+    // If its 10th chosen interest of the player, make player.stillChoosing = false
     @IBAction func confirmTapped(_ sender: UIButton) {
         let extraText = extraTextView.text == placeholderText ? "" : extraTextView.text!
         let level = levelSegmentedControl.selectedSegmentIndex
@@ -144,6 +156,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         delegate.confirmChoice()
     }
     
+    // Player.stillChoosing will be set to false
     @IBAction func noMoreTapped(_ sender: UIButton) {
         viewModel.noMoreInterest()
         

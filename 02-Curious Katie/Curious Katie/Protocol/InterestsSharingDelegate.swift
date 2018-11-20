@@ -8,6 +8,7 @@
 
 import Foundation
 
+// The delegate is needed to make a connection from InterestsSelectionView back to InterestSharingViewController
 protocol InterestsSharingDelegate {
     func confirmChoice()
     func fadeButton()

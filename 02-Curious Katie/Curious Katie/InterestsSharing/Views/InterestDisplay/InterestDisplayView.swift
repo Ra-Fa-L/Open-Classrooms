@@ -16,13 +16,16 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
     @IBOutlet var customCollectionView: UICollectionView!
     
     var viewModel: CuriousKatieVM!
+    // For making calculation take less space
     var width: CGFloat = 0
     var height: CGFloat = 0
     
+    // Insets and spacing constants
     let inset: CGFloat = 16.0
     let interItem: CGFloat = 10.0
     let lineSpacing: CGFloat = 10.0
     
+    // The very first time no player is chosen so we need some data
     var playerInterests: [Bool] = Array(repeating: false, count: 10)
     
     override init(frame: CGRect) {
@@ -67,6 +70,7 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
         return viewModel.interests.count
     }
     
+    // Create a customView from nibFile and highlight chonsen interest with yellow background color
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let nibFile = UINib(nibName: "CustomCollectionViewCell", bundle: nil)

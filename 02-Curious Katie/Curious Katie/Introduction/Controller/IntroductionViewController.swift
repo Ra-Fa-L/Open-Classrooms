@@ -14,7 +14,6 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var activePlayerLabel: UILabel!
     @IBOutlet var generateLabel: UILabel!
     
-    // textField.tag == Order of TextField in Collection
     @IBOutlet var textFieldCollection: [UITextField]!
     
     @IBOutlet var generateAllButton: UIButton!
@@ -22,8 +21,11 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
     
     var viewModel: CuriousKatieVM!
     
+    // Will be changed on start
     var activePlayerNumber: Int = 1
     var playersCount: Int = 12
+    
+    // Adding player allowed is used to allow only one animation at a time
     var addingPlayerAllowed: Bool = true {
         didSet {
             checkNextPlayerButton()
@@ -37,14 +39,14 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         for textField in textFieldCollection {
             textField.delegate = self
         }
-        
         playersCount = viewModel.playersCount
-        
         changeActivePlayerLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        setUI()
+        DispatchQueue.main.async {
+            self.setUI()
+        }
     }
     
     func setUI() {
@@ -58,6 +60,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         generateAllButton.setUpButton()
     }
     
+    // Active player label shows "1. of 12 players". Because the digits are in bold a NSAttributedString will be used
     func changeActivePlayerLabel() {
         let boldAttribute = [NSAttributedString.Key.font: UIFont(name: "Avenir-Heavy", size: 18.0)!]
         
@@ -82,10 +85,10 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         for field in textFieldCollection {
             field.text = ""
         }
-        
         checkNextPlayerButton()
     }
     
+    // Check only if not empty
     func isEverythingFilledOut() -> Bool
     {
         for field in textFieldCollection {
@@ -96,6 +99,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    // Checks if is age is appropriate, name not repeating or minNumberOfLetter used
     func isEverythingCorrecttlyFilledOut() -> Bool {
         let minNumOfLetters = viewModel.minNumberOfLetters
         let ageBoundary = viewModel.ageBoundary
@@ -134,16 +138,19 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         textFieldCollection[withId].text = text
     }
     
+    // Check if NextPlayerButton should be allowed
     func checkNextPlayerButton()
     {
         nextPlayerButton.isEnabled = isEverythingFilledOut() && addingPlayerAllowed
     }
     
+    // Hide keyboard on return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
     
+    // Add player and fire the animation
     func addPersonToViewModel()
     {
         var playerData = [String]()
@@ -157,6 +164,8 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         animateNewPlayer(with: playerData)
     }
     
+    // Animates the addition of player
+    // It moved newly added player to the bottom right and stays there until a new player will be addded
     func animateNewPlayer(with data: [String])
     {
         let currentActivePlayer = activePlayerNumber
@@ -200,6 +209,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "InterestsSharingVC") as? InterestsSharingViewController
         nextVC?.viewModel = viewModel
         
+        // Wait for the animation to finish
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.4) {
             self.present(nextVC!, animated: true, completion: {
                 nextVC?.shuffleButtons(initially: true)
@@ -207,6 +217,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // Fires on every change in each textFields
     @IBAction func textFieldChanged(_ sender: UITextField) {
         sender.restoreDefault()
         
@@ -242,6 +253,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         checkNextPlayerButton()
     }
     
+    // Add new player and animate. If last player has been added goToNextView
     @IBAction func nextPlayerButtonTapped(_ sender: UIButton) {
         if isEverythingCorrecttlyFilledOut() {
             addPersonToViewModel()
@@ -263,6 +275,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    // For quickly relaunching a game
     @IBAction func goBackTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }

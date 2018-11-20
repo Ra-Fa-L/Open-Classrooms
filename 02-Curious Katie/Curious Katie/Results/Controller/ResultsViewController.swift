@@ -11,10 +11,9 @@ import UIKit
 class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var customTableView: UITableView!
-    @IBOutlet var displaySegmenteControl: UISegmentedControl!
     
+    // [SectionId, RowId]
     var selectedCell: [Int]  = []
-    var segment = 0
     
     var resultModel: ResultsVM!
     
@@ -38,36 +37,16 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         customTableView.setUIColors()
     }
     
-    func changeHeight(for segment: Int) {
-        let height = segment == 1 ? 36.0 : 60.0
-        
-        customTableView.rowHeight = CGFloat(height)
-    }
-    
     func giveNumberOfRows() -> Int {
-        return segment == 0 ? resultModel.personToPerson.count : resultModel.hitsToPerson.count
+        return resultModel.personToPerson.count
     }
     
     func giveHeaderText(for section: Int) -> String {
-        if segment == 0 {
-            return resultModel.players[section].name
-        }
-        let matches = resultModel.hitsToPerson.sorted { (first, second) -> Bool in
-            return first.key > second.key
-        }
-        return "\(matches[section].key) Interests Matching between:"
+        return resultModel.players[section].name
     }
     
     func giveNumberOfRows(for section: Int) -> Int {
-        if segment == 0 {
-            return resultModel.personToPerson[section]!.count
-        }
-        
-        let sortedHitCount = resultModel.hitsCount.sorted { (arg0, arg1) -> Bool in
-            return arg0.key < arg1.key
-        }
-        
-        return sortedHitCount[section].value
+        return resultModel.personToPerson[section]!.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -82,41 +61,28 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         return giveNumberOfRows(for: section)
     }
     
+    // CustomCell that higlights chosen interests
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if segment == 0 {
-            let newCell = tableView.dequeueReusableCell(withIdentifier: "NameTableCell", for: indexPath) as? NamesTableViewCell
-            let (person, count) = resultModel.getPersonBased(on: indexPath.section, and: indexPath.row)
-            
-            newCell?.playerLabel.text = person
-            newCell?.interestCount.text = String(count)
-            
-            return newCell!
-        }
+        let newCell = tableView.dequeueReusableCell(withIdentifier: "NameTableCell", for: indexPath) as? NamesTableViewCell
+        let (person, count, unsharedInterests) = resultModel.getPersonBased(on: indexPath.section, and: indexPath.row)
         
-        let newCell = tableView.dequeueReusableCell(withIdentifier: "HitTableCell", for: indexPath) as? SuitableHitsTableViewCell
+        newCell?.playerLabel.text = person
+        newCell?.interestCount.text = String(count)
         
-        let (firstName, secondName) = resultModel.getPersonPairBased(on: indexPath.section, and: indexPath.row)
-        
-        newCell?.firstNameLabel.text = firstName
-        newCell?.secondNameLabel.text = secondName
-        
-        let unshared = resultModel.getUnsharedInterests(on: indexPath.section, and: indexPath.row)
-        
-        newCell?.makeVisible(resultModel.interests, unshared)
+        newCell?.highlighChosen(resultModel.interests, unsharedInterests)
         
         return newCell!
     }
     
+    // If selected extend the height of the cell to show the interest stackView
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if segment == 1 {
-            if selectedCell.count == 2 {
-                if selectedCell[0] == indexPath.section && selectedCell[1] == indexPath.row {
-                    return 80.0
-                }
+        
+        if selectedCell.count == 2 {
+            if selectedCell[0] == indexPath.section && selectedCell[1] == indexPath.row {
+                return 100.0
             }
-            return  36.0
         }
-        return 60.0
+        return  60.0
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -129,14 +95,6 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func refreshTables() {
-        changeHeight(for: segment)
-        
-        customTableView.allowsSelection = segment == 1
         customTableView.reloadData()
-    }
-    
-    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-        segment = sender.selectedSegmentIndex
-        refreshTables()
     }
 }
