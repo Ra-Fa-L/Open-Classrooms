@@ -10,11 +10,23 @@ import UIKit
 
 class IntroductionViewController: UIViewController, UITextFieldDelegate {
     
+    enum textFieldType {
+        case name
+        case age
+        case city
+        case nationality
+    }
+    
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var activePlayerLabel: UILabel!
     @IBOutlet var generateLabel: UILabel!
     
     @IBOutlet var textFieldCollection: [UITextField]!
+    
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var ageTextField: UITextField!
+    @IBOutlet var cityTextField: UITextField!
+    @IBOutlet var nationalityTextField: UITextField!
     
     @IBOutlet var generateAllButton: UIButton!
     @IBOutlet var nextPlayerButton: UIButton!
@@ -133,11 +145,6 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         return result
     }
     
-    func changeTextField(withId: Int, text: String) {
-        textFieldCollection[withId].restoreDefault()
-        textFieldCollection[withId].text = text
-    }
-    
     // Check if NextPlayerButton should be allowed
     func checkNextPlayerButton()
     {
@@ -224,28 +231,25 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
         checkNextPlayerButton()
     }
     
-    // 1 = male name, 2 = female name -> TextField.tag = 0
-    // 3 = age -> TextField.tag = 1
-    // 4 = city -> TextField.tag = 2
-    // 5 = nationality -> TextField.tag = 3
-    // 0 = all
     @IBAction func generateButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 0:
             let generateAll = viewModel.generateAll()
-            for (index, text) in generateAll.enumerated() {
-                changeTextField(withId: index, text: text)
-            }
+        
+            nameTextField.change(text: generateAll[0])
+            ageTextField.change(text: generateAll[1])
+            cityTextField.change(text: generateAll[2])
+            nationalityTextField.change(text: generateAll[3])
         case 1:
-            changeTextField(withId: 0, text: viewModel.generateName(male: true))
+            nameTextField.change(text: viewModel.generateName(male: true))
         case 2:
-            changeTextField(withId: 0, text: viewModel.generateName(male: false))
+            nameTextField.change(text: viewModel.generateName(male: false))
         case 3:
-            changeTextField(withId: 1, text: viewModel.generateAge())
+            ageTextField.change(text: viewModel.generateAge())
         case 4:
-            changeTextField(withId: 2, text: viewModel.generateCity())
+            cityTextField.change(text: viewModel.generateCity())
         case 5:
-            changeTextField(withId: 3, text: viewModel.generateNationality())
+            nationalityTextField.change(text: viewModel.generateNationality())
         default:
             break
         }

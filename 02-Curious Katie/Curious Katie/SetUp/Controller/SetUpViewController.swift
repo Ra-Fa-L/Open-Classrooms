@@ -31,8 +31,6 @@ class SetUpViewController: UIViewController {
         super.viewDidLoad()
         
         setPlayerCount()
-        
-        print("WELCOME to Curious Katie, please start a game!")
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -40,15 +40,14 @@ class ResultsVM
     func createResult() {
         players.forEach { (player) in
             
+            print("******************************************")
             print("\(player.name.uppercased())'s possible partners are:")
-            print("**********************************************************")
             
             for secondPlayer in players {
                 if player.id != secondPlayer.id {
                     if personToPerson[player.id] == nil {
                         personToPerson[player.id] = [:]
                     }
-                    
                     let matchingInterests = interests.filter({ (interest) -> Bool in
                         let firstPlayerHas = player.interests.contains(interest)
                         let secondPlayerHas = secondPlayer.interests.contains(interest)

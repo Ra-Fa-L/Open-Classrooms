@@ -10,6 +10,11 @@ import UIKit
 
 // Short animation to let the user know if he made a mistake on input
 extension UITextField {
+    func change(text: String) {
+        self.restoreDefault()
+        self.text = text
+    }
+    
     func animateError(with text: String = "Too short") {
         let oldValue = self.text!
         

@@ -40,11 +40,6 @@ class CuriousKatieVM {
     init(with customPlayersCount: Int?) {
         self.playersCount = customPlayersCount ?? Int.random(in: 2 ... 12)
         self.initializeInterests()
-        
-        // PRINT:
-        print("------------------------")
-        print("Please introduce all \(self.playersCount) Players to the game!")
-        print("------------------------")
     }
     
     func initializeInterests() {
@@ -131,13 +126,6 @@ class CuriousKatieVM {
             playersShuffled.append(player.id)
             playerToButton[player.id] = index
         }
-        // PRINT:
-        print("------------------------")
-        print("The Players have been rearranged!")
-        
-        for (index, player) in playersShuffled.enumerated() {
-            print("\(index + 1). \(players[player].name)")
-        }
     }
     
     private func getPlayerWithId(id: Int) -> Int {
@@ -163,12 +151,6 @@ class CuriousKatieVM {
             }
             if chosenPlayerId == 0 {
                 if chosenAllInterest {
-                    
-                    // PRINT:
-                    print("------------------------")
-                    print("All Players have no more interests!")
-                    print("------------------------")
-                    
                     return nil
                 }
             }
@@ -297,15 +279,10 @@ class CuriousKatieVM {
                 let interestId = generateInterest()
                 _ = addInterest(rowId: interestId, extraText: generateInterestExtras(id: interestId), level: generateLevel())
             }
+            print("*** \(player.name) has no more interests!")
         }
-        // PRINT:
-        print("------------------------")
-        print("All Players have no more interests!")
         print("========================")
-        // PRINT:
-        print("========================")
-        print("HERE YOU CAN SEE THE PAIRING RESULTS!")
-        print("========================")
+        print("PAIRING RESULTS!")
         print("========================")
     }
 }

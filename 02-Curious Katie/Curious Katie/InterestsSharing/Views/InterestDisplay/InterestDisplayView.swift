@@ -84,6 +84,8 @@ class InterestDisplayView: UIView, UICollectionViewDelegate, UICollectionViewDat
         viewCell!.prepareImage(chosen: chosenIntrests, name: imageName)
         
         return viewCell!
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

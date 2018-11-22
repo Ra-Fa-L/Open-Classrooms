@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -325,8 +325,12 @@
                     </view>
                     <connections>
                         <outlet property="activePlayerLabel" destination="zHh-cY-o9K" id="ly7-1z-JIf"/>
+                        <outlet property="ageTextField" destination="34y-Qd-TLZ" id="plz-mT-hc7"/>
+                        <outlet property="cityTextField" destination="gSh-aV-oaz" id="mij-EZ-vsj"/>
                         <outlet property="generateAllButton" destination="yKN-iE-KPL" id="gT2-S6-QYT"/>
                         <outlet property="generateLabel" destination="8fP-VL-neV" id="ZOl-ZR-uQx"/>
+                        <outlet property="nameTextField" destination="IAf-vb-v9m" id="c70-iv-9Ui"/>
+                        <outlet property="nationalityTextField" destination="xYE-jg-Fio" id="yok-fc-aAp"/>
                         <outlet property="nextPlayerButton" destination="ua4-J1-EHC" id="Mh8-o4-HyG"/>
                         <outlet property="titleLabel" destination="Q3Y-WY-nRI" id="Ws1-VN-WDR"/>
                         <outletCollection property="textFieldCollection" destination="IAf-vb-v9m" collectionClass="NSMutableArray" id="qFf-Gb-DPm"/>
@@ -727,6 +731,7 @@
                     </view>
                     <connections>
                         <outlet property="customTableView" destination="vJQ-PZ-4dx" id="ges-qu-XSn"/>
+                        <outlet property="titleLabel" destination="cPs-nA-kpA" id="jDh-yP-d5d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dvf-YK-Qbx" userLabel="First Responder" sceneMemberID="firstResponder"/>

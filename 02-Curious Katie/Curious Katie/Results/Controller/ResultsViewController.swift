@@ -11,6 +11,7 @@ import UIKit
 class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var customTableView: UITableView!
+    @IBOutlet var titleLabel: UILabel!
     
     // [SectionId, RowId]
     var selectedCell: [Int]  = []
@@ -35,6 +36,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func setUI() {
         view.setDarkUIColors()
         customTableView.setUIColors()
+        titleLabel.textColor = customColorTheme.lightGray
     }
     
     func giveNumberOfRows() -> Int {

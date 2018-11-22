@@ -219,10 +219,6 @@ class InterestsSharingViewController: UIViewController {
             moveTheHand(id: nextPlayersId!)
             interestSelectionView.changePlayerAnimation()
         } else {
-            
-            print("You can now review the selected Interests")
-            print("========================")
-            
             createDisplayView()
             moveTheUIToTheLeft()
         }
@@ -247,8 +243,7 @@ class InterestsSharingViewController: UIViewController {
         if sharingDone {
             // PRINT:
             print("========================")
-            print("HERE YOU CAN SEE THE PAIRING RESULTS!")
-            print("========================")
+            print("PAIRING RESULTS!")
             print("========================")
             
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
@@ -265,11 +260,6 @@ class InterestsSharingViewController: UIViewController {
             activeHandImageView.show()
             
             startSharing()
-            
-            // PRINT:
-            print("------------------------")
-            print("Now we can start choosing interests!")
-            print("------------------------")
         }
     }
     
