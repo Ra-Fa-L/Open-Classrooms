@@ -19,7 +19,7 @@
 		0133745C2194A728009F6147 /* ResultsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745B2194A728009F6147 /* ResultsVM.swift */; };
 		0133745E2194A736009F6147 /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0133745D2194A736009F6147 /* Generator.swift */; };
 		013374622194B0A2009F6147 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 013374612194AC49009F6147 /* Assets.xcassets */; };
-		013374642194D051009F6147 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374632194D051009F6147 /* CustomColors.swift */; };
+		013374642194D051009F6147 /* CustomColorTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374632194D051009F6147 /* CustomColorTheme.swift */; };
 		013374682194DBCF009F6147 /* View-Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374672194DBCF009F6147 /* View-Colors.swift */; };
 		0133746A2194E084009F6147 /* Button-ColorCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013374692194E084009F6147 /* Button-ColorCorners.swift */; };
 		01581F37219591C600A32A8A /* TextField-Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01581F36219591C600A32A8A /* TextField-Error.swift */; };
@@ -55,7 +55,7 @@
 		0133745B2194A728009F6147 /* ResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVM.swift; sourceTree = "<group>"; };
 		0133745D2194A736009F6147 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		013374612194AC49009F6147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		013374632194D051009F6147 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		013374632194D051009F6147 /* CustomColorTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorTheme.swift; sourceTree = "<group>"; };
 		013374672194DBCF009F6147 /* View-Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Colors.swift"; sourceTree = "<group>"; };
 		013374692194E084009F6147 /* Button-ColorCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button-ColorCorners.swift"; sourceTree = "<group>"; };
 		01581F36219591C600A32A8A /* TextField-Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField-Error.swift"; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 		0133744C2194A622009F6147 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				013374632194D051009F6147 /* CustomColors.swift */,
+				013374632194D051009F6147 /* CustomColorTheme.swift */,
 				013374572194A6A7009F6147 /* Player.swift */,
 				013374592194A711009F6147 /* Interest.swift */,
 				0133745D2194A736009F6147 /* Generator.swift */,
@@ -364,7 +364,7 @@
 				013374682194DBCF009F6147 /* View-Colors.swift in Sources */,
 				01581F3A2195A8C000A32A8A /* AddedPlayerView.swift in Sources */,
 				013374562194A698009F6147 /* CuriousKatieVM.swift in Sources */,
-				013374642194D051009F6147 /* CustomColors.swift in Sources */,
+				013374642194D051009F6147 /* CustomColorTheme.swift in Sources */,
 				01E541A9219628B900CB9C70 /* SingleInterestView.swift in Sources */,
 				013374502194A653009F6147 /* IntroductionViewController.swift in Sources */,
 				0133744E2194A642009F6147 /* SetUpViewController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  CustomColors.swift
+//  CustomColorTheme.swift
 //  Curious Katie
 //
 //  Created by Rafal Padberg on 08.11.18.
