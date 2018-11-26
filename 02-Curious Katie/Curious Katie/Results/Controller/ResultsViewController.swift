@@ -111,11 +111,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if generated {
             self.dismiss(animated: true, completion: nil)
         } else {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SetUpVC") as! SetUpViewController
-            
-            present(nextVC, animated: true, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }
     }
 }

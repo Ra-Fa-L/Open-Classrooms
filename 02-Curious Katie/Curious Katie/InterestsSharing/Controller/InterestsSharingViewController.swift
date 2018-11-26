@@ -54,11 +54,23 @@ class InterestsSharingViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.view.setUIColors()
-            self.startButton.setUpButton()
-            self.shuffleButton.setUpButton()
+        if sharingDone {
+            // After clicking NewGame a chain of self.dismiss should fire including this one
+            self.dismiss(animated: false, completion: nil)
+        } else {
+            DispatchQueue.main.async {
+                self.view.setUIColors()
+                self.startButton.setUpButton()
+                self.shuffleButton.setUpButton()
+            }
         }
+    }
+    
+    // This view should cover the whole screen. For newGame self.dismiss chain
+    override func viewDidDisappear(_ animated: Bool) {
+        let coverView = UIView(frame: view.frame)
+        coverView.setUIColors()
+        self.view.addSubview(coverView)
     }
     
     // Just not to rely on the UIBuilder's order

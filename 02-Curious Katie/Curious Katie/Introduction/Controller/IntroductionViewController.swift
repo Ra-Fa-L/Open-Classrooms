@@ -56,9 +56,21 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        DispatchQueue.main.async {
-            self.setUI()
+        if activePlayerNumber > 1 {
+            // After clicking NewGame a chain of self.dismiss should fire including this one
+            self.dismiss(animated: false, completion: nil)
+        } else {
+            DispatchQueue.main.async {
+                self.setUI()
+            }
         }
+    }
+    
+    // This view should cover the whole screen. For newGame self.dismiss chain
+    override func viewDidDisappear(_ animated: Bool) {
+        let coverView = UIView(frame: view.frame)
+        coverView.setUIColors()
+        self.view.addSubview(coverView)
     }
     
     func setUI() {
