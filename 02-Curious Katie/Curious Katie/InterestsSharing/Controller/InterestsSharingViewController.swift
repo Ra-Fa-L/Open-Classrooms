@@ -185,6 +185,8 @@ class InterestsSharingViewController: UIViewController {
             self.enableAllButtons()
             
             self.displayView?.showContainerView()
+            
+            self.nameButtonTapped(self.playerNameButtonCollection[self.viewModel.getActivePlayer()])
         }
     }
     

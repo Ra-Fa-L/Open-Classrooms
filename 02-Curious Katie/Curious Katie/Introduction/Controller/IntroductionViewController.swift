@@ -268,7 +268,7 @@ class IntroductionViewController: UIViewController, UITextFieldDelegate {
                 updateUI()
                 
                 if nextPersonNumber == playersCount {
-                    nextPlayerButton.setTitle("LAST PLAYER", for: .normal)
+                    nextPlayerButton.setTitle("PROCEED", for: .normal)
                 }
             } else {
                 addingPlayerAllowed = false

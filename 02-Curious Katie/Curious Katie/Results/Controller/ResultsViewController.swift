@@ -15,6 +15,7 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // [SectionId, RowId]
     var selectedCell: [Int]  = []
+    var generated: Bool = false
     
     var resultModel: ResultsVM!
     
@@ -92,11 +93,29 @@ class ResultsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedCell = [indexPath.section, indexPath.row]
+        let selection = [indexPath.section, indexPath.row]
+        
+        if selectedCell == selection {
+            selectedCell.removeAll()
+        } else {
+            selectedCell = selection
+        }
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
     }
     
     func refreshTables() {
         customTableView.reloadData()
+    }
+    
+    @IBAction func newGameTapped(_ sender: UIButton) {
+        if generated {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let nextVC = storyBoard.instantiateViewController(withIdentifier: "SetUpVC") as! SetUpViewController
+            
+            present(nextVC, animated: true, completion: nil)
+        }
     }
 }

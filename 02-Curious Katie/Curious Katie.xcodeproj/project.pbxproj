@@ -54,8 +54,8 @@
 		013374592194A711009F6147 /* Interest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interest.swift; sourceTree = "<group>"; };
 		0133745B2194A728009F6147 /* ResultsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsVM.swift; sourceTree = "<group>"; };
 		0133745D2194A736009F6147 /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
-		013374612194AC49009F6147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "/Users/rafi/Dane/Ra-Fa-L/Projects/Open-Classrooms/02-Curious Katie/Curious Katie/Assets.xcassets"; sourceTree = "<absolute>"; };
-		013374632194D051009F6147 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomColors.swift; path = "/Users/rafi/Dane/Ra-Fa-L/Projects/Open-Classrooms/02-Curious Katie/Curious Katie/Model/CustomColors.swift"; sourceTree = "<absolute>"; };
+		013374612194AC49009F6147 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		013374632194D051009F6147 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		013374672194DBCF009F6147 /* View-Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-Colors.swift"; sourceTree = "<group>"; };
 		013374692194E084009F6147 /* Button-ColorCorners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Button-ColorCorners.swift"; sourceTree = "<group>"; };
 		01581F36219591C600A32A8A /* TextField-Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField-Error.swift"; sourceTree = "<group>"; };

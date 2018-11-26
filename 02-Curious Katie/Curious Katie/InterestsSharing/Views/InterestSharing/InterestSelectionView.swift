@@ -80,6 +80,14 @@ class InterestSelectionView: UIView, UITextViewDelegate {
         extraTextView.attributedText = fullString
     }
     
+    func createBlackText() {
+        let attribute = [NSAttributedString.Key.font: UIFont(name: "Avenir", size: 12.0)!, NSAttributedString.Key.foregroundColor: UIColor.black]
+        let fullString = NSMutableAttributedString(string: " ", attributes: attribute)
+        
+        extraTextView.attributedText = fullString
+        extraTextView.attributedText = NSAttributedString(string: "")
+    }
+    
     // Will be fired once on the appearance of the interestSelectionView
     // Sets picker delegates and injects neeeded data
     func setUpCustomPickerView() {
@@ -99,7 +107,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
     // If the text == placeholderText => delete it
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         if textView.text == placeholderText {
-            textView.text = ""
+            createBlackText()
         }
         return true
     }
@@ -116,7 +124,7 @@ class InterestSelectionView: UIView, UITextViewDelegate {
     // If no text was typed change to placeholder text
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text == "" {
-            textView.text = placeholderText
+            createPlaceholderText()
         }
     }
 

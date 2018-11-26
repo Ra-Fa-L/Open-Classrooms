@@ -89,7 +89,9 @@ class SetUpViewController: UIViewController {
         let nextVC = storyBoard.instantiateViewController(withIdentifier: "ResultsVC") as! ResultsViewController
         let viewModel = CuriousKatieVM(with: customPlayerCount)
         viewModel.simulate()
+        
         nextVC.resultModel = viewModel.createResultsVM()
+        nextVC.generated = true
         nextVC.modalTransitionStyle = .crossDissolve
         
         present(nextVC, animated: true, completion: nil)

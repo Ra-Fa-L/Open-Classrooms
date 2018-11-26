@@ -38,6 +38,8 @@ class CuriousKatieVM {
     var chosenAllInterest: Bool = false
     
     init(with customPlayersCount: Int?) {
+        Player.identifier = 0
+        Interest.identifier = 0
         self.playersCount = customPlayersCount ?? Int.random(in: 2 ... 12)
         self.initializeInterests()
     }

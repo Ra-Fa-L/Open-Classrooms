@@ -12,7 +12,7 @@
         <!--Set Up View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SetUpViewController" customModule="Curious_Katie" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SetUpVC" id="BYZ-38-t0r" customClass="SetUpViewController" customModule="Curious_Katie" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -268,7 +268,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GENERATE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fP-VL-neV">
-                                <rect key="frame" x="244" y="83" width="61" height="15"/>
+                                <rect key="frame" x="237.5" y="83" width="61" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -300,6 +300,7 @@
                             <constraint firstItem="IAf-vb-v9m" firstAttribute="leading" secondItem="32q-nD-0Rp" secondAttribute="leading" constant="15" id="SSB-OQ-rBn"/>
                             <constraint firstItem="gSh-aV-oaz" firstAttribute="leading" secondItem="32q-nD-0Rp" secondAttribute="leading" constant="15" id="TZO-tg-G1n"/>
                             <constraint firstItem="l9K-I8-tdv" firstAttribute="centerY" secondItem="xYE-jg-Fio" secondAttribute="centerY" id="UVc-Ig-Ghb"/>
+                            <constraint firstItem="8fP-VL-neV" firstAttribute="centerX" secondItem="ivX-ZO-Edj" secondAttribute="centerX" id="UbN-22-G7s"/>
                             <constraint firstItem="34y-Qd-TLZ" firstAttribute="leading" secondItem="32q-nD-0Rp" secondAttribute="leading" constant="15" id="Xib-iV-8hj"/>
                             <constraint firstItem="ua4-J1-EHC" firstAttribute="top" secondItem="yKN-iE-KPL" secondAttribute="bottom" constant="40" id="YGv-cY-j1h"/>
                             <constraint firstItem="zHh-cY-o9K" firstAttribute="centerX" secondItem="NGs-k9-Cek" secondAttribute="centerX" id="Yms-oi-pAS"/>
@@ -314,7 +315,6 @@
                             <constraint firstItem="yKN-iE-KPL" firstAttribute="top" secondItem="xYE-jg-Fio" secondAttribute="bottom" constant="30" id="lil-Xo-pcE"/>
                             <constraint firstItem="ivX-ZO-Edj" firstAttribute="leading" secondItem="34y-Qd-TLZ" secondAttribute="trailing" constant="37" id="o52-fq-LQU"/>
                             <constraint firstItem="Q3Y-WY-nRI" firstAttribute="centerX" secondItem="NGs-k9-Cek" secondAttribute="centerX" id="oRi-kz-w3L"/>
-                            <constraint firstItem="32q-nD-0Rp" firstAttribute="trailing" secondItem="8fP-VL-neV" secondAttribute="trailing" constant="15" id="oiZ-5h-fHd"/>
                             <constraint firstItem="8fP-VL-neV" firstAttribute="top" secondItem="zHh-cY-o9K" secondAttribute="bottom" id="uQx-cu-IbW"/>
                             <constraint firstItem="Q3Y-WY-nRI" firstAttribute="top" secondItem="32q-nD-0Rp" secondAttribute="top" constant="5" id="xjd-Vo-Hhc"/>
                             <constraint firstItem="xYE-jg-Fio" firstAttribute="leading" secondItem="32q-nD-0Rp" secondAttribute="leading" constant="15" id="yQQ-yX-aYp"/>
@@ -341,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QXF-gp-xrO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="559" y="118"/>
+            <point key="canvasLocation" x="558.75" y="117.25352112676056"/>
         </scene>
         <!--Interests Sharing View Controller-->
         <scene sceneID="wn7-zo-0fG">
@@ -717,13 +717,26 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mA-pT-zIt">
+                                <rect key="frame" x="11" y="30.5" width="54" height="32"/>
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-Medium" family="Avenir Next Condensed" pointSize="14"/>
+                                <state key="normal" title="new Game">
+                                    <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="newGameTapped:" destination="uO8-XT-lyT" eventType="touchUpInside" id="3N5-t1-tY9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.56862745098039214" green="0.66666666666666663" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="cPs-nA-kpA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9mA-pT-zIt" secondAttribute="trailing" constant="5" id="JTl-uj-dnJ"/>
+                            <constraint firstItem="9mA-pT-zIt" firstAttribute="leading" secondItem="1wv-JX-zi9" secondAttribute="leading" constant="11" id="Qmq-ib-7E6"/>
                             <constraint firstItem="cPs-nA-kpA" firstAttribute="centerX" secondItem="VuP-so-U11" secondAttribute="centerX" id="Stq-Bx-mfe"/>
                             <constraint firstItem="vJQ-PZ-4dx" firstAttribute="top" secondItem="cPs-nA-kpA" secondAttribute="bottom" constant="15" id="Y2f-zR-6Yo"/>
                             <constraint firstAttribute="trailing" secondItem="vJQ-PZ-4dx" secondAttribute="trailing" id="csx-4e-cFR"/>
                             <constraint firstItem="vJQ-PZ-4dx" firstAttribute="leading" secondItem="1wv-JX-zi9" secondAttribute="leading" id="g6D-xB-wGG"/>
+                            <constraint firstItem="9mA-pT-zIt" firstAttribute="centerY" secondItem="cPs-nA-kpA" secondAttribute="centerY" id="uXS-1V-Dku"/>
                             <constraint firstItem="cPs-nA-kpA" firstAttribute="top" secondItem="1wv-JX-zi9" secondAttribute="top" constant="10" id="xQL-cu-1oY"/>
                             <constraint firstItem="vJQ-PZ-4dx" firstAttribute="bottom" secondItem="1wv-JX-zi9" secondAttribute="bottom" id="xqV-U3-puG"/>
                         </constraints>
